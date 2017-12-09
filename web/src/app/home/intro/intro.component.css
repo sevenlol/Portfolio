@@ -1,0 +1,26 @@
+.intro {
+    padding-top: 80px;
+    background-color: #42a5f5;
+    height: 450px;
+}
+
+.img-circular{
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    display: block;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+}
+
+.basic-intro h1 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.basic-intro p {
+    margin-top: 5px;
+    color: white;
+}
