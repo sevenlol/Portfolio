@@ -1,0 +1,16 @@
+.contacts {
+    background-color: #42a5f5;
+    height: 250px;
+}
+
+.social-icon {
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+}
+
+.social-icon mat-icon {
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+}
