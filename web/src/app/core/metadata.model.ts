@@ -1,3 +1,12 @@
+export class MainMetadata {
+  languages: Language;
+  types: Type;
+}
+
+export class KeywordMetadata {
+  keywords: Keyword;
+}
+
 export class Type {
   [key: string]: Resource;
 }
