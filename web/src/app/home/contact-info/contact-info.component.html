@@ -1,17 +1,22 @@
-<div class="contacts" 
-  fxLayout="row" 
-  fxLayoutAlign="center center" 
-  fxLayoutGap="30px" fxLayoutGap.sm="10px" fxLayoutGap.xs="5px">
-  <a mat-icon-button class="social-icon">
-    <mat-icon svgIcon="linkedin"></mat-icon>
-  </a>
-  <a mat-icon-button class="social-icon">
-    <mat-icon svgIcon="github"></mat-icon>
-  </a>
-  <a mat-icon-button class="social-icon">
-    <mat-icon svgIcon="facebook"></mat-icon>
-  </a>
-  <a mat-icon-button class="social-icon">
-    <mat-icon svgIcon="twitter"></mat-icon>
-  </a>            
+<div class="contact-container" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <h1 class="contact-title">Contact</h1>
+  </div>
+  <div class="contacts"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="30px" fxLayoutGap.sm="10px" fxLayoutGap.xs="5px">
+    <a mat-icon-button class="social-icon" [href]="profiles.linkedin.url" target="_blank">
+      <mat-icon svgIcon="linkedin"></mat-icon>
+    </a>
+    <a mat-icon-button class="social-icon" [href]="profiles.github.url" target="_blank">
+      <mat-icon svgIcon="github"></mat-icon>
+    </a>
+    <a mat-icon-button class="social-icon" [href]="profiles.facebook.url" target="_blank">
+      <mat-icon svgIcon="facebook"></mat-icon>
+    </a>
+    <a mat-icon-button class="social-icon" [href]="profiles.twitter.url" target="_blank">
+      <mat-icon svgIcon="twitter"></mat-icon>
+    </a>
+  </div>
 </div>

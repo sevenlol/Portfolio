@@ -19,6 +19,10 @@ export class ContactInfoComponent implements OnInit {
     twitter : {
       url : 'https://twitter.com/sevenlol1007',
       username : 'sevenlol1007'
+    },
+    linkedin : {
+      url : 'https://www.linkedin.com/in/stephen-lin-b211aa109/',
+      username : 'sevenlol1007@gmail.com'
     }
   }
 

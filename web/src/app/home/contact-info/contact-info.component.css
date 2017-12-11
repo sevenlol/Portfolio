@@ -1,6 +1,12 @@
-.contacts {
+.contact-container {
     background-color: #42a5f5;
-    height: 250px;
+    min-height: 300px;
+}
+
+.contact-title {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  color: #ffffff;
 }
 
 .social-icon {
@@ -10,7 +16,19 @@
 }
 
 .social-icon mat-icon {
+    color: white;
     width: 48px;
     height: 48px;
     line-height: 48px;
+}
+
+@media screen and (max-width: 600px) {
+  .contact-title {
+    margin-top: 25px;
+    margin-bottom: 15px;
+  }
+
+  .contact-container {
+    min-height: 200px;
+  }
 }
