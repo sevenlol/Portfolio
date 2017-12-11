@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 
   private registerIcon(name: string, path: string) {
     this.iconRegistry.addSvgIcon(
-      name, 
+      name,
       this.sanitizer.bypassSecurityTrustResourceUrl(path));
   }
 

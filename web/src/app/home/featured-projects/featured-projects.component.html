@@ -1,3 +1,20 @@
-<p>
-  featured-projects works!
-</p>
+<div>
+  <div fxLayout="row" fxLayoutAlign="center" class="title-container">
+    <h1>Personal Projects</h1>
+  </div>
+  <div class="project-container">
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayout.sm="column"
+      fxLayoutAlign="space-around center"
+      *ngFor="let projectRow of featuredProjects">
+      <div *ngFor="let project of projectRow" class="project-container">
+        <app-project [project]="project" [languages]="languages" [types]="types" [keywords]="keywords"></app-project>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center" class="action-container">
+    <button mat-raised-button color="primary">View More Projects</button>
+  </div>
+</div>

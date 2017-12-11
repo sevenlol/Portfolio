@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
+import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { IntroComponent } from './intro/intro.component';
@@ -18,7 +19,8 @@ import { MatButtonModule } from '@angular/material/button';
     FlexLayoutModule,
     MatIconModule,
     MatButtonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    SharedModule,
   ],
   exports : [
     HomeComponent,
