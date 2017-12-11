@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Project } from '../project.model';
-import { Type, Language, Keyword, Resource } from '../metadata.model';
+import { Type, Language, Keyword, Resource } from '../../core/metadata.model';
 
 const DISPLAY_KEYWORD_COUNT = 3;
 

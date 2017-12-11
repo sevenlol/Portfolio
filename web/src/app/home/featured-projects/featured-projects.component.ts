@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Project } from '../../shared/project.model';
-import { Type, Language, Keyword } from '../../shared/metadata.model';
+import { MainMetadata, Type, Language, Keyword } from '../../core/metadata.model';
 
 const PROJECT = {
   id : 'sssss',
@@ -73,24 +73,16 @@ export class FeaturedProjectsComponent implements OnInit {
       description : 'Firebase Platform'
     }
   };
-  languages: Language = {
-    javascript : {
-      displayName : 'Javascript',
-      description : 'Frontend JS'
-    }
-  };
-  types: Type = {
-    web : {
-      displayName : 'Web',
-      description : 'Websites',
-      color : '#2196f3',
-      fontColor : '#ffffff'
-    }
-  };
+  languages: Language;
+  types: Type;
+
+  @Input() mainMetadata: MainMetadata;
 
   constructor() { }
 
   ngOnInit() {
+    this.languages = this.mainMetadata.languages;
+    this.types = this.mainMetadata.types;
   }
 
 }
