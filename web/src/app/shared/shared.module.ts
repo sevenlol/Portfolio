@@ -4,8 +4,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { ProjectComponent } from './project/project.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   imports: [
@@ -13,11 +15,13 @@ import { ProjectComponent } from './project/project.component';
     FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
-    MatChipsModule
+    MatChipsModule,
+    MatProgressSpinnerModule
   ],
   exports : [
-    ProjectComponent
+    ProjectComponent,
+    SpinnerComponent
   ],
-  declarations: [ProjectComponent]
+  declarations: [ProjectComponent, SpinnerComponent]
 })
 export class SharedModule { }
