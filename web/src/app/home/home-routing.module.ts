@@ -3,13 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { MainMetadataResolverService } from '../core/main-metadata-resolver.service';
+import { KeywordMetadataResolverService } from '../core/keyword-metadata-resolver.service';
+import { BasicInfoResolverService } from '../core/info/basic-info-resolver.service';
 
 const routes: Routes = [
   {
     path : 'home',
     component : HomeComponent,
     resolve : {
-      mainMetadata : MainMetadataResolverService
+      mainMetadata : MainMetadataResolverService,
+      keywordMetadata: KeywordMetadataResolverService,
+      basicInfo: BasicInfoResolverService
     }
   }
 ];

@@ -6,16 +6,16 @@
     fxLayout="row"
     fxLayoutAlign="center center"
     fxLayoutGap="30px" fxLayoutGap.sm="10px" fxLayoutGap.xs="5px">
-    <a mat-icon-button class="social-icon" [href]="profiles.linkedin.url" target="_blank">
+    <a mat-icon-button class="social-icon" *ngIf="profiles.linkedin" [href]="profiles.linkedin.url" target="_blank">
       <mat-icon svgIcon="linkedin"></mat-icon>
     </a>
-    <a mat-icon-button class="social-icon" [href]="profiles.github.url" target="_blank">
+    <a mat-icon-button class="social-icon" *ngIf="profiles.github" [href]="profiles.github.url" target="_blank">
       <mat-icon svgIcon="github"></mat-icon>
     </a>
-    <a mat-icon-button class="social-icon" [href]="profiles.facebook.url" target="_blank">
+    <a mat-icon-button class="social-icon" *ngIf="profiles.facebook" [href]="profiles.facebook.url" target="_blank">
       <mat-icon svgIcon="facebook"></mat-icon>
     </a>
-    <a mat-icon-button class="social-icon" [href]="profiles.twitter.url" target="_blank">
+    <a mat-icon-button class="social-icon" *ngIf="profiles.twitter" [href]="profiles.twitter.url" target="_blank">
       <mat-icon svgIcon="twitter"></mat-icon>
     </a>
   </div>

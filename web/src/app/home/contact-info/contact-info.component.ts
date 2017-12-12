@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { BasicInfo, Profile } from '../../core/info/info.model';
 
 @Component({
   selector: 'app-contact-info',
@@ -7,24 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactInfoComponent implements OnInit {
 
-  profiles: object = {
-    facebook : {
-      url : 'https://www.facebook.com/fattselin',
-      username : 'fattselin'
-    },
-    github : {
-      url : 'https://github.com/sevenlol',
-      username : 'sevenlol'
-    },
-    twitter : {
-      url : 'https://twitter.com/sevenlol1007',
-      username : 'sevenlol1007'
-    },
-    linkedin : {
-      url : 'https://www.linkedin.com/in/stephen-lin-b211aa109/',
-      username : 'sevenlol1007@gmail.com'
-    }
-  }
+  @Input() profiles: Profile;
 
   constructor() { }
 

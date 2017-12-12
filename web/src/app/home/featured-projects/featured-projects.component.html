@@ -7,7 +7,10 @@
       fxLayout="row"
       fxLayout.xs="column"
       fxLayout.sm="column"
-      fxLayoutAlign="space-around center"
+      fxLayoutAlign="center center"
+      fxLayoutGap="20px"
+      fxLayoutGap.sm="5px"
+      fxLayoutGap.xs="5px"
       *ngFor="let projectRow of featuredProjects">
       <div *ngFor="let project of projectRow" class="project-container">
         <app-project [project]="project" [languages]="languages" [types]="types" [keywords]="keywords"></app-project>

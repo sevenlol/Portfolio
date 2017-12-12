@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Project } from '../../shared/project.model';
-import { MainMetadata, Type, Language, Keyword } from '../../core/metadata.model';
+import { MainMetadata, KeywordMetadata, Type, Language, Keyword } from '../../core/metadata.model';
 
 const PROJECT = {
   id : 'sssss',
@@ -60,29 +60,25 @@ export class FeaturedProjectsComponent implements OnInit {
   featuredProjects: Project[][] = [
     [
       PROJECT, PROJECT, PROJECT2
+    ],
+    [
+      PROJECT
     ]
   ];
 
-  keywords: Keyword = {
-    angular : {
-      displayName : 'Angular',
-      description : 'Angular Framework'
-    },
-    firebase : {
-      displayName : 'Firebase',
-      description : 'Firebase Platform'
-    }
-  };
+  keywords: Keyword;
   languages: Language;
   types: Type;
 
   @Input() mainMetadata: MainMetadata;
+  @Input() keywordMetadata: KeywordMetadata;
 
   constructor() { }
 
   ngOnInit() {
     this.languages = this.mainMetadata.languages;
     this.types = this.mainMetadata.types;
+    this.keywords = this.keywordMetadata.keywords;
   }
 
 }
