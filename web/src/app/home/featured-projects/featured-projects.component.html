@@ -2,7 +2,8 @@
   <div fxLayout="row" fxLayoutAlign="center" class="title-container">
     <h1>Personal Projects</h1>
   </div>
-  <div class="project-container">
+  <app-spinner *ngIf="showSpinner"></app-spinner>
+  <div class="project-container" *ngIf="!showSpinner">
     <div
       fxLayout="row"
       fxLayout.xs="column"

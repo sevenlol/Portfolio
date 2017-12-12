@@ -1,6 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Project } from '../../shared/project.model';
+import 'rxjs/add/operator/takeUntil';
+
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Project } from '../../shared/project/project.model';
 import { MainMetadata, KeywordMetadata, Type, Language, Keyword } from '../../core/metadata.model';
+import { FeaturedProjectService } from './featured-project.service';
+import { Subject } from 'rxjs/Subject';
 
 const PROJECT = {
   id : 'sssss',
@@ -44,41 +48,45 @@ const PROJECT = {
   }
 };
 
-const PROJECT2 = JSON.parse(JSON.stringify(PROJECT));
-PROJECT2.description = `Very long
-  descriptionnnnnnnnnnnnnnnnnnnnn
-  ssss ddd  d d d d  d dddddddjdjdjdjjd
-  sldkfksljdflsjfk`;
+const NUM_PROJECTS_PER_ROW = 3;
 
 @Component({
   selector: 'app-featured-projects',
   templateUrl: './featured-projects.component.html',
   styleUrls: ['./featured-projects.component.css']
 })
-export class FeaturedProjectsComponent implements OnInit {
+export class FeaturedProjectsComponent implements OnInit, OnDestroy {
 
-  featuredProjects: Project[][] = [
-    [
-      PROJECT, PROJECT, PROJECT2
-    ],
-    [
-      PROJECT
-    ]
-  ];
+  featuredProjects: Project[][];
 
   keywords: Keyword;
   languages: Language;
   types: Type;
+  showSpinner: boolean = true;
+
+  private unSub$: Subject<boolean> = new Subject();
 
   @Input() mainMetadata: MainMetadata;
   @Input() keywordMetadata: KeywordMetadata;
 
-  constructor() { }
+  constructor(private projectService: FeaturedProjectService) { }
 
   ngOnInit() {
     this.languages = this.mainMetadata.languages;
     this.types = this.mainMetadata.types;
     this.keywords = this.keywordMetadata.keywords;
+
+    this.projectService
+      .get(NUM_PROJECTS_PER_ROW)
+      .takeUntil(this.unSub$)
+      .subscribe(projects => {
+        this.showSpinner = false;
+        this.featuredProjects = projects;
+      });
   }
 
+  ngOnDestroy() {
+    this.unSub$.next(true);
+    this.unSub$.complete();
+  }
 }
