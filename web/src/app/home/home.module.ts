@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
@@ -18,9 +20,11 @@ import { FeaturedProjectService } from './featured-projects/featured-project.ser
     CommonModule,
     SharedModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     FlexLayoutModule,
     MatIconModule,
     MatButtonModule,
+    MatTooltipModule,
     HomeRoutingModule,
   ],
   exports : [

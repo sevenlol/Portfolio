@@ -1,6 +1,6 @@
 .contact-container {
-    background-color: #42a5f5;
-    min-height: 300px;
+  background-color: #002f6c;
+  min-height: 300px;
 }
 
 .contact-title {
@@ -10,16 +10,16 @@
 }
 
 .social-icon {
-    width: 64px;
-    height: 64px;
-    line-height: 64px;
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
 }
 
 .social-icon mat-icon {
-    color: white;
-    width: 48px;
-    height: 48px;
-    line-height: 48px;
+  color: white;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
 }
 
 @media screen and (max-width: 600px) {
