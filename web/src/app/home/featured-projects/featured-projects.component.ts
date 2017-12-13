@@ -6,48 +6,6 @@ import { MainMetadata, KeywordMetadata, Type, Language, Keyword } from '../../co
 import { FeaturedProjectService } from './featured-project.service';
 import { Subject } from 'rxjs/Subject';
 
-const PROJECT = {
-  id : 'sssss',
-  name : 'Portfolio',
-  description : 'Personal Website',
-  highlights : [
-      'Basic Information',
-      'Personal Projects'
-  ],
-  keywords : {
-    angular : Date.now(),
-    firebase : Date.now()
-  },
-  startDate : new Date(2017,11,1),
-  endDate : new Date(2017,11,31),
-  featured : true,
-  active : true,
-  url : 'https://sevenloldev.com',
-  coverImageUrl : 'https://avatars3.githubusercontent.com/u/6497884?s=400&u=14a9be7c3afc0a1e0d797db1d9a7c86c5aac7a83&v=4',
-  languages : {
-    javascript : Date.now(),
-    nodejs : Date.now()
-  },
-  primaryLanguage : 'javascript',
-  primaryType : 'web',
-  types : {
-    web : Date.now(),
-    backend : Date.now()
-  },
-  links : {
-      doc : [],
-      github : [
-          {
-              name : 'Portfolio Website',
-              url : 'https://github.com/sevenlol/Portfolio',
-              description : 'Code of the main website'
-          }
-      ],
-      demoVideo : [],
-      demoImage : []
-  }
-};
-
 const NUM_PROJECTS_PER_ROW = 3;
 
 @Component({
