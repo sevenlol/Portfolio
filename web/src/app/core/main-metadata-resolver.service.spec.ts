@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { MetadataResolverService } from './metadata-resolver.service';
+import { MainMetadataResolverService } from './main-metadata-resolver.service';
 
 describe('MetadataResolverService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MetadataResolverService]
+      providers: [MainMetadataResolverService]
     });
   });
 
-  it('should be created', inject([MetadataResolverService], (service: MetadataResolverService) => {
+  it('should be created', inject([MainMetadataResolverService], (service: MainMetadataResolverService) => {
     expect(service).toBeTruthy();
   }));
 });
