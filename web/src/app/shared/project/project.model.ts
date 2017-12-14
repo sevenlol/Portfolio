@@ -6,7 +6,6 @@ export class Project {
   keywords: object;
   url: string;
   coverImageUrl?: string;
-  test?: string;
   startDate: Date;
   endDate: Date;
   featured: boolean;

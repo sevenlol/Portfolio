@@ -12,6 +12,7 @@
       fxLayoutGap="20px"
       fxLayoutGap.sm="5px"
       fxLayoutGap.xs="5px"
+      class="project-row-container"
       *ngFor="let projectRow of featuredProjects">
       <div *ngFor="let project of projectRow" class="project-container">
         <app-project [project]="project" [languages]="languages" [types]="types" [keywords]="keywords"></app-project>
