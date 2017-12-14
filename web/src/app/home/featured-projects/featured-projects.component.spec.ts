@@ -57,7 +57,7 @@ const BASE_PROJECT: Project = {
   }
 };
 
-fdescribe('FeaturedProjectsComponent', () => {
+describe('FeaturedProjectsComponent', () => {
   let projects: Project[][];
   let component: FeaturedProjectsComponent;
   let fixture: ComponentFixture<FeaturedProjectsComponent>;
