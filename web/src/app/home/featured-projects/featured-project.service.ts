@@ -12,6 +12,9 @@ export class FeaturedProjectService {
   constructor(private afs: AngularFirestore) { }
 
   public get(numPerRow: number): Observable<Project[][]> {
+    if (!numPerRow || parseInt(numPerRow.toString()) !== numPerRow || numPerRow < 0) {
+      throw new Error('numPerRow should be a postive integer');
+    }
     return this.afs
       .collection<Project>(
         PROJECT_COLL,
