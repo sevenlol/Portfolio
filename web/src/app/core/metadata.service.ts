@@ -15,14 +15,18 @@ const METADATA_DOCS = {
 @Injectable()
 export class MetadataService {
 
+  // TODO figure out if this is a good idea
+  public static readonly MAIN_METADATA_PATH = `${METADATA_COLL}/${METADATA_DOCS.MAIN}`;
+  public static readonly KEYWORD_METADATA_PATH = `${METADATA_COLL}/${METADATA_DOCS.KEYWORD}`;
+
   private main$: BehaviorSubject<MainMetadata>;
   private keyword$: BehaviorSubject<KeywordMetadata>;
 
   constructor(private afs: AngularFirestore) {
     this.main$ = new BehaviorSubject(null);
     this.keyword$ = new BehaviorSubject(null);
-    afs.doc<MainMetadata>(`${METADATA_COLL}/${METADATA_DOCS.MAIN}`).valueChanges().subscribe((res) => this.main$.next(res));
-    afs.doc<KeywordMetadata>(`${METADATA_COLL}/${METADATA_DOCS.KEYWORD}`).valueChanges().subscribe((res) => this.keyword$.next(res));
+    afs.doc<MainMetadata>(MetadataService.MAIN_METADATA_PATH).valueChanges().subscribe((res) => this.main$.next(res));
+    afs.doc<KeywordMetadata>(MetadataService.KEYWORD_METADATA_PATH).valueChanges().subscribe((res) => this.keyword$.next(res));
   }
 
   getMainMetadata(): Observable<MainMetadata> {
