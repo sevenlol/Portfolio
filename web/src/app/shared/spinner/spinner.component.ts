@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-spinner',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpinnerComponent implements OnInit {
 
-  // TODO add input
-  diameter: number = 85;
-  topMargin: string = '100px';
+  private static readonly DEFAULT_DIAMETER: number = 85;
+  private static readonly DEFAULT_TOP_MARGIN: string = '100px';
+
+  @Input() diameter: number = SpinnerComponent.DEFAULT_DIAMETER;
+  @Input() topMargin: string = SpinnerComponent.DEFAULT_TOP_MARGIN;
 
   constructor() { }
 

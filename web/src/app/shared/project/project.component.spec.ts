@@ -67,7 +67,7 @@ let PROJECT: Project = {
   }
 };
 
-fdescribe('ProjectComponent', () => {
+describe('ProjectComponent', () => {
   let component: ProjectComponent;
   let fixture: ComponentFixture<ProjectComponent>;
   let de: DebugElement;
