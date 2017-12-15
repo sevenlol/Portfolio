@@ -6,12 +6,14 @@
     <mat-chip-list class="lang-list">
       <mat-chip [ngStyle]="{
         backgroundColor: primaryLanguage?.color,
-        color : primaryLanguage.fontColor }">
+        color : primaryLanguage.fontColor }"
+        matTooltip="Primary Language">
         {{ primaryLanguage?.displayName }}
       </mat-chip>
       <mat-chip [ngStyle]="{
         backgroundColor: primaryType?.color,
-        color : primaryType.fontColor }">
+        color : primaryType.fontColor }"
+        [matTooltip]="primaryType.description || 'Project Category'">
         {{ primaryType?.displayName }}
       </mat-chip>
     </mat-chip-list>
@@ -21,12 +23,16 @@
     {{ project.description }}
   </mat-card-content>
   <mat-card-actions fxLayout="row" fxLayoutAlign="space-between" class="read-more">
-    <a mat-button [href]="project.url" target="_blank">Demo</a>
-    <button mat-button>Detail</button>
+    <a mat-button [href]="project.url" target="_blank" aria-label="Link to Project Website">Link</a>
+    <button mat-button aria-label="View Project Detail">Detail</button>
   </mat-card-actions>
   <mat-card-footer fxLayout="row" fxLayoutAlign="start" class="project-footer">
-    <mat-chip-list *ngFor="let keyword of displayKeywords" selectable="false">
-      <mat-chip *ngIf="keyword?.displayName">{{ keyword.displayName }}</mat-chip>
+    <mat-chip-list *ngFor="let keyword of displayKeywords" selectable="false" aria-label="Keyword list of this project">
+      <mat-chip
+        *ngIf="keyword?.displayName"
+        [matTooltip]="keyword.description">
+        {{ keyword.displayName }}
+      </mat-chip>
     </mat-chip-list>
   </mat-card-footer>
 </mat-card>

@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ProjectComponent } from './project/project.component';
 import { SpinnerComponent } from './spinner/spinner.component';
@@ -16,7 +17,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   exports : [
     ProjectComponent,
