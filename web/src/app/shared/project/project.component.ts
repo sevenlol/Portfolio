@@ -12,6 +12,8 @@ const DISPLAY_KEYWORD_COUNT = 3;
 })
 export class ProjectComponent implements OnInit {
 
+  @Input() displayKeywordCount: number = DISPLAY_KEYWORD_COUNT;
+
   @Input() project: Project;
   @Input() types: Type;
   @Input() languages: Language;
@@ -30,10 +32,13 @@ export class ProjectComponent implements OnInit {
   }
 
   private getKeywords(): Resource[] {
+    if (!this.project.keywords) {
+      return [];
+    }
     let keywordList: Resource[] = [];
 
     for (let key in this.project.keywords) {
-      if (keywordList.length === DISPLAY_KEYWORD_COUNT) {
+      if (keywordList.length === this.displayKeywordCount) {
         break;
       }
       if (!this.keywords[key]) {
