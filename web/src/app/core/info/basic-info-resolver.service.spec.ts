@@ -19,7 +19,7 @@ describe('BasicInfoResolverService', () => {
       providers: [
         {
           provide : InfoService,
-          useValue : new InfoServiceStub(BASIC_INFO);
+          useValue : new InfoServiceStub(BASIC_INFO)
         },
         BasicInfoResolverService
       ]
