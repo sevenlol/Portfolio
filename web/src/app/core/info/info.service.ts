@@ -10,10 +10,12 @@ const BASIC_INFO_DOC = 'basic';
 @Injectable()
 export class InfoService {
 
+  public static readonly BASIC_INFO_PATH = `${INFO_COLL}/${BASIC_INFO_DOC}`;
+
   private basicInfoDoc: AngularFirestoreDocument<BasicInfo>;
 
   constructor(private afs: AngularFirestore) {
-    this.basicInfoDoc = afs.doc(`${INFO_COLL}/${BASIC_INFO_DOC}`);
+    this.basicInfoDoc = afs.doc(InfoService.BASIC_INFO_PATH);
   }
 
   // TODO add projection when the sdk supports it
