@@ -1,5 +1,5 @@
 <div class="container">
     <app-nav-bar></app-nav-bar>
     <app-spinner *ngIf="showSpinner"></app-spinner>
-    <router-outlet></router-outlet>
+    <router-outlet *ngIf="!showSpinner"></router-outlet>
 </div>
