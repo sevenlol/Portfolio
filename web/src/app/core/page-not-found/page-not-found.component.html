@@ -1,0 +1,24 @@
+<div
+  class="error-container"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayoutAlign.xs="start">
+  <div
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutGap="40px"
+    fxLayoutGap.xs="5px"
+    fxLayoutAlign="center center">
+    <div>
+      <mat-icon svgIcon="error" class="icon"></mat-icon>
+    </div>
+    <div
+      fxLayout="column"
+      fxLayoutAlign="start center">
+      <h1 fxShow.gt-xs fxHide.xs class="mat-display-4">Oops!</h1>
+      <h1 fxHide.gt-xs fxShow.xs class="mat-display-2">Oops!</h1>
+      <p fxShow.gt-xs fxHide.xs class="mat-headline">The page you are looking for cannot be found!</p>
+      <p fxHide.gt-xs fxShow.xs class="mat-subheading-1">The page you are looking for cannot be found!</p>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../../environments/environment';
@@ -13,10 +14,12 @@ import { InfoService } from './info/info.service';
 import { MainMetadataResolverService } from './main-metadata-resolver.service';
 import { KeywordMetadataResolverService } from './keyword-metadata-resolver.service';
 import { BasicInfoResolverService } from './info/basic-info-resolver.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     MatToolbarModule,
@@ -34,6 +37,6 @@ import { BasicInfoResolverService } from './info/basic-info-resolver.service';
     KeywordMetadataResolverService,
     BasicInfoResolverService
   ],
-  declarations: [NavBarComponent]
+  declarations: [NavBarComponent, PageNotFoundComponent]
 })
 export class CoreModule { }
