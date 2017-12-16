@@ -11,6 +11,10 @@ const routes: Routes = [
     pathMatch : 'full'
   },
   {
+    path : 'about',
+    loadChildren : 'app/about/about.module#AboutModule'
+  },
+  {
     path : '**',
     component : PageNotFoundComponent
   }
