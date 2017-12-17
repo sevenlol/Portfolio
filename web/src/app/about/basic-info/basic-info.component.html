@@ -1,0 +1,65 @@
+<mat-card class="basic-info-container">
+  <mat-card-content fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxLayout="column" fxLayoutAlign="start start">
+      <h1 class="info-text info-name mat-display-2">{{ info.name }}</h1>
+      <h2 class="info-text info-label mat-subheading-2">{{ info.label }}</h2>
+      <div class="info-list" fxLayout="column" fxLayoutAlign="start start">
+        <div class="info-item" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon class="info-item-icon" svgIcon="facebook"></mat-icon>
+          <span class="info-text mat-body-1">sevenlol1007@gmail.com</span>
+        </div>
+        <div class="info-item" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon class="info-item-icon" svgIcon="facebook"></mat-icon>
+          <span class="info-text mat-body-1">Hsinchu, Taiwan</span>
+        </div>
+        <div class="info-item" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon class="info-item-icon" svgIcon="facebook"></mat-icon>
+          <span class="info-text mat-body-1">+886 910535163</span>
+        </div>
+      </div>
+      <div fxLayout="row" class="profile-list">
+        <a mat-mini-fab
+          class="profile-item"
+          *ngIf="info.profile.linkedin"
+          [href]="info.profile.linkedin.url"
+          target="_blank"
+          aria-label="LinkedIn Link"
+          matTooltip="LinkedIn">
+          <mat-icon svgIcon="linkedin"></mat-icon>
+        </a>
+        <a mat-mini-fab
+          class="profile-item"
+          *ngIf="info.profile.github"
+          [href]="info.profile.github.url"
+          target="_blank"
+          aria-label="Github Link"
+          matTooltip="Github">
+          <mat-icon svgIcon="github"></mat-icon>
+        </a>
+        <a mat-mini-fab
+          class="profile-item"
+          *ngIf="info.profile.facebook"
+          [href]="info.profile.facebook.url"
+          target="_blank"
+          aria-label="Facebook Link"
+          matTooltip="Facebook">
+          <mat-icon svgIcon="facebook"></mat-icon>
+        </a>
+        <a mat-mini-fab
+          class="profile-item"
+          *ngIf="info.profile.twitter"
+          [href]="info.profile.twitter.url"
+          target="_blank"
+          aria-label="Twitter Link"
+          matTooltip="Twitter">
+          <mat-icon svgIcon="twitter"></mat-icon>
+        </a>
+      </div>
+    </div>
+    <div
+      class="img-circular"
+      [ngStyle]="{'background-image': 'url(' + info.image + ')'}"
+      aria-label="Avatar">
+    </div>
+  </mat-card-content>
+</mat-card>

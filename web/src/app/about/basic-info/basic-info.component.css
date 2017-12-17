@@ -1,0 +1,45 @@
+.basic-info-container {
+  background-color: #004c8c;
+}
+
+.img-circular {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  display: block;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .3);
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .3);
+  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, .3);
+}
+
+.info-text {
+  color: white;
+}
+
+.info-name {
+  margin-bottom: 0;
+}
+
+.info-label {
+  margin-top: 5px;
+}
+
+.info-item-icon {
+  color: white;
+  margin-right: 5px;
+}
+
+.info-item {
+  margin: 5px 0;
+}
+
+.profile-list {
+  margin-top: 15px;
+}
+
+.profile-item {
+  margin: 0 5px;
+}
