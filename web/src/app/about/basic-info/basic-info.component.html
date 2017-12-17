@@ -1,8 +1,25 @@
 <mat-card class="basic-info-container">
-  <mat-card-content fxLayout="row" fxLayoutAlign="space-around center">
-    <div fxLayout="column" fxLayoutAlign="start start">
-      <h1 class="info-text info-name mat-display-2">{{ info.name }}</h1>
-      <h2 class="info-text info-label mat-subheading-2">{{ info.label }}</h2>
+  <mat-card-header
+    fxShow.xs
+    fxHide.gt-xs>
+    <div mat-card-avatar
+      class="info-image"
+      [ngStyle]="{'background-image': 'url(' + info.image + ')'}"></div>
+    <mat-card-title class="info-text">{{ info.name }}</mat-card-title>
+    <mat-card-subtitle class="info-text">{{ info.label }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-around center"
+    fxLayoutAlign.xs="start start">
+    <div
+      fxLayout="column"
+      fxLayoutAlign="start start">
+      <div fxHide.xs>
+        <h1 class="info-text info-name mat-display-2">{{ info.name }}</h1>
+        <h2 class="info-text info-label mat-subheading-2">{{ info.label }}</h2>
+      </div>
       <div class="info-list" fxLayout="column" fxLayoutAlign="start start">
         <div class="info-item" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon class="info-item-icon" svgIcon="facebook"></mat-icon>
@@ -57,6 +74,7 @@
       </div>
     </div>
     <div
+      fxHide.xs
       class="img-circular"
       [ngStyle]="{'background-image': 'url(' + info.image + ')'}"
       aria-label="Avatar">
