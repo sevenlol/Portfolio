@@ -1,0 +1,38 @@
+<mat-card class="container" fxHide.xs fxShow.gt-xs>
+  <mat-card-header>
+    <mat-card-title>
+      <span class="mat-display-2">Education</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list class="edu-list">
+      <mat-list-item *ngFor="let edu of educations">
+        <mat-icon mat-list-icon svgIcon="school" class="edu-icon"></mat-icon>
+        <h4 mat-line><span class="mat-title">{{ edu.institution }}</span></h4>
+        <p mat-line><span class="mat-subheading-2">{{ edu.studyType }} - {{ edu.area }}</span></p>
+        <p mat-line><span class="mat-caption">Sep. 2008 - Jun. 2012</span></p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="container" fxHide.gt-xs fxShow.xs>
+  <mat-card-header>
+    <mat-card-title>
+      <span class="mat-headline">Education</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list class="edu-list">
+      <mat-divider></mat-divider>
+      <div *ngFor="let edu of educations">
+        <mat-list-item>
+          <h4 mat-line><span class="mat-subheading-2">{{ edu.institution }}</span></h4>
+          <p mat-line><span class="mat-body-1">{{ edu.studyType }} - {{ edu.area }}</span></p>
+          <p mat-line><span class="mat-caption">Sep. 2008 - Jun. 2012</span></p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
