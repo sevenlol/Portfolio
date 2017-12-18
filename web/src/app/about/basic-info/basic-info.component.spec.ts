@@ -41,7 +41,7 @@ const INFO: Info = {
   }
 };
 
-fdescribe('BasicInfoComponent', () => {
+describe('BasicInfoComponent', () => {
   let component: BasicInfoComponent;
   let fixture: ComponentFixture<BasicInfoComponent>;
   let de: DebugElement;
