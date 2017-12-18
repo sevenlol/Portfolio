@@ -11,6 +11,8 @@ import { AboutComponent } from './about.component';
 import { BasicInfoComponent } from './basic-info/basic-info.component';
 import { MatButtonModule, MatTooltipModule } from '@angular/material';
 
+import { SharedModule } from '../shared/shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -20,6 +22,7 @@ import { MatButtonModule, MatTooltipModule } from '@angular/material';
     MatListModule,
     MatIconModule,
     MatTooltipModule,
+    SharedModule,
     AboutRoutingModule
   ],
   declarations: [AboutComponent, BasicInfoComponent]

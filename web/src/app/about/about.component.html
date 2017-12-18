@@ -1,6 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="start center">
   <div class="container">
-    <app-basic-info></app-basic-info>
+    <app-spinner *ngIf="showSpinner"></app-spinner>
+    <app-basic-info *ngIf="!showSpinner" [info]="info"></app-basic-info>
   </div>
 </div>
 
