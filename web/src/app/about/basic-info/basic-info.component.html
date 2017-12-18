@@ -22,16 +22,16 @@
       </div>
       <div class="info-list" fxLayout="column" fxLayoutAlign="start start">
         <div class="info-item" fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon class="info-item-icon" svgIcon="facebook"></mat-icon>
-          <span class="info-text mat-body-1">sevenlol1007@gmail.com</span>
+          <mat-icon class="info-item-icon" svgIcon="email"></mat-icon>
+          <span class="info-text mat-body-1">{{ info.email }}</span>
         </div>
         <div class="info-item" fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon class="info-item-icon" svgIcon="facebook"></mat-icon>
-          <span class="info-text mat-body-1">Hsinchu, Taiwan</span>
+          <mat-icon class="info-item-icon" svgIcon="location"></mat-icon>
+          <span class="info-text mat-body-1">{{ info.location.city }}, {{ info.location.region }}</span>
         </div>
         <div class="info-item" fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon class="info-item-icon" svgIcon="facebook"></mat-icon>
-          <span class="info-text mat-body-1">+886 910535163</span>
+          <mat-icon class="info-item-icon" svgIcon="phone"></mat-icon>
+          <span class="info-text mat-body-1">{{ info.phone }}</span>
         </div>
       </div>
       <div fxLayout="row" class="profile-list">
