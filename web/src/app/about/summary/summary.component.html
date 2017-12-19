@@ -1,0 +1,13 @@
+<mat-card class="container">
+  <mat-card-content>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <p fxShow.gt-xs fxHide.xs class="mat-subheading-2">{{ info.summary }}</p>
+      <p fxShow.xs fxHide.gt-xs class="mat-body-1">{{ info.summary }}</p>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <a mat-raised-button color="primary" [href]="info.resumeUrl" target="_blank">View My Resume</a>
+    </div>
+  </mat-card-actions>
+</mat-card>

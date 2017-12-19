@@ -5,6 +5,7 @@
     fxLayoutGap.xs="5px">
     <app-spinner *ngIf="showSpinner"></app-spinner>
     <app-basic-info *ngIf="!showSpinner" [info]="info"></app-basic-info>
+    <app-summary *ngIf="!showSpinner" [info]="info"></app-summary>
     <app-education *ngIf="!showSpinner" [educations]="info.education"></app-education>
   </div>
 </div>

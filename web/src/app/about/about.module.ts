@@ -13,6 +13,7 @@ import { MatButtonModule, MatTooltipModule } from '@angular/material';
 
 import { SharedModule } from '../shared/shared.module';
 import { EducationComponent } from './education/education.component';
+import { SummaryComponent } from './summary/summary.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,6 @@ import { EducationComponent } from './education/education.component';
     SharedModule,
     AboutRoutingModule
   ],
-  declarations: [AboutComponent, BasicInfoComponent, EducationComponent]
+  declarations: [AboutComponent, BasicInfoComponent, EducationComponent, SummaryComponent]
 })
 export class AboutModule { }
