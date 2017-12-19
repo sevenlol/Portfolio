@@ -48,7 +48,7 @@ describe('EducationComponent', () => {
   });
 
   it('should display education title correctly', () => {
-    let titleEle = de.query(By.css('mat-card-title span'));
+    let titleEle = de.query(By.css('.edu-title'));
     expect(titleEle).toBeTruthy();
     expect(titleEle.nativeElement.textContent).toContain('Education');
   });

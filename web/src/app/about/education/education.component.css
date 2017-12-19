@@ -1,8 +1,19 @@
 .edu-list {
   margin-top: 0;
+  padding-top: 0;
+}
+
+.edu-title {
+  margin: 20px 5px;
 }
 
 .edu-icon {
   width: 48px !important;
   height: 48px !important;
+}
+
+@media screen and (max-width: 600px) {
+  .edu-title {
+    margin: 10px 0;
+  }
 }
