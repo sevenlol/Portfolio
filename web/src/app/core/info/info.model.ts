@@ -45,6 +45,6 @@ export interface WorkExperience {
   summary: string;
   description: string;
   startDate: Date;
-  endDate: Date;
+  endDate?: Date;
   highlights: string[];
 }
