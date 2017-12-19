@@ -11,6 +11,8 @@ import { Education } from '../../core/info/info.model';
 })
 export class EducationComponent implements OnInit {
 
+  readonly DATE_FORMAT = 'MMM. yyyy';
+
   @Input() educations: Education[];
 
   constructor(
