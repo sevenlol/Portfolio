@@ -1,0 +1,48 @@
+<div>
+  <div class="work-title">
+    <span fxShow.gt-xs fxHide.xs class="mat-display-2">Work Experience</span>
+    <span fxHide.gt-xs fxShow.xs class="mat-display-1">Work Experience</span>
+  </div>
+
+  <!-- desktop -->
+  <mat-accordion [multi]="true" [displayMode]="'default'" fxShow.gt-xs fxHide.xs>
+    <mat-expansion-panel [expanded]="true" *ngFor="let work of experiences">
+      <mat-expansion-panel-header>
+        <mat-panel-title fxFlex="70">
+          <span>{{ work.name }} - {{ work.position }}</span>
+        </mat-panel-title>
+        <mat-panel-description>
+          May. 2018 - Now
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p class="mat-body-2 work-info-item">{{ work.location }}</p>
+      <p class="mat-body-1 work-info-item">{{ work.summary }}</p>
+      <ul class="work-highlight-list">
+        <li class="work-highlight-item" *ngFor="let content of work.highlights">
+          <span>{{ content }}</span>
+        </li>
+      </ul>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- mobile -->
+  <mat-accordion [multi]="false" [displayMode]="'flat'" fxShow.xs fxHide.gt-xs>
+    <mat-expansion-panel [expanded]="false" *ngFor="let work of experiences">
+      <mat-expansion-panel-header>
+        <mat-panel-title fxFlex="60">
+          <span>{{ work.name }} <br /> {{ work.position }}</span>
+        </mat-panel-title>
+        <mat-panel-description>
+          May. 2018 - Now
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p class="mat-body-2 work-info-item">{{ work.location }}</p>
+      <p class="mat-body-1 work-info-item">{{ work.summary }}</p>
+      <ul class="work-highlight-list">
+        <li class="work-highlight-item" *ngFor="let content of work.highlights">
+          <span>{{ content }}</span>
+        </li>
+      </ul>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

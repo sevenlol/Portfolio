@@ -1,0 +1,26 @@
+.container {
+}
+
+.work-title {
+  margin: 20px 5px;
+}
+
+.work-info-item {
+  margin: 0;
+}
+
+.work-highlight-list {
+  margin-top: 10px;
+  margin-left: 0;
+  padding-left: 25px;
+}
+
+.work-highlight-item {
+  margin-top: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .work-title {
+    margin: 20px 0;
+  }
+}
