@@ -1,7 +1,7 @@
 <div>
   <div class="work-title">
-    <span fxShow.gt-xs fxHide.xs class="mat-display-2">Work Experience</span>
-    <span fxHide.gt-xs fxShow.xs class="mat-display-1">Work Experience</span>
+    <span fxShow.gt-xs fxHide.xs class="mat-display-2">Experience</span>
+    <span fxHide.gt-xs fxShow.xs class="mat-display-1">Experience</span>
   </div>
 
   <!-- desktop -->
@@ -12,7 +12,8 @@
           <span>{{ work.name }} - {{ work.position }}</span>
         </mat-panel-title>
         <mat-panel-description>
-          May. 2018 - Now
+          {{ work.startDate | date : DATE_FORMAT }} -
+          {{ work.endDate ? (work.endDate | date : DATE_FORMAT) : 'Now' }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p class="mat-body-2 work-info-item">{{ work.location }}</p>
@@ -33,7 +34,8 @@
           <span>{{ work.name }} <br /> {{ work.position }}</span>
         </mat-panel-title>
         <mat-panel-description>
-          May. 2018 - Now
+          {{ work.startDate | date : DATE_FORMAT }} -
+          {{ work.endDate ? (work.endDate | date : DATE_FORMAT) : 'Now' }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p class="mat-body-2 work-info-item">{{ work.location }}</p>
@@ -45,4 +47,10 @@
       </ul>
     </mat-expansion-panel>
   </mat-accordion>
+
+  <app-spinner *ngIf="isLoading" [diameter]="40" [topMargin]="'20px'"></app-spinner>
+
+  <div fxLayout="column" fxLayoutAlign="center center" class="show-more" *ngIf="!isLoading && hasMoreData">
+    <button mat-button (click)="loadNext()" [disabled]="!hasMoreData">More</button>
+  </div>
 </div>

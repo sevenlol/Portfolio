@@ -19,8 +19,12 @@
   margin-top: 5px;
 }
 
+.show-more {
+  margin-top: 20px;
+}
+
 @media screen and (max-width: 600px) {
   .work-title {
-    margin: 20px 0;
+    margin: 10px 0;
   }
 }
