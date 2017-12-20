@@ -13,6 +13,8 @@ import { Project } from '../../shared/project/project.model';
 import { KeywordMetadata, MainMetadata, Keyword, Language, Type } from '../../core/metadata.model';
 import { ProjectComponent } from '../../shared/project/project.component';
 import { ProjectService, QueryType } from '../project.service';
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-project-list',
@@ -27,6 +29,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   rowHeight: number = ProjectComponent.HEIGHT + ProjectListComponent.HEIGHT_GAP;
 
+  filterPanelExpanded: boolean = false;
   isLoading: boolean = false;
   hasMoreData: boolean = true;
   cols$: Observable<number>;
@@ -42,10 +45,14 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   constructor(
     private media: ObservableMedia,
     private route: ActivatedRoute,
-    private service: ProjectService
+    private service: ProjectService,
+    private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
+    this.registerIcon('filter-list', 'assets/icons/filter_list.svg');
+
     let cols = Object.keys(ProjectComponent.COLS)
       .reduce((col, mqAlias) =>
         // check current width
@@ -92,6 +99,10 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     this.nextPage$.next();
   }
 
+  public toggleFilterPanel() {
+    this.filterPanelExpanded = !this.filterPanelExpanded;
+  }
+
   ngOnDestroy() {
     this.unSub$.next();
     this.unSub$.complete();
@@ -103,5 +114,12 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     // if # of results is less than batch count, no more data
     this.hasMoreData = projects.length === ProjectListComponent.BATCH_COUNT;
     projects.forEach(project => this.projects.push(project));
+  }
+
+  // TODO move to utility class
+  private registerIcon(name: string, path: string) {
+    this.iconRegistry.addSvgIcon(
+      name,
+      this.sanitizer.bypassSecurityTrustResourceUrl(path));
   }
 }

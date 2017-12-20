@@ -1,13 +1,37 @@
 <div fxLayout="column" class="container">
-  <div>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
     <h2 class="title mat-heading" fxShow.xs fxHide.gt-xs>Personal Projects</h2>
     <h2 class="title mat-display-2" fxShow.gt-xs fxHide.xs>Personal Projects</h2>
+    <!-- expand/collapse filter panel -->
+    <div fxFlex="20" class="filter-btn-container">
+      <button mat-button
+        (click)="toggleFilterPanel()"
+        fxHide.xs fxShow.gt-xs
+        aria-label="Expand Filter Panel"
+        matTooltip="Expand filter panel">
+        <mat-icon svgIcon="filter-list"></mat-icon>
+        <span class="mat-button">Filter</span>
+      </button>
+      <button mat-icon-button
+        (click)="toggleFilterPanel()"
+        fxShow.xs fxHide.gt-xs
+        aria-label="Expand Filter Panel"
+        matTooltip="Expand filter panel">
+        <mat-icon svgIcon="filter-list"></mat-icon>
+      </button>
+    </div>
   </div>
+
+  <!-- filter panel -->
+  <app-filter-panel [expanded]="filterPanelExpanded"></app-filter-panel>
+
+  <!-- project grid list (non portrait mobile) -->
   <mat-grid-list [cols]="cols$ | async" [rowHeight]="rowHeight" fxShow.gt-xs fxHide.xs>
     <mat-grid-tile *ngFor="let project of projects">
       <app-project [project]="project" [languages]="languages" [types]="types" [keywords]="keywords"></app-project>
     </mat-grid-tile>
   </mat-grid-list>
+  <!-- project list (column, on portrait mobile) -->
   <div fxLayout="column" fxLayoutGap="5px" fxShow.xs fxHide.gt-xs>
     <app-project
       *ngFor="let project of projects"

@@ -15,4 +15,8 @@
   .title {
     margin: 0 15px 20px 0;
   }
+
+  .filter-btn-container {
+    margin-bottom: 20px;
+  }
 }
