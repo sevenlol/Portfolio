@@ -11,6 +11,10 @@ const routes: Routes = [
     pathMatch : 'full'
   },
   {
+    path : 'projects',
+    loadChildren : 'app/project/project.module#ProjectModule'
+  },
+  {
     path : 'about',
     loadChildren : 'app/about/about.module#AboutModule'
   },
