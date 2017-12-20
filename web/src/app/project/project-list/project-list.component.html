@@ -1,0 +1,31 @@
+<div fxLayout="column" class="container">
+  <div>
+    <h2 class="title mat-heading" fxShow.xs fxHide.gt-xs>Personal Projects</h2>
+    <h2 class="title mat-display-2" fxShow.gt-xs fxHide.xs>Personal Projects</h2>
+  </div>
+  <mat-grid-list [cols]="cols$ | async" [rowHeight]="rowHeight" fxShow.gt-xs fxHide.xs>
+    <mat-grid-tile *ngFor="let project of projects">
+      <app-project [project]="project" [languages]="languages" [types]="types" [keywords]="keywords"></app-project>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div fxLayout="column" fxLayoutGap="5px" fxShow.xs fxHide.gt-xs>
+    <app-project
+      *ngFor="let project of projects"
+      [project]="project"
+      [languages]="languages"
+      [types]="types"
+      [keywords]="keywords"></app-project>
+  </div>
+
+  <app-spinner *ngIf="isLoading" [diameter]="60" [topMargin]="'30px'"></app-spinner>
+
+  <div fxLayout="column" fxLayoutAlign="center center" class="show-more" *ngIf="!isLoading && hasMoreData">
+    <button mat-raised-button
+      color="primary"
+      (click)="loadNext()"
+      [disabled]="!hasMoreData"
+      aria-label="Show More Personal Projects">
+      Show More Projects
+    </button>
+  </div>
+</div>
