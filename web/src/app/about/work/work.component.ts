@@ -20,11 +20,11 @@ export class WorkComponent implements OnInit, OnDestroy {
 
   readonly DATE_FORMAT: string = 'MMM. yyyy';
   isLoading: boolean = false;
+  hasMoreData: boolean = true;
   experiences: WorkExperience[] = [];
 
   private nextPage$: Subject<void> = new Subject();
   private unSub$: Subject<void> = new Subject();
-  private hasMoreData: boolean = true;
 
   constructor(private infoService: InfoService) { }
 
