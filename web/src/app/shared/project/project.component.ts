@@ -12,6 +12,17 @@ const DISPLAY_KEYWORD_COUNT = 3;
 })
 export class ProjectComponent implements OnInit {
 
+  // TODO find a way to make this consistent with css
+  static readonly HEIGHT: number = 450;
+  static readonly WIDTH: number = 350;
+  static readonly COLS = {
+    xs : 1,
+    sm : 1,
+    md : 2,
+    lg : 3,
+    xl : 4
+  };
+
   @Input() displayKeywordCount: number = DISPLAY_KEYWORD_COUNT;
 
   @Input() project: Project;
