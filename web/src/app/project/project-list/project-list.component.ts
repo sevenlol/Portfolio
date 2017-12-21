@@ -52,6 +52,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.registerIcon('filter-list', 'assets/icons/filter_list.svg');
+    this.registerIcon('clear', 'assets/icons/clear.svg');
 
     let cols = Object.keys(ProjectComponent.COLS)
       .reduce((col, mqAlias) =>

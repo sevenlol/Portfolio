@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { ProjectRoutingModule } from './project-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -10,7 +11,12 @@ import {
   MatButtonModule,
   MatExpansionModule,
   MatIconModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatSelectModule,
+  MatSlideToggleModule,
+  MatRadioModule,
+  MatTabsModule,
+  MatAutocompleteModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProjectService } from './project.service';
@@ -20,12 +26,17 @@ import { FilterPanelComponent } from './filter-panel/filter-panel.component';
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     FlexLayoutModule,
+    MatAutocompleteModule,
     MatButtonModule,
     MatExpansionModule,
     MatGridListModule,
     MatIconModule,
     MatTooltipModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatRadioModule,
     ProjectRoutingModule
   ],
   providers : [ProjectService],
