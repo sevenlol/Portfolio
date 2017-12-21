@@ -3,7 +3,25 @@
   <mat-expansion-panel [expanded]="expanded" class="filter-panel" fxFlex="80" fxFlex.xs>
     <mat-tab-group (selectedIndexChange)="queryTypeChanged($event)" dynamicHeight>
       <mat-tab label="Keyword">
-        Keyword
+        <div class="tab-content">
+          <mat-form-field class="keyword-input">
+            <input matInput
+              #keywordInput="ngModel"
+              placeholder="keyword"
+              aria-label="Keyword"
+              [matAutocomplete]="keywordAuto"
+              [(ngModel)]="keywordName"
+              validKeyword
+              required
+              [keywords]="keywords"
+              (ngModelChange)="filteredKeywords = filterKeywords(keywordName)">
+            <mat-autocomplete #keywordAuto="matAutocomplete">
+              <mat-option *ngFor="let keyword of filteredKeywords" [value]="keyword.name">
+                <span>{{ keyword.name }}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
       </mat-tab>
       <mat-tab label="Language">
         <div class="tab-content">

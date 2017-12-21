@@ -16,7 +16,8 @@ import {
   MatSlideToggleModule,
   MatRadioModule,
   MatTabsModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatInputModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProjectService } from './project.service';
@@ -33,6 +34,7 @@ import { FilterPanelComponent } from './filter-panel/filter-panel.component';
     MatExpansionModule,
     MatGridListModule,
     MatIconModule,
+    MatInputModule,
     MatTooltipModule,
     MatSelectModule,
     MatTabsModule,

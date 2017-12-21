@@ -24,6 +24,8 @@ export class FilterPanelComponent implements OnInit {
   active: boolean;
   value: string;
 
+  keywordName: string;
+  filteredKeywords;
   projectStatus;
 
   constructor() { }
@@ -43,9 +45,12 @@ export class FilterPanelComponent implements OnInit {
   }
 
   public clearFilterOptions() {
+    // TODO reset keyword input's valid state
     delete this.type;
     delete this.active;
     delete this.value;
+    delete this.keywordName;
+    this.filteredKeywords = this.keywordOptions;
   }
 
   // FIXME remove hard-coded index comparison
@@ -61,6 +66,13 @@ export class FilterPanelComponent implements OnInit {
     this.clearFilterOptions();
   }
 
+  public filterKeywords(val: string) {
+    this.value = this.keywordOptions.reduce(
+      (curr, keyword) => (keyword.name === val) ? keyword.key : curr,
+      undefined);
+    return this.keywordOptions.filter(keyword => keyword.name.toLowerCase().startsWith(val.toLowerCase()));
+  }
+
   private generateOptions(options, map: Type | Keyword | Language) {
     for (let key in map) {
       options.push({
@@ -69,5 +81,6 @@ export class FilterPanelComponent implements OnInit {
         description : map[key].description
       });
     }
+    this.filteredKeywords = this.keywordOptions;
   }
 }
