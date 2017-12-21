@@ -2,8 +2,30 @@
   margin: 20px 0;
 }
 
+.tab-content {
+  padding: 15px;
+}
+
+.clear-icon {
+  width: 18px;
+  height: 18px;
+  color: #f44336;
+}
+
+.action-list {
+  margin-top: 20px;
+}
+
 @media screen and (max-width: 600px) {
   .container {
     margin: 0 0 5px 0;
+  }
+
+  .tab-content {
+    padding: 10px;
+  }
+
+  .action-list {
+    margin-top: 10px;
   }
 }

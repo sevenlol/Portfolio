@@ -1,5 +1,95 @@
-<div class="container">
-  <mat-expansion-panel [expanded]="expanded">
-    <p>TEST</p>
+<div class="container" fxLayout="row" fxLayoutAlign="center center">
+  <div fxHide.xs></div>
+  <mat-expansion-panel [expanded]="expanded" class="filter-panel" fxFlex="80" fxFlex.xs>
+    <mat-tab-group (selectedIndexChange)="queryTypeChanged($event)" dynamicHeight>
+      <mat-tab label="Keyword">
+        Keyword
+      </mat-tab>
+      <mat-tab label="Language">
+        <div class="tab-content">
+          <h4>Language</h4>
+          <mat-radio-group
+            [(ngModel)]="value"
+            fxLayout="row"
+            fxLayoutGap="10px"
+            fxLayout.xs="column">
+            <mat-radio-button
+              *ngFor="let lang of languageOptions"
+              [value]="lang.key">
+              {{ lang.name }}
+            </mat-radio-button>
+          </mat-radio-group>
+
+          <!-- project status -->
+          <div fxLayout="row" fxLayoutAlign="start center">
+              <h4>Project Status</h4>
+              <button mat-icon-button
+                (click)="clearProjectStatus()"
+                *ngIf="active !== undefined"
+                matTooltip="Clear filter">
+                <mat-icon svgIcon="clear" class="clear-icon"></mat-icon>
+              </button>
+            </div>
+            <mat-radio-group
+              [(ngModel)]="active"
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutGap="10px">
+              <mat-radio-button [value]="true">Active</mat-radio-button>
+              <mat-radio-button [value]="false">Completed</mat-radio-button>
+            </mat-radio-group>
+        </div>
+      </mat-tab>
+      <!-- filter by category -->
+      <mat-tab label="Category">
+        <div class="tab-content">
+          <h4>Project Category</h4>
+          <mat-radio-group
+            [(ngModel)]="value"
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutGap="10px">
+            <mat-radio-button
+              *ngFor="let category of categoryOptions"
+              [value]="category.key">
+              {{ category.name }}
+            </mat-radio-button>
+          </mat-radio-group>
+
+          <!-- project status -->
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <h4>Project Status</h4>
+            <button mat-icon-button
+              (click)="clearProjectStatus()"
+              *ngIf="active !== undefined"
+              matTooltip="Clear filter">
+              <mat-icon svgIcon="clear" class="clear-icon"></mat-icon>
+            </button>
+          </div>
+          <mat-radio-group
+            [(ngModel)]="active"
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutGap="10px">
+            <mat-radio-button [value]="true">Active</mat-radio-button>
+            <mat-radio-button [value]="false">Completed</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+    <div fxLayout="row" fxLayoutGap="20px" class="action-list">
+      <button mat-raised-button
+        (click)="apply()"
+        [disabled]="!value"
+        matTooltip="Apply filter"
+        aria-label="Apply Filter">Apply</button>
+      <button mat-raised-button
+        color="warn"
+        matTooltip="Clear all"
+        (click)="clearFilterOptions()"
+        aria-label="Clear Filter Options">Clear</button>
+    </div>
   </mat-expansion-panel>
+  <div fxHide.xs></div>
 </div>
