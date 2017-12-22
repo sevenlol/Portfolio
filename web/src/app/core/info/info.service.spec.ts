@@ -101,4 +101,3 @@ class FirestoreDocumentStub<T> {
 function notImplemented(): any {
   throw new Error('Not implemented');
 }
-
