@@ -133,6 +133,10 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     this.queryChange$.next(query);
   }
 
+  public clearQuery() {
+    this.queryChange$.next();
+  }
+
   ngOnDestroy() {
     this.unSub$.next();
     this.unSub$.complete();

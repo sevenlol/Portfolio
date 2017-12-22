@@ -3,10 +3,11 @@
     <h2 class="title mat-heading" fxShow.xs fxHide.gt-xs>Personal Projects</h2>
     <h2 class="title mat-display-2" fxShow.gt-xs fxHide.xs>Personal Projects</h2>
     <!-- expand/collapse filter panel -->
-    <div fxFlex="20" class="filter-btn-container">
+    <div fxFlex="20" class="filter-btn-container" fxLayout="row">
       <button mat-button
         (click)="toggleFilterPanel()"
         fxHide.xs fxShow.gt-xs
+        [color]="currQuery ? 'warn' : ''"
         aria-label="Expand Filter Panel"
         matTooltip="Expand filter panel">
         <mat-icon svgIcon="filter-list"></mat-icon>
@@ -15,9 +16,18 @@
       <button mat-icon-button
         (click)="toggleFilterPanel()"
         fxShow.xs fxHide.gt-xs
+        [color]="currQuery ? 'warn' : ''"
         aria-label="Expand Filter Panel"
         matTooltip="Expand filter panel">
         <mat-icon svgIcon="filter-list"></mat-icon>
+      </button>
+      <button mat-icon-button
+        color="warn"
+        *ngIf="currQuery"
+        (click)="clearQuery()"
+        aria-label="Clear Filter Query"
+        matTooltip="Clear query">
+        <mat-icon svgIcon="clear"></mat-icon>
       </button>
     </div>
   </div>

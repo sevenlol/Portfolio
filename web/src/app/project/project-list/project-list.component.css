@@ -11,6 +11,10 @@
   margin: 20px 0;
 }
 
+.filter-btn-container {
+  margin-right: 25px;
+}
+
 @media screen and (max-width: 600px) {
   .title {
     margin: 0 15px 20px 0;
@@ -18,5 +22,6 @@
 
   .filter-btn-container {
     margin-bottom: 20px;
+    margin-right: 10px;
   }
 }
