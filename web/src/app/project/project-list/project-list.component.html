@@ -23,7 +23,12 @@
   </div>
 
   <!-- filter panel -->
-  <app-filter-panel [expanded]="filterPanelExpanded" [types]="types" [languages]="languages" [keywords]="keywords"></app-filter-panel>
+  <app-filter-panel
+    [expanded]="filterPanelExpanded"
+    [types]="types"
+    [languages]="languages"
+    [keywords]="keywords"
+    (queryChange)="queryChanged($event)"></app-filter-panel>
 
   <!-- project grid list (non portrait mobile) -->
   <mat-grid-list [cols]="cols$ | async" [rowHeight]="rowHeight" fxShow.gt-xs fxHide.xs>

@@ -1,7 +1,10 @@
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/takeUntil';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/combineLatest';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +15,7 @@ import { ObservableMedia } from '@angular/flex-layout';
 import { Project } from '../../shared/project/project.model';
 import { KeywordMetadata, MainMetadata, Keyword, Language, Type } from '../../core/metadata.model';
 import { ProjectComponent } from '../../shared/project/project.component';
-import { ProjectService, QueryType } from '../project.service';
+import { ProjectService, QueryType, Query } from '../project.service';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -34,7 +37,9 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   hasMoreData: boolean = true;
   cols$: Observable<number>;
   private nextPage$: Subject<void> = new Subject();
+  private queryChange$: Subject<Query> = new Subject();
   private unSub$: Subject<void> = new Subject();
+  private currQuery: Query;
 
   keywords: Keyword;
   languages: Language;
@@ -75,23 +80,41 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     });
 
     this.nextPage$
+      .combineLatest(this.queryChange$
+        .distinctUntilChanged((q1, q2) => {
+          if (!q1 || !q2) {
+            // both have to be falsy
+            return !q1 && !q2;
+          }
+
+          // both truthy, compare fields
+          return q1.type === q2.type &&
+            q1.active === q2.active &&
+            q1.value === q2.value;
+        })
+        // clear current data when query changed
+        .do(() => this.projects = []))
+      .map(([ nextPage, query ]) => query)
       // show spinner
       .do(() => this.isLoading = true)
-      .mergeMap(() => {
+      .switchMap((query) => {
+        this.currQuery = query;
         if (this.projects.length === 0) {
           // initial query, no endDate/startDate cursor
-          return this.service.queryProjects(ProjectListComponent.BATCH_COUNT, null);
+          return this.service.queryProjects(ProjectListComponent.BATCH_COUNT, query);
         }
 
         // retrieve the last item as cursor
         let last = this.projects[this.projects.length - 1];
-        return this.service.queryProjects(ProjectListComponent.BATCH_COUNT, null, last);
+        return this.service.queryProjects(ProjectListComponent.BATCH_COUNT, query, last);
       })
       // component descruction
       .takeUntil(this.unSub$)
       .subscribe(this.handleData.bind(this));
 
+    // initial query
     this.nextPage$.next();
+    this.queryChange$.next();
   }
 
   public loadNext() {
@@ -102,6 +125,12 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   public toggleFilterPanel() {
     this.filterPanelExpanded = !this.filterPanelExpanded;
+  }
+
+  public queryChanged(query: Query) {
+    // collapse filter panel
+    this.filterPanelExpanded = false;
+    this.queryChange$.next(query);
   }
 
   ngOnDestroy() {
