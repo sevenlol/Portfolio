@@ -11,6 +11,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MainMetadata, KeywordMetadata } from '../../core/metadata.model';
 import { Project } from './project.model';
 import { ProjectComponent } from './project.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 const MAIN_METADATA: MainMetadata = {
   languages : {
@@ -78,7 +79,8 @@ describe('ProjectComponent', () => {
         MatButtonModule,
         MatCardModule,
         MatChipsModule,
-        MatTooltipModule
+        MatTooltipModule,
+        RouterTestingModule
       ],
       declarations: [ ProjectComponent ]
     })
