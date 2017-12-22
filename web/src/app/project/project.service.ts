@@ -33,7 +33,7 @@ export class ProjectService {
     }
     if (query) {
       // must exists
-      if (!query.type) {
+      if (!(query.type in QueryType)) {
         throw new Error('Invalid query type');
       }
       // cannot be null or empty string
