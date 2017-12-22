@@ -28,8 +28,11 @@ export class ProjectService {
   }
 
   private checkQueryParams(limit: number, query: Query) {
-    if (!limit) {
+    if (!limit || limit < 0) {
       throw new Error('Limit should be greater than 0');
+    }
+    if (parseInt(limit.toString()) !== limit) {
+      throw new Error('Limit should be an integer');
     }
     if (query) {
       // must exists
