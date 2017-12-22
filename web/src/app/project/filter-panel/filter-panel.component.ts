@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Type, Language, Keyword } from '../../core/metadata.model';
 import { Query, QueryType } from '../project.service';
@@ -15,12 +15,17 @@ export class FilterPanelComponent implements OnInit {
   @Input() keywords: Keyword;
   @Input() expanded: boolean = false;
 
+  @Output() queryChange: EventEmitter<Query> = new EventEmitter<Query>();
+
   QueryType = QueryType;
   categoryOptions = [];
   keywordOptions = [];
   languageOptions = [];
 
-  type: QueryType;
+  // TODO find a way to be consistent with template and not have
+  // to modify multiply places
+  // default query type
+  type: QueryType = QueryType.KEYWORD;
   active: boolean;
   value: string;
 
@@ -37,7 +42,15 @@ export class FilterPanelComponent implements OnInit {
   }
 
   public apply() {
-    // TODO implement
+    // TODO add checks for related variables
+    // all query related field should be valid
+    let query: Query = {
+      type : this.type,
+      active : this.active,
+      value : this.value
+    };
+
+    this.queryChange.emit(query);
   }
 
   public clearProjectStatus() {
@@ -45,16 +58,16 @@ export class FilterPanelComponent implements OnInit {
   }
 
   public clearFilterOptions() {
-    // TODO reset keyword input's valid state
-    delete this.type;
-    delete this.active;
-    delete this.value;
-    delete this.keywordName;
-    this.filteredKeywords = this.keywordOptions;
+    // emit an empty query when the user click clear
+    this.queryChange.emit();
+    this.clear();
   }
 
   // FIXME remove hard-coded index comparison
+  // TODO find a way to use QueryType oridinal as the order of tabs
   public queryTypeChanged(index: number) {
+    // clear filter options
+    this.clear();
     if (index === 0) {
       this.type = QueryType.KEYWORD;
     } else if (index === 1) {
@@ -62,8 +75,6 @@ export class FilterPanelComponent implements OnInit {
     } else if (index === 2) {
       this.type = QueryType.TYPE;
     }
-    // clear filter options
-    this.clearFilterOptions();
   }
 
   public filterKeywords(val: string) {
@@ -71,6 +82,14 @@ export class FilterPanelComponent implements OnInit {
       (curr, keyword) => (keyword.name === val) ? keyword.key : curr,
       undefined);
     return this.keywordOptions.filter(keyword => keyword.name.toLowerCase().startsWith(val.toLowerCase()));
+  }
+
+  private clear() {
+    // TODO reset keyword input's valid state
+    delete this.active;
+    delete this.value;
+    delete this.keywordName;
+    this.filteredKeywords = this.keywordOptions;
   }
 
   private generateOptions(options, map: Type | Keyword | Language) {
