@@ -24,7 +24,10 @@
   </mat-card-content>
   <mat-card-actions fxLayout="row" fxLayoutAlign="space-between" class="read-more">
     <a mat-button [href]="project.url" target="_blank" aria-label="Link to Project Website">Link</a>
-    <a mat-button aria-label="View Project Detail" [routerLink]="['/projects', project.id ]">Detail</a>
+    <a mat-button
+      [disabled]="!project.id"
+      aria-label="View Project Detail"
+      [routerLink]="['/projects', project.id ]">Detail</a>
   </mat-card-actions>
   <mat-card-footer fxLayout="row" fxLayoutAlign="start" class="project-footer">
     <mat-chip-list selectable="false" aria-label="Keyword list of this project">
