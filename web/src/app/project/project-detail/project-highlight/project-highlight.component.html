@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-content>
+    <ul *ngIf="project.highlights">
+      <li *ngFor="let item of project.highlights">
+        <span class="mat-subheading-2" fxHide.xs fxShow.gt-xs>{{ item }}</span>
+        <span class="mat-subheading-1" fxShow.xs fxHide.gt-xs>{{ item }}</span>
+      </li>
+    </ul>
+  </mat-card-content>
+</mat-card>

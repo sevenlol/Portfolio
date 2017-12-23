@@ -1,9 +1,9 @@
-export class Project {
+export interface Project {
   id?: string;
   name: string;
   description: string;
   highlights?: string[];
-  keywords: object;
+  keywords: IndexMap;
   url: string;
   coverImageUrl?: string;
   startDate: Date;
@@ -12,20 +12,24 @@ export class Project {
   active: boolean;
   primaryLanguage: string;
   primaryType: string;
-  languages: object;
-  types: object;
-  links?: object;
+  languages: IndexMap;
+  types: IndexMap;
+  links?: LinkMap;
 }
 
-export class LinkMap {
+export interface LinkMap {
   doc: Link[];
   github: Link[];
   demoVideo: Link[];
   demoImage: Link[];
 }
 
-export class Link {
+export interface Link {
   name: string;
   url: string;
   description?: string;
+}
+
+interface IndexMap {
+  [key: string]: number;
 }
