@@ -67,7 +67,7 @@ let PROJECT: Project = {
   }
 };
 
-fdescribe('ProjectListComponent, 5 projects', () => {
+describe('ProjectListComponent, 5 projects', () => {
   let component: ProjectListComponent;
   let fixture: ComponentFixture<ProjectListComponent>;
   let de: DebugElement;
@@ -144,7 +144,7 @@ fdescribe('ProjectListComponent, 5 projects', () => {
     expect(component.filterPanelExpanded).toBe(false);
   });
 
-  it('should form the initial query correctly', async(() => {
+  it('should generate the initial query correctly', async(() => {
     let service = TestBed.get(ProjectService) as ProjectServiceStub;
 
     expect(service.lastProject).toBeUndefined();
@@ -153,6 +153,86 @@ fdescribe('ProjectListComponent, 5 projects', () => {
     expect(component.hasMoreData).toBe(true);
     expect(component.projects).toBeTruthy();
     expect(component.projects.length).toBe(3);
+  }));
+
+  it('should generate query correctly when users click show more projects', async(() => {
+    let service = TestBed.get(ProjectService) as ProjectServiceStub;
+    // user already loads the first batch
+    // simulate only two left
+    service.skipProjects = 3;
+
+    // user clicking show more data
+    component.loadNext();
+    fixture.detectChanges();
+
+    // service is called correctly
+    expect(service.lastProject).toBeTruthy();
+    expect(service.lastProject.id).toBe('' + (ProjectListComponent.BATCH_COUNT - 1));
+
+    expect(component.hasMoreData).toBeFalsy();
+    expect(component.projects).toBeTruthy();
+    // all projects loaded
+    expect(component.projects.length).toBe(NUM_OF_TOTAL_PROJECTS);
+  }));
+
+  it('should generate query correctly when user apply filters', async(() => {
+    let service = TestBed.get(ProjectService) as ProjectServiceStub;
+
+    // apply filter
+    component.queryChanged({ type : QueryType.KEYWORD, value : 'angular' });
+
+    // currently displayed projects should be clear
+    // cuz the original query is invalidated
+    expect(service.lastProject).toBeUndefined();
+    // checking request query
+    expect(service.query).toBeTruthy();
+    expect(service.query.type).toBe(QueryType.KEYWORD);
+    expect(service.query.value).toBe('angular');
+    expect(service.query.active).toBeUndefined();
+
+    fixture.detectChanges();
+
+    // initial batch, has more data
+    expect(component.hasMoreData).toBe(true);
+    expect(component.projects).toBeTruthy();
+    expect(component.projects.length).toBe(LIMIT);
+  }));
+
+  it('should generate query correctly when loading more data with new filter', async(() => {
+    let service = TestBed.get(ProjectService) as ProjectServiceStub;
+    // apply filter
+    component.queryChanged({ type : QueryType.LANGUAGE, value : 'javascript', active : true });
+
+    // currently displayed projects should be clear
+    // cuz the original query is invalidated
+    expect(service.lastProject).toBeUndefined();
+    // checking request query
+    expect(service.query).toBeTruthy();
+    expect(service.query.type).toBe(QueryType.LANGUAGE);
+    expect(service.query.value).toBe('javascript');
+    expect(service.query.active).toBe(true);
+
+    // user already loads the first batch
+    // simulate only two left
+    service.skipProjects = 3;
+
+    // user clicking show more data
+    component.loadNext();
+    fixture.detectChanges();
+
+    // service is called correctly
+    expect(service.lastProject).toBeTruthy();
+    expect(service.lastProject.id).toBe('' + (ProjectListComponent.BATCH_COUNT - 1));
+    // checking request query
+    expect(service.query).toBeTruthy();
+    expect(service.query.type).toBe(QueryType.LANGUAGE);
+    expect(service.query.value).toBe('javascript');
+    expect(service.query.active).toBe(true);
+
+    expect(component.hasMoreData).toBeFalsy();
+    expect(component.projects).toBeTruthy();
+    // all projects loaded
+    expect(component.projects.length).toBe(NUM_OF_TOTAL_PROJECTS);
   }));
 });
 
