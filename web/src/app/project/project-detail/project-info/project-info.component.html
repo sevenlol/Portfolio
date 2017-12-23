@@ -1,0 +1,107 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <span fxHide.xs fxShow.gt-xs class="mat-display-2">{{ project.name }}</span>
+      <span fxShow.xs fxHide.gt-xs class="mat-display-1">{{ project.name }}</span>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <span>
+        {{ project.startDate | date : DATE_FORMAT }} -
+        {{ project.endDate | date : DATE_FORMAT }}</span>
+    </mat-card-subtitle>
+    <!-- categories (desktop) -->
+    <mat-chip-list class="category-list" fxHide.xs>
+      <mat-chip
+        *ngFor="let category of displayCategories"
+        [ngStyle]="{
+          backgroundColor: category?.color,
+          color : category?.fontColor }"
+        [matTooltip]="category.description || 'Project Category'">
+        {{ category.displayName }}
+      </mat-chip>
+    </mat-chip-list>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="column" fxLayoutGap="20px" fxLayoutGap.xs="10px">
+      <p fxHide.xs fxShow.gt-xs class="mat-subheading-2 description">{{ project.description }}</p>
+      <p fxShow.xs fxHide.gt-xs class="mat-subheading-1 description">{{ project.description }}</p>
+
+      <!-- categories (mobile) -->
+      <div fxShow.xs fxHide.gt-xs>
+        <h4 class="mat-title">Categories</h4>
+        <mat-chip-list>
+          <mat-chip
+            *ngFor="let category of displayCategories"
+            [ngStyle]="{
+              backgroundColor: category?.color,
+              color : category?.fontColor }"
+            [matTooltip]="category.description || 'Project Category'">
+            {{ category.displayName }}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+
+      <!-- languages -->
+      <div>
+        <h4 class="mat-title">Programming Languages</h4>
+        <mat-chip-list>
+          <mat-chip
+            *ngFor="let lang of displayLanguages"
+            [ngStyle]="{
+              backgroundColor: lang?.color,
+              color : lang?.fontColor }"
+            [matTooltip]="lang.description || 'Project Language'">
+            {{ lang.displayName }}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+
+      <div>
+        <h4 class="mat-title">Project Status</h4>
+        <mat-chip
+          *ngIf="project.active"
+          class="active-project"
+          matTooltip="Under Active Development">Active</mat-chip>
+        <mat-chip
+          *ngIf="!project.active"
+          matTooltip="Project Finished">Complete</mat-chip>
+      </div>
+
+      <div>
+        <mat-nav-list>
+          <h4 mat-sub-header class="mat-title">Documentation</h4>
+          <div *ngIf="project.links && project.links.doc">
+            <a mat-list-item *ngFor="let link of project.links.doc" [href]="link.url" target="_blank">
+              <mat-icon fxHide.xs mat-list-icon svgIcon="doc"></mat-icon>
+              <h4 mat-line>{{ link.name }}</h4>
+              <span mat-line>{{ link.description }}</span>
+            </a>
+          </div>
+          <h4 mat-sub-header class="mat-title">Github</h4>
+          <div *ngIf="project.links && project.links.github">
+            <a mat-list-item *ngFor="let link of project.links.github" [href]="link.url" target="_blank">
+              <mat-icon fxHide.xs mat-list-icon svgIcon="github"></mat-icon>
+              <h4 mat-line>{{ link.name }}</h4>
+              <span mat-line>{{ link.description }}</span>
+            </a>
+          </div>
+        </mat-nav-list>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <!-- keywords -->
+    <div class="keyword-list">
+      <mat-chip-list>
+        <mat-chip
+          *ngFor="let keyword of displayKeywords"
+          [ngStyle]="{
+            backgroundColor: keyword?.color,
+            color : keyword?.fontColor }"
+          [matTooltip]="keyword.description || 'Project Keyword'">
+          {{ keyword.displayName }}
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+  </mat-card-footer>
+</mat-card>
