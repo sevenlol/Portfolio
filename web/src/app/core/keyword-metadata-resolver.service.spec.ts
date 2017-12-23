@@ -62,7 +62,7 @@ class MetadataServiceStub {
   }
 
   getKeywordMetadata(): Observable<KeywordMetadata> {
-    return Observable.of(this.keyword).delay(this.delay);
+    return Observable.of(this.keyword);
   }
 }
 

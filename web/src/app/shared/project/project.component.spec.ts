@@ -1,4 +1,4 @@
-import { DebugElement } from '@angular/core';
+import { DebugElement, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import { By } from '@angular/platform-browser';
@@ -12,6 +12,7 @@ import { MainMetadata, KeywordMetadata } from '../../core/metadata.model';
 import { Project } from './project.model';
 import { ProjectComponent } from './project.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 const MAIN_METADATA: MainMetadata = {
   languages : {
@@ -80,9 +81,11 @@ describe('ProjectComponent', () => {
         MatCardModule,
         MatChipsModule,
         MatTooltipModule,
+        NoopAnimationsModule,
         RouterTestingModule
       ],
-      declarations: [ ProjectComponent ]
+      declarations: [ ProjectComponent ],
+      schemas : [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   }));
@@ -136,7 +139,7 @@ describe('ProjectComponent', () => {
   });
 
   // keywords
-  it('should display keywords correctly', () => {
+  it('should display keywords correctly', async(() => {
     let keywordListEle = de.query(By.css('.project-footer'));
     expect(keywordListEle).toBeTruthy();
     let keywordEles = keywordListEle.queryAll(By.css('mat-chip'));
@@ -149,7 +152,7 @@ describe('ProjectComponent', () => {
       expect(keyword).toBeTruthy();
       expect(PROJECT.keywords[keyword]).toBeTruthy();
     });
-  });
+  }));
 
   it('should display keywords with correct count', () => {
     let keywordCount = Object.keys(PROJECT.keywords).length;

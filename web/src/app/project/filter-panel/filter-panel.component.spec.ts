@@ -47,7 +47,7 @@ const KEYWORD_METADATA: KeywordMetadata = {
   }
 };
 
-xdescribe('FilterPanelComponent', () => {
+describe('FilterPanelComponent', () => {
   let component: FilterPanelComponent;
   let fixture: ComponentFixture<FilterPanelComponent>;
   let de: DebugElement;
