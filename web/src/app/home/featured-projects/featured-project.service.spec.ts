@@ -3,7 +3,7 @@ import 'rxjs/add/operator/take';
 import { TestBed, inject } from '@angular/core/testing';
 import { FirebaseApp } from 'angularfire2';
 import * as firebase from 'firebase/app';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QueryFn } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QueryFn, DocumentChangeAction } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -11,6 +11,30 @@ import { Project } from '../../shared/project/project.model';
 import { FeaturedProjectService } from './featured-project.service';
 
 const INVALID_NUM_PER_ROW_ERROR = new Error('numPerRow should be a postive integer');
+
+let PROJECT: Project = {
+  name : 'Test Project',
+  description : 'Project description',
+  keywords : {
+    angular : Date.now(),
+    firebase : Date.now(),
+    firestore : Date.now(),
+    material : Date.now()
+  },
+  url : 'https://www.google.com',
+  startDate : new Date(2017, 11, 1),
+  endDate : new Date(2017, 11, 3),
+  featured : true,
+  active : false,
+  primaryLanguage : 'javascript',
+  primaryType : 'web',
+  languages : {
+    javascript : Date.now()
+  },
+  types : {
+    web : Date.now()
+  }
+};
 
 // no projects exist in the database
 describe('FeaturedProjectService: empty project in database', () => {
@@ -142,7 +166,7 @@ describe('FeaturedProjectService: different # of projects in database', () => {
   function setProjects(count: number) {
     PROJECTS = [];
     for (let i = 0; i < count; i++) {
-      PROJECTS.push(null);
+      PROJECTS.push(PROJECT);
     }
   }
 
@@ -208,8 +232,28 @@ class FirestoreCollectionStub extends AngularFirestoreCollection<Project> {
   auditTrail(events?: firebase.firestore.DocumentChangeType[]): Observable<any> {
     return notImplemented();
   }
-  snapshotChanges(events?: firebase.firestore.DocumentChangeType[]): Observable<any> {
-    return notImplemented();
+  snapshotChanges(events?: firebase.firestore.DocumentChangeType[]): Observable<DocumentChangeAction[]> {
+    return Observable.of(this.fakeProjects).map(projects => {
+      return projects.map((project, index) => {
+        // return a DocumentChangeAction
+        return {
+          type : null,
+          payload : {
+            type : null,
+            doc : {
+              exists : true,
+              ref : null,
+              id : index.toString(),
+              metadata : null,
+              data : () => project,
+              get : () => {}
+            },
+            oldIndex : index,
+            newIndex : index
+          }
+        };
+      });
+    });
   }
   add(data): Promise<any> {
     return notImplemented();

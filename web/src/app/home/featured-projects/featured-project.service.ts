@@ -19,11 +19,15 @@ export class FeaturedProjectService {
       .collection<Project>(
         PROJECT_COLL,
         ref => ref.where('featured', '==', true).orderBy('endDate', 'desc'))
-      .valueChanges().map(projects => {
-        let rows = projects.reduce((rows, project) => {
+      .snapshotChanges().map(snapshots => {
+        let rows = snapshots.reduce((rows, snapshot) => {
           if (rows.length === 0 || rows[rows.length - 1].length === numPerRow) {
             rows.push([]);
           }
+
+          let project: Project = snapshot.payload.doc.data() as Project;
+          project.id = snapshot.payload.doc.id;
+
           let col = rows[rows.length - 1];
           col.push(project);
           return rows;
