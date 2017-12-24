@@ -9,6 +9,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import {
   MatGridListModule,
   MatButtonModule,
+  MatCardModule,
   MatExpansionModule,
   MatIconModule,
   MatTooltipModule,
@@ -17,11 +18,16 @@ import {
   MatRadioModule,
   MatTabsModule,
   MatAutocompleteModule,
-  MatInputModule
+  MatInputModule,
+  MatChipsModule,
+  MatListModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProjectService } from './project.service';
 import { FilterPanelComponent } from './filter-panel/filter-panel.component';
+import { ProjectInfoComponent } from './project-detail/project-info/project-info.component';
+import { ProjectHighlightComponent } from './project-detail/project-highlight/project-highlight.component';
+import { ProjectDemoComponent } from './project-detail/project-demo/project-demo.component';
 
 @NgModule({
   imports: [
@@ -31,10 +37,13 @@ import { FilterPanelComponent } from './filter-panel/filter-panel.component';
     FlexLayoutModule,
     MatAutocompleteModule,
     MatButtonModule,
+    MatCardModule,
+    MatChipsModule,
     MatExpansionModule,
     MatGridListModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatTooltipModule,
     MatSelectModule,
     MatTabsModule,
@@ -42,6 +51,6 @@ import { FilterPanelComponent } from './filter-panel/filter-panel.component';
     ProjectRoutingModule
   ],
   providers : [ProjectService],
-  declarations: [ProjectListComponent, ProjectDetailComponent, FilterPanelComponent]
+  declarations: [ProjectListComponent, ProjectDetailComponent, FilterPanelComponent, ProjectInfoComponent, ProjectHighlightComponent, ProjectDemoComponent]
 })
 export class ProjectModule { }

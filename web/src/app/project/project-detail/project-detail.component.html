@@ -1,3 +1,14 @@
-<p>
-  project-detail works!
-</p>
+<div class="container" fxLayout="row">
+  <div fxFlex fxHide.xs></div>
+  <div fxLayout="column" fxFlex="80" fxFlex.xs="100" fxLayoutGap="20px" fxLayoutGap.xs="5px">
+    <app-project-info
+      [project]="project"
+      [keywords]="keywords"
+      [languages]="languages"
+      [types]="types">
+    </app-project-info>
+    <app-project-highlight [project]="project"></app-project-highlight>
+    <app-project-demo [project]="project"></app-project-demo>
+  </div>
+  <div fxFlex fxHide.xs></div>
+</div>
