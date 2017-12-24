@@ -1,6 +1,13 @@
 <div class="container" fxLayout="row">
   <div fxFlex fxHide.xs></div>
-  <div fxLayout="column" fxFlex="80" fxFlex.xs="100" fxLayoutGap="20px" fxLayoutGap.xs="5px">
+  <app-spinner *ngIf="showSpinner"></app-spinner>
+  <div
+    *ngIf="project"
+    fxLayout="column"
+    fxFlex="80"
+    fxFlex.xs="100"
+    fxLayoutGap="20px"
+    fxLayoutGap.xs="5px">
     <app-project-info
       [project]="project"
       [keywords]="keywords"

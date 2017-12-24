@@ -1,83 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/takeUntil';
+import 'rxjs/add/operator/do';
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 import { Project } from '../../shared/project/project.model';
 import { Keyword, Language, Type, MainMetadata, KeywordMetadata } from '../../core/metadata.model';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ProjectService } from '../project.service';
 
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.css']
 })
-export class ProjectDetailComponent implements OnInit {
+export class ProjectDetailComponent implements OnInit, OnDestroy {
 
-  project: Project = {
-    name : 'Test Project',
-    description : 'Project description',
-    keywords : {
-      angular : Date.now(),
-      firebase : Date.now(),
-      firestore : Date.now()
-    },
-    url : 'https://www.google.com',
-    coverImageUrl : 'https://avatars3.githubusercontent.com/u/6497884?s=400&u=14a9be7c3afc0a1e0d797db1d9a7c86c5aac7a83&v=4',
-    startDate : new Date(2017, 11, 1),
-    endDate : new Date(2017, 11, 3),
-    featured : true,
-    active : true,
-    primaryLanguage : 'javascript',
-    primaryType : 'web',
-    languages : {
-      javascript : Date.now()
-    },
-    types : {
-      backend : Date.now(),
-      web : Date.now()
-    },
-    highlights : [
-      'this is a awesome project. sldkjflks ddifjdfi highlight #1. some random stuff.',
-      'this is item 2 which I don\'t know what I should type.',
-      'just watched justice league, meh movie.'
-    ],
-    links : {
-      demoImage : [
-        {
-          name : 'Web Layout',
-          url : 'https://avatars3.githubusercontent.com/u/6497884?s=400&u=14a9be7c3afc0a1e0d797db1d9a7c86c5aac7a83&v=4'
-        },
-        {
-          name : 'Some random image',
-          url : 'https://istio.io/docs/tasks/telemetry/img/istio-tcp-attribute-flow.svg'
-        }
-      ],
-      demoVideo : [
-        {
-          name : 'Website Demo Video',
-          url : 'https://www.youtube.com/watch?v=WQJ61CVthBM'
-        },
-        {
-          name : 'Random Video',
-          url : 'https://www.youtube.com/watch?v=WQJ61CVthBM'
-        }
-      ],
-      doc : [
-        {
-          description : 'Code of the main website',
-          name : 'Portfolio Website',
-          url : 'https://github.com/sevenlol/Portfolio'
-        }
-      ],
-      github : [
-        {
-          description : 'Code of the main website',
-          name : 'Portfolio Website',
-          url : 'https://github.com/sevenlol/Portfolio'
-        }
-      ]
-    }
-  };
+  project: Project;
+  showSpinner: boolean;
+
+  unSub$: Subject<void> = new Subject();
 
   keywords: Keyword;
   languages: Language;
@@ -86,7 +32,8 @@ export class ProjectDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private iconRegistry: MatIconRegistry,
-    private sanitizer: DomSanitizer,) { }
+    private sanitizer: DomSanitizer,
+    private projectService: ProjectService) { }
 
   ngOnInit() {
     // icons
@@ -103,7 +50,22 @@ export class ProjectDetailComponent implements OnInit {
       this.keywords = data.keywordMetadata.keywords;
     });
 
-    // TODO load project data here
+    // load project data
+    this.route.paramMap
+      .switchMap((params: ParamMap) =>
+        this.projectService.get(params.get('id')))
+      .do(() => this.showSpinner = true)
+      .takeUntil(this.unSub$)
+      .subscribe(project => {
+        this.project = project;
+        this.showSpinner = false;
+      });
+  }
+
+  ngOnDestroy() {
+    // to unsubscribe other observers
+    this.unSub$.next();
+    this.unSub$.complete();
   }
 
   private registerIcon(name: string, path: string) {
