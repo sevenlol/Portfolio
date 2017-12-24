@@ -14,6 +14,18 @@ export class ProjectService {
 
   constructor(private afs: AngularFirestore) { }
 
+  get(id: string): Observable<Project> {
+    this.checkId(id);
+
+    return this.afs.doc<Project>(`${ProjectService.PROJECTS_PATH}/${id}`)
+      .snapshotChanges().map(ref => {
+        let project = ref.payload.data() as Project;
+        let id = ref.payload.id;
+        project.id = id;
+        return project;
+      });
+  }
+
   queryProjects(limit: number, query: Query, lastProject?: Project): Observable<Project[]> {
     this.checkQueryParams(limit, query);
     return this.afs.collection<Project>(ProjectService.PROJECTS_PATH,
@@ -25,6 +37,12 @@ export class ProjectService {
         project.id = id;
         return project;
       }));
+  }
+
+  private checkId(id: string) {
+    if (!id) {
+      throw new Error('Invalid project ID');
+    }
   }
 
   private checkQueryParams(limit: number, query: Query) {
