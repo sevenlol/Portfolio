@@ -1,0 +1,11 @@
+.image-container {
+  margin-bottom: 15px;
+}
+
+.demo-image {
+  max-width: 100%;
+}
+
+.demo-image-name {
+  text-align: center;
+}
