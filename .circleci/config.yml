@@ -61,9 +61,15 @@ jobs:
       - run:
           # configure angular environment
           name: Configure environment
-          command: npm run configure-env
-          environment:
-            PORTFOLIO_ENV: staging
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                export PORTFOLIO_ENV=staging
+            elif [ "${CIRCLE_BRANCH}" == "master" ]; then
+                export PORTFOLIO_ENV=prod
+            else
+                echo "Invalid branch name ${CIRCLE_BRANCE}"
+            fi
+            npm run configure-env
       - run:
           name: Build Website
           command: npm run build
