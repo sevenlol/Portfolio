@@ -70,7 +70,7 @@
       <div>
         <mat-nav-list>
           <h4 mat-sub-header class="mat-title">Documentation</h4>
-          <div *ngIf="project.links && project.links.doc">
+          <div *ngIf="project.links && project.links.doc" class="doc-list">
             <a mat-list-item *ngFor="let link of project.links.doc" [href]="link.url" target="_blank">
               <mat-icon fxHide.xs mat-list-icon svgIcon="doc"></mat-icon>
               <h4 mat-line>{{ link.name }}</h4>
@@ -78,7 +78,7 @@
             </a>
           </div>
           <h4 mat-sub-header class="mat-title">Github</h4>
-          <div *ngIf="project.links && project.links.github">
+          <div *ngIf="project.links && project.links.github" class="github-list">
             <a mat-list-item *ngFor="let link of project.links.github" [href]="link.url" target="_blank">
               <mat-icon fxHide.xs mat-list-icon svgIcon="github"></mat-icon>
               <h4 mat-line>{{ link.name }}</h4>
