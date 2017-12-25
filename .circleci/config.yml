@@ -1,7 +1,7 @@
 version: 2
 jobs:
-  # build website job
-  build_web:
+  # test website job
+  test_web:
     working_directory: ~/project/web
     docker:
       - image: circleci/node:8.9.1-browsers
@@ -38,6 +38,14 @@ jobs:
           path: reports/
       - store_artifacts:
           path: reports/
+  # build website job
+  build_web:
+    working_directory: ~/project/web
+    docker:
+      - image: circleci/node:8.9.1-browsers
+    steps:
+      - checkout:
+          path: ~/project
       - run:
           # configure angular environment
           name: Configure environment
@@ -53,7 +61,10 @@ workflows:
   version: 2
   build_and_deploy:
     jobs:
+      - test_web
       - build_web:
+          requires:
+            - test_web
           filters:
             branches:
               only:
