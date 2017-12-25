@@ -38,6 +38,17 @@ jobs:
           path: reports/
       - store_artifacts:
           path: reports/
+      - run:
+          # configure angular environment
+          name: Configure environment
+          command: npm run configure
+          environment:
+            FIREBASE_WEB_CONFIG: $FIREBASE_WEB_CONFIG_STAGING
+      - run:
+          name: Build Website
+          command: npm run build
+      - store_artifacts:
+          path: dist/
 workflows:
   version: 2
   build_and_deploy:

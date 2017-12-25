@@ -35,11 +35,11 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   filterPanelExpanded = false;
   isLoading = false;
   hasMoreData = true;
+  currQuery: Query;
   cols$: Observable<number>;
   private nextPage$: Subject<void> = new Subject();
   private queryChange$: Subject<Query> = new Subject();
   private unSub$: Subject<void> = new Subject();
-  private currQuery: Query;
 
   keywords: Keyword;
   languages: Language;
