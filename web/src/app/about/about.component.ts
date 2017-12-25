@@ -14,7 +14,7 @@ import { InfoService } from '../core/info/info.service';
 export class AboutComponent implements OnInit, OnDestroy {
 
   info: Info;
-  showSpinner: boolean = true;
+  showSpinner = true;
 
   private unSub$: Subject<boolean> = new Subject();
 

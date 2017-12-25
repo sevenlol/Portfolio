@@ -25,6 +25,21 @@ const KEYWORD_METADATA: KeywordMetadata = {
   }
 };
 
+class MetadataServiceStub {
+  constructor(
+    private keyword: KeywordMetadata,
+    private delay: number) {
+  }
+
+  getMainMetadata(): Observable<MainMetadata> {
+    return ;
+  }
+
+  getKeywordMetadata(): Observable<KeywordMetadata> {
+    return Observable.of(this.keyword);
+  }
+}
+
 describe('KeywordMetadataResolverService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -50,19 +65,3 @@ describe('KeywordMetadataResolverService', () => {
     });
   })));
 });
-
-class MetadataServiceStub {
-  constructor(
-    private keyword: KeywordMetadata,
-    private delay: number) {
-  }
-
-  getMainMetadata(): Observable<MainMetadata> {
-    return ;
-  }
-
-  getKeywordMetadata(): Observable<KeywordMetadata> {
-    return Observable.of(this.keyword);
-  }
-}
-

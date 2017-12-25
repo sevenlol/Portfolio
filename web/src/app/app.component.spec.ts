@@ -1,6 +1,6 @@
 import { DebugElement, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { Router, NavigationStart, NavigationEnd, Event } from '@angular/router'
+import { Router, NavigationStart, NavigationEnd, Event } from '@angular/router';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -29,7 +29,7 @@ describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let de: DebugElement;
-  let router = new RouterStub();
+  const router = new RouterStub();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

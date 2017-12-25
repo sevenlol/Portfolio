@@ -71,23 +71,23 @@ describe('BasicInfoComponent', () => {
   });
 
   it('should display name and label correctly', () => {
-    let nameEle = de.query(By.css('mat-card-title'));
+    const nameEle = de.query(By.css('mat-card-title'));
     expect(nameEle).toBeTruthy();
     expect(nameEle.nativeElement.textContent).toContain(INFO.name);
 
-    let labelEle = de.query(By.css('mat-card-subtitle'));
+    const labelEle = de.query(By.css('mat-card-subtitle'));
     expect(labelEle).toBeTruthy();
     expect(labelEle.nativeElement.textContent).toContain(INFO.label);
   });
 
   it('should display info items correctly', () => {
-    let infoEles = de.queryAll(By.css('.info-item'));
+    const infoEles = de.queryAll(By.css('.info-item'));
     expect(infoEles).toBeTruthy();
     expect(infoEles.length).toBe(3);
 
-    let emailEle = infoEles[0];
-    let locationEle = infoEles[1];
-    let phoneEle = infoEles[2];
+    const emailEle = infoEles[0];
+    const locationEle = infoEles[1];
+    const phoneEle = infoEles[2];
 
     // email info item
     expect(emailEle).toBeTruthy();
@@ -104,7 +104,7 @@ describe('BasicInfoComponent', () => {
   });
 
   it('should display the correct number of profile items', () => {
-    let profileItems = de.queryAll(By.css('.profile-item'));
+    const profileItems = de.queryAll(By.css('.profile-item'));
     expect(profileItems).toBeTruthy();
     expect(profileItems.length).toBe(Object.keys(INFO.profile).length);
   });

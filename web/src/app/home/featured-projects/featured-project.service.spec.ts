@@ -3,7 +3,13 @@ import 'rxjs/add/operator/take';
 import { TestBed, inject } from '@angular/core/testing';
 import { FirebaseApp } from 'angularfire2';
 import * as firebase from 'firebase/app';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QueryFn, DocumentChangeAction } from 'angularfire2/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument,
+  QueryFn,
+  DocumentChangeAction
+} from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -12,7 +18,7 @@ import { FeaturedProjectService } from './featured-project.service';
 
 const INVALID_NUM_PER_ROW_ERROR = new Error('numPerRow should be a postive integer');
 
-let PROJECT: Project = {
+const PROJECT: Project = {
   name : 'Test Project',
   description : 'Project description',
   keywords : {
@@ -36,9 +42,77 @@ let PROJECT: Project = {
   }
 };
 
+class FirestoreCollectionStub extends AngularFirestoreCollection<Project> {
+  constructor(private fakeProjects: Project[]) {
+    super(null, null);
+  }
+
+  valueChanges(events?: firebase.firestore.DocumentChangeType[]): Observable<Project[]> {
+    return Observable.of(this.fakeProjects);
+  }
+
+  // not used
+  stateChanges(events?: firebase.firestore.DocumentChangeType[]): Observable<any> {
+    return notImplemented();
+  }
+  auditTrail(events?: firebase.firestore.DocumentChangeType[]): Observable<any> {
+    return notImplemented();
+  }
+  snapshotChanges(events?: firebase.firestore.DocumentChangeType[]): Observable<DocumentChangeAction[]> {
+    return Observable.of(this.fakeProjects).map(projects => {
+      return projects.map((project, index) => {
+        // return a DocumentChangeAction
+        return {
+          type : null,
+          payload : {
+            type : null,
+            doc : {
+              exists : true,
+              ref : null,
+              id : index.toString(),
+              metadata : null,
+              data : () => project,
+              get : () => {}
+            },
+            oldIndex : index,
+            newIndex : index
+          }
+        };
+      });
+    });
+  }
+  add(data): Promise<any> {
+    return notImplemented();
+  }
+  doc<T>(path): AngularFirestoreDocument<T> {
+    return notImplemented();
+  }
+}
+
+// TODO get a better implementation
+class FirestoreStub {
+  app: FirebaseApp;
+  readonly firestore: firebase.firestore.Firestore;
+  readonly persistenceEnabled$: Observable<boolean>;
+
+  constructor(private fakeProjects: Project[]) {}
+
+  collection<T>(path: string, queryFn?: QueryFn): AngularFirestoreCollection<any> {
+    return new FirestoreCollectionStub(this.fakeProjects);
+  }
+  doc<T>(path: string): AngularFirestoreDocument<T> {
+    // not used
+    return notImplemented();
+  }
+  createId(): string {
+    // not used
+    return notImplemented();
+  }
+}
+
 // no projects exist in the database
 describe('FeaturedProjectService: empty project in database', () => {
-  let PROJECTS: Project[] = [];
+  const PROJECTS: Project[] = [];
   beforeEach(initFirestoreStub(PROJECTS));
 
   it('should be created', inject([FeaturedProjectService], (service: FeaturedProjectService) => {
@@ -58,7 +132,7 @@ describe('FeaturedProjectService: empty project in database', () => {
     // different numPerRow value
     service.get(1).subscribe((projects) => {
       result = projects;
-    })
+    });
     expect(result).toBeTruthy();
     expect(result.length).toBe(0);
   }));
@@ -193,74 +267,6 @@ function initFirestoreStub(projects: Project[]) {
 // which emits the given projects (sync)
 function getFirestoreStub(projects: Project[]): AngularFirestore {
   return new FirestoreStub(projects);
-}
-
-// TODO get a better implementation
-class FirestoreStub {
-  app: FirebaseApp;
-  readonly firestore: firebase.firestore.Firestore;
-  readonly persistenceEnabled$: Observable<boolean>;
-
-  constructor(private fakeProjects: Project[]) {}
-
-  collection<Project>(path: string, queryFn?: QueryFn): AngularFirestoreCollection<any> {
-    return new FirestoreCollectionStub(this.fakeProjects);
-  }
-  doc<Project>(path: string): AngularFirestoreDocument<Project> {
-    // not used
-    return notImplemented();
-  }
-  createId(): string {
-    // not used
-    return notImplemented();
-  }
-}
-
-class FirestoreCollectionStub extends AngularFirestoreCollection<Project> {
-  constructor(private fakeProjects: Project[]) {
-    super(null, null);
-  }
-
-  valueChanges(events?: firebase.firestore.DocumentChangeType[]): Observable<Project[]> {
-    return Observable.of(this.fakeProjects);
-  }
-
-  // not used
-  stateChanges(events?: firebase.firestore.DocumentChangeType[]): Observable<any>{
-    return notImplemented();
-  }
-  auditTrail(events?: firebase.firestore.DocumentChangeType[]): Observable<any> {
-    return notImplemented();
-  }
-  snapshotChanges(events?: firebase.firestore.DocumentChangeType[]): Observable<DocumentChangeAction[]> {
-    return Observable.of(this.fakeProjects).map(projects => {
-      return projects.map((project, index) => {
-        // return a DocumentChangeAction
-        return {
-          type : null,
-          payload : {
-            type : null,
-            doc : {
-              exists : true,
-              ref : null,
-              id : index.toString(),
-              metadata : null,
-              data : () => project,
-              get : () => {}
-            },
-            oldIndex : index,
-            newIndex : index
-          }
-        };
-      });
-    });
-  }
-  add(data): Promise<any> {
-    return notImplemented();
-  }
-  doc<Project>(path): AngularFirestoreDocument<Project> {
-    return notImplemented();
-  }
 }
 
 function notImplemented(): any {

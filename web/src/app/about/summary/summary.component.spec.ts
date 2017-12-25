@@ -52,13 +52,13 @@ describe('SummaryComponent', () => {
   });
 
   it('should display summary correctly', () => {
-    let summaryEle = de.query(By.css('mat-card-content p'));
+    const summaryEle = de.query(By.css('mat-card-content p'));
     expect(summaryEle).toBeTruthy();
     expect(summaryEle.nativeElement.textContent).toContain(INFO.summary);
   });
 
   it('should display resume link correctly', () => {
-    let resumeEle = de.query(By.css('mat-card-actions a'));
+    const resumeEle = de.query(By.css('mat-card-actions a'));
     expect(resumeEle).toBeTruthy();
     expect(resumeEle.nativeElement.textContent).toContain('View My Resume');
     // link matches mocked resume url

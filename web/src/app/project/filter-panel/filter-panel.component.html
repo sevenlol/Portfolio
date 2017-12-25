@@ -11,7 +11,7 @@
               aria-label="Keyword"
               [matAutocomplete]="keywordAuto"
               [(ngModel)]="keywordName"
-              validKeyword
+              appValidKeyword
               required
               [keywords]="keywords"
               (ngModelChange)="filteredKeywords = filterKeywords(keywordName)">

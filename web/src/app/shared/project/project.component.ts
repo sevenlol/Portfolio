@@ -46,9 +46,12 @@ export class ProjectComponent implements OnInit {
     if (!this.project.keywords) {
       return [];
     }
-    let keywordList: Resource[] = [];
+    const keywordList: Resource[] = [];
 
-    for (let key in this.project.keywords) {
+    for (const key in this.project.keywords) {
+      if (!this.project.keywords.hasOwnProperty(key)) {
+        continue;
+      }
       if (keywordList.length === this.displayKeywordCount) {
         break;
       }

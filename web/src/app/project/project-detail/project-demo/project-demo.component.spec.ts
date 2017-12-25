@@ -83,21 +83,21 @@ describe('ProjectDemoComponent', () => {
   });
 
   it('should display demo video links correctly', () => {
-    let linkEles = de.queryAll(By.css('a[mat-list-item]'));
+    const linkEles = de.queryAll(By.css('a[mat-list-item]'));
     // length of videos
     expect(linkEles).toBeTruthy();
     expect(linkEles.length).toBe(component.project.links.demoVideo.length);
 
-    let videos = component.project.links.demoVideo;
+    const videos = component.project.links.demoVideo;
     linkEles.forEach((ele, index) => {
-      let video = videos[index];
+      const video = videos[index];
       expect(ele).toBeTruthy();
       // video name
-      let nameEle = ele.query(By.css('h4'));
+      const nameEle = ele.query(By.css('h4'));
       expect(nameEle).toBeTruthy();
       expect(nameEle.nativeElement.textContent).toContain(video.name);
       // video description
-      let descriptionEle = ele.query(By.css('span'));
+      const descriptionEle = ele.query(By.css('span'));
       if (video.description) {
         expect(descriptionEle.nativeElement.textContent).toContain(video.description);
       } else {
@@ -109,24 +109,24 @@ describe('ProjectDemoComponent', () => {
   });
 
   it('should display demo images correctly', () => {
-    let images = component.project.links.demoImage;
+    const images = component.project.links.demoImage;
 
     // image names
-    let imageNameEles = de.queryAll(By.css('mat-card-content .demo-image-name'));
+    const imageNameEles = de.queryAll(By.css('mat-card-content .demo-image-name'));
     expect(imageNameEles).toBeTruthy();
     expect(imageNameEles.length).toBe(images.length);
     imageNameEles.forEach((ele, index) => {
-      let image = images[index];
+      const image = images[index];
       expect(ele).toBeTruthy();
       expect(ele.nativeElement.textContent).toContain(image.name);
     });
 
     // image urls
-    let urlEles = de.queryAll(By.css('mat-card-content .demo-image'));
+    const urlEles = de.queryAll(By.css('mat-card-content .demo-image'));
     expect(urlEles).toBeTruthy();
     expect(urlEles.length).toBe(images.length);
     urlEles.forEach((ele, index) => {
-      let image = images[index];
+      const image = images[index];
       expect(ele).toBeTruthy();
       // image src
       expect(ele.nativeElement.getAttribute('src')).toBe(image.url);

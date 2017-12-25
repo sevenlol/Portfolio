@@ -42,9 +42,9 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     this.registerIcon('video', 'assets/icons/video.svg');
 
     // retrieve metadata (already resolved)
-    this.route.data.subscribe(( data : {
-      mainMetadata : MainMetadata,
-      keywordMetadata : KeywordMetadata }) => {
+    this.route.data.subscribe(( data: {
+      mainMetadata: MainMetadata,
+      keywordMetadata: KeywordMetadata }) => {
       this.languages = data.mainMetadata.languages;
       this.types = data.mainMetadata.types;
       this.keywords = data.keywordMetadata.keywords;

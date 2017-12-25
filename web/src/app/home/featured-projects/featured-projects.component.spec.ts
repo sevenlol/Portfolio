@@ -57,6 +57,16 @@ const BASE_PROJECT: Project = {
   }
 };
 
+class FeaturedProjectServiceStub extends FeaturedProjectService {
+  constructor(private projects: Project[][], private delay: number) {
+    super(null);
+  }
+
+  get(numPerRow: number): Observable<Project[][]> {
+    return Observable.timer(this.delay).take(1).map(val => this.projects);
+  }
+}
+
 describe('FeaturedProjectsComponent', () => {
   let projects: Project[][];
   let component: FeaturedProjectsComponent;
@@ -81,10 +91,10 @@ describe('FeaturedProjectsComponent', () => {
 
   // personal project title
   it('should display personal project title', () => {
-    let titleEle = de.query(By.css('h1'));
+    const titleEle = de.query(By.css('h1'));
     expect(titleEle).toBeTruthy();
     expect(titleEle.nativeElement.textContent).toContain('Personal Project');
-  })
+  });
 
   // component properties
 
@@ -146,7 +156,7 @@ describe('FeaturedProjectsComponent', () => {
       expect(rowEles.length).toBe(projects.length);
       rowEles.forEach((ele, i) => {
         // check the number of project component in each row
-        let projectEles = de.queryAll(By.css('app-project'));
+        const projectEles = de.queryAll(By.css('app-project'));
         expect(projectEles.length).toBe(projects[i].length);
       });
     });
@@ -159,7 +169,7 @@ describe('FeaturedProjectsComponent', () => {
       if (projects.length === 0 || projects[projects.length - 1].length === numPerRow) {
         projects.push([]);
       }
-      let proj = JSON.parse(JSON.stringify(BASE_PROJECT));
+      const proj = JSON.parse(JSON.stringify(BASE_PROJECT));
       proj.id = '' + i;
       projects[projects.length - 1].push(proj);
     }
@@ -181,14 +191,4 @@ function init(projects: Project[][], delay: number) {
     })
     .compileComponents();
   });
-}
-
-class FeaturedProjectServiceStub extends FeaturedProjectService {
-  constructor(private projects: Project[][], private delay: number) {
-    super(null);
-  }
-
-  get(numPerRow: number): Observable<Project[][]> {
-    return Observable.timer(this.delay).take(1).map(val => this.projects);
-  }
 }

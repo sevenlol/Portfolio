@@ -11,9 +11,9 @@ import { Query, QueryType } from '../project.service';
 export class FilterPanelComponent implements OnInit {
 
   @Input() languages: Language;
-  @Input('types') categories: Type;
+  @Input() categories: Type;
   @Input() keywords: Keyword;
-  @Input() expanded: boolean = false;
+  @Input() expanded = false;
 
   @Output() queryChange: EventEmitter<Query> = new EventEmitter<Query>();
 
@@ -44,7 +44,7 @@ export class FilterPanelComponent implements OnInit {
   public apply() {
     // TODO add checks for related variables
     // all query related field should be valid
-    let query: Query = {
+    const query: Query = {
       type : this.type,
       active : this.active,
       value : this.value
@@ -93,7 +93,10 @@ export class FilterPanelComponent implements OnInit {
   }
 
   private generateOptions(options, map: Type | Keyword | Language) {
-    for (let key in map) {
+    for (const key in map) {
+      if (!map.hasOwnProperty(key)) {
+        continue;
+      }
       options.push({
         key : key,
         name : map[key].displayName,

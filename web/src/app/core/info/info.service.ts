@@ -46,10 +46,11 @@ export class InfoService {
         let query = ref.orderBy('endDate', 'desc').orderBy('startDate', 'desc');
         if (lastEndDate) {
           // add cursor
-          if (!lastStartDate)
+          if (!lastStartDate) {
             query = query.startAfter(lastEndDate);
-          else
-            query = query.startAfter(lastEndDate, lastStartDate)
+          } else {
+            query = query.startAfter(lastEndDate, lastStartDate);
+          }
         }
         // limit the number of results
         return query.limit(limit);

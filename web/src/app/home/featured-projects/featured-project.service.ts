@@ -12,7 +12,7 @@ export class FeaturedProjectService {
   constructor(private afs: AngularFirestore) { }
 
   public get(numPerRow: number): Observable<Project[][]> {
-    if (!numPerRow || parseInt(numPerRow.toString()) !== numPerRow || numPerRow < 0) {
+    if (!numPerRow || parseInt(numPerRow.toString(), 10) !== numPerRow || numPerRow < 0) {
       throw new Error('numPerRow should be a postive integer');
     }
     return this.afs
@@ -20,19 +20,19 @@ export class FeaturedProjectService {
         PROJECT_COLL,
         ref => ref.where('featured', '==', true).orderBy('endDate', 'desc'))
       .snapshotChanges().map(snapshots => {
-        let rows = snapshots.reduce((rows, snapshot) => {
+        const res = snapshots.reduce((rows, snapshot) => {
           if (rows.length === 0 || rows[rows.length - 1].length === numPerRow) {
             rows.push([]);
           }
 
-          let project: Project = snapshot.payload.doc.data() as Project;
+          const project: Project = snapshot.payload.doc.data() as Project;
           project.id = snapshot.payload.doc.id;
 
-          let col = rows[rows.length - 1];
+          const col = rows[rows.length - 1];
           col.push(project);
           return rows;
         }, []);
-        return rows;
+        return res;
       });
   }
 }

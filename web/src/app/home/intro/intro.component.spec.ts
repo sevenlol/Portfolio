@@ -38,19 +38,19 @@ describe('IntroComponent', () => {
 
   // name
   it('should contain the correct name', () => {
-    let nameEle: DebugElement = de.query(By.css('h1'));
+    const nameEle: DebugElement = de.query(By.css('h1'));
     expect(nameEle.nativeElement.textContent).toContain(BASIC_INFO.name);
   });
 
   // summary
   it('should contain the correct summary', () => {
-    let summaryEle: DebugElement = de.query(By.css('p'));
+    const summaryEle: DebugElement = de.query(By.css('p'));
     expect(summaryEle.nativeElement.textContent).toContain(BASIC_INFO.summary);
   });
 
   // image
   it('should load the correct image link', () => {
-    let imageEle: DebugElement = de.query(By.css('.img-circular'));
+    const imageEle: DebugElement = de.query(By.css('.img-circular'));
     // dom exists
     expect(imageEle).toBeTruthy();
     // image url matched

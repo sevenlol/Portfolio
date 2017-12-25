@@ -51,6 +51,13 @@ import { ProjectDemoComponent } from './project-detail/project-demo/project-demo
     ProjectRoutingModule
   ],
   providers : [ProjectService],
-  declarations: [ProjectListComponent, ProjectDetailComponent, FilterPanelComponent, ProjectInfoComponent, ProjectHighlightComponent, ProjectDemoComponent]
+  declarations: [
+    ProjectListComponent,
+    ProjectDetailComponent,
+    FilterPanelComponent,
+    ProjectInfoComponent,
+    ProjectHighlightComponent,
+    ProjectDemoComponent
+  ]
 })
 export class ProjectModule { }

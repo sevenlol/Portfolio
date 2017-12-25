@@ -34,22 +34,22 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   private buildDisplayResource(indexMap, resourceMap: Keyword | Language | Type, primaryKey?: string): Resource[] {
-    let res: Resource[] = [];
+    const res: Resource[] = [];
     // add primary resource
     if (primaryKey) {
-      let primary = this.copy(resourceMap[primaryKey]);
+      const primary = this.copy(resourceMap[primaryKey]);
       primary.key = primaryKey;
       primary.color = ProjectInfoComponent.PRIMARY_COLOR;
       primary.fontColor = ProjectInfoComponent.PRIMARY_FONT_COLOR;
       res.push(primary);
     }
 
-    for (let key in indexMap) {
+    for (const key in indexMap) {
       if (!key || key === primaryKey) {
         continue;
       }
 
-      let resource = this.copy(resourceMap[key]);
+      const resource = this.copy(resourceMap[key]);
       resource.key = key;
       res.push(resource);
     }
@@ -58,7 +58,7 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   private copy(resource: Resource): Resource {
-    let copyRes: Resource = new Resource();
+    const copyRes: Resource = new Resource();
     copyRes.color = resource.color;
     copyRes.description = resource.description;
     copyRes.displayName = resource.displayName;

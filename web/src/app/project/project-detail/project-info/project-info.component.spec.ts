@@ -86,7 +86,7 @@ const PROJECT: Project = {
 describe('ProjectInfoComponent', () => {
   let component: ProjectInfoComponent;
   let fixture: ComponentFixture<ProjectInfoComponent>;
-  let de : DebugElement;
+  let de: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -118,11 +118,11 @@ describe('ProjectInfoComponent', () => {
   });
 
   it('should display project name and description correctly', () => {
-    let nameEle = de.query(By.css('mat-card-title span'));
+    const nameEle = de.query(By.css('mat-card-title span'));
     expect(nameEle).toBeTruthy();
     expect(nameEle.nativeElement.textContent).toContain(component.project.name);
 
-    let desEle = de.query(By.css('.description'));
+    const desEle = de.query(By.css('.description'));
     expect(desEle).toBeTruthy();
     expect(desEle.nativeElement.textContent).toContain(component.project.description);
   });
@@ -131,10 +131,10 @@ describe('ProjectInfoComponent', () => {
     expect(component.displayCategories).toBeTruthy();
     expect(component.displayCategories.length).toBe(Object.keys(component.project.types).length);
 
-    let categories = component.displayCategories;
+    const categories = component.displayCategories;
     categories.forEach((category, index) => {
       expect(category.key).toBeTruthy();
-      let categoryObj = component.types[category.key];
+      const categoryObj = component.types[category.key];
       expect(categoryObj).toBeTruthy();
       expect(category.displayName).toBe(categoryObj.displayName);
       expect(category.description).toBe(categoryObj.description);
@@ -150,9 +150,9 @@ describe('ProjectInfoComponent', () => {
   });
 
   it('should display project categories correctly', () => {
-    let listEle = de.query(By.css('.category-list'));
+    const listEle = de.query(By.css('.category-list'));
     expect(listEle).toBeTruthy();
-    let itemEles = listEle.queryAll(By.css('mat-chip'));
+    const itemEles = listEle.queryAll(By.css('mat-chip'));
     expect(itemEles).toBeTruthy();
     // category item length
     expect(itemEles.length).toBe(Object.keys(component.project.types).length);
@@ -168,27 +168,27 @@ describe('ProjectInfoComponent', () => {
   // linkKey is used to retrieve links from link map
   function checkLinks(cssName: string, linkKey: string) {
     return () => {
-      let listEle = de.query(By.css('mat-nav-list'));
+      const listEle = de.query(By.css('mat-nav-list'));
       expect(listEle).toBeTruthy();
-      let linkEle = listEle.query(By.css(`.${cssName}`));
+      const linkEle = listEle.query(By.css(`.${cssName}`));
       expect(linkEle).toBeTruthy();
-      let linkItemsEle = linkEle.queryAll(By.css('a[mat-list-item]'));
+      const linkItemsEle = linkEle.queryAll(By.css('a[mat-list-item]'));
       expect(linkItemsEle).toBeTruthy();
       expect(linkItemsEle.length).toBe(component.project.links[linkKey].length);
 
       // check doc properties
       linkItemsEle.forEach((doc, index) => {
-        let linkObj = component.project.links[linkKey][index];
-        let nameEle = doc.query(By.css('h4'));
+        const linkObj = component.project.links[linkKey][index];
+        const nameEle = doc.query(By.css('h4'));
         expect(nameEle).toBeTruthy();
         expect(nameEle.nativeElement.textContent).toContain(linkObj.name);
-        let desEle = doc.query(By.css('span'));
+        const desEle = doc.query(By.css('span'));
         expect(desEle).toBeTruthy();
         if (linkObj.description) {
           expect(desEle.nativeElement.textContent).toContain(linkObj.description);
         }
 
-        let url = doc.nativeElement.getAttribute('href');
+        const url = doc.nativeElement.getAttribute('href');
         expect(url).toBe(linkObj.url);
       });
     };

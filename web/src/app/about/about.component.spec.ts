@@ -25,6 +25,18 @@ const INFO: Info = {
   profile : {}
 };
 
+class InfoServiceStub {
+
+  constructor(private info: Info) {}
+
+  getBasicInfo(): Observable<BasicInfo> {
+    throw new Error('Not implemented');
+  }
+  getInfo(): Observable<Info> {
+    return Observable.of(this.info);
+  }
+}
+
 describe('AboutComponent', () => {
   let component: AboutComponent;
   let fixture: ComponentFixture<AboutComponent>;
@@ -61,15 +73,3 @@ describe('AboutComponent', () => {
     expect(component.showSpinner).toBeFalsy();
   }));
 });
-
-class InfoServiceStub {
-
-  constructor(private info: Info) {}
-
-  getBasicInfo(): Observable<BasicInfo> {
-    throw new Error('Not implemented');
-  }
-  getInfo(): Observable<Info> {
-    return Observable.of(this.info);
-  }
-}

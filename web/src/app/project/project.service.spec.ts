@@ -2,7 +2,14 @@ import { TestBed, inject, async } from '@angular/core/testing';
 
 import { FirebaseApp } from 'angularfire2';
 import * as firebase from 'firebase/app';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QueryFn, Action, DocumentChangeAction } from 'angularfire2/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument,
+  QueryFn,
+  Action,
+  DocumentChangeAction
+} from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
 import { ProjectService, QueryType } from './project.service';
@@ -42,7 +49,7 @@ class FirestoreCollectionStub<T> extends AngularFirestoreCollection<T> {
   }
 
   // not used
-  stateChanges(events?: firebase.firestore.DocumentChangeType[]): Observable<any>{
+  stateChanges(events?: firebase.firestore.DocumentChangeType[]): Observable<any> {
     return notImplemented();
   }
   auditTrail(events?: firebase.firestore.DocumentChangeType[]): Observable<any> {
@@ -75,16 +82,16 @@ class FirestoreCollectionStub<T> extends AngularFirestoreCollection<T> {
   add(data): Promise<any> {
     return notImplemented();
   }
-  doc<Project>(path): AngularFirestoreDocument<Project> {
+  doc<V>(path): AngularFirestoreDocument<V> {
     return notImplemented();
   }
 }
 
 describe('ProjectService', () => {
-  let projects: Project[] = [];
+  const projects: Project[] = [];
 
-  let collStub = new FirestoreCollectionStub<Project>(projects)
-  let firestoreStub = new FirestoreStub(collStub);
+  const collStub = new FirestoreCollectionStub<Project>(projects);
+  const firestoreStub = new FirestoreStub(collStub);
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [

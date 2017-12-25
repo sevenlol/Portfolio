@@ -39,16 +39,16 @@ describe('PageNotFoundComponent', () => {
   });
 
   it('should dispaly error icon', () => {
-    let errorEle = de.query(By.css('mat-icon[svgIcon="error"]'));
+    const errorEle = de.query(By.css('mat-icon[svgIcon="error"]'));
     expect(errorEle).toBeTruthy();
   });
 
   it('should display error messages', () => {
-    let titleEle = de.query(By.css('h1'));
+    const titleEle = de.query(By.css('h1'));
     expect(titleEle).toBeTruthy();
     expect(titleEle.nativeElement.textContent).toContain(ERROR_MESSAGES.TITLE);
 
-    let contentEle = de.query(By.css('p'));
+    const contentEle = de.query(By.css('p'));
     expect(contentEle).toBeTruthy();
     expect(contentEle.nativeElement.textContent).toContain(ERROR_MESSAGES.CONTENT);
   });

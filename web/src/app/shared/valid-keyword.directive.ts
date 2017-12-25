@@ -4,7 +4,7 @@ import { ValidatorFn } from '@angular/forms/src/directives/validators';
 import { AbstractControl, NG_VALIDATORS } from '@angular/forms';
 
 @Directive({
-  selector: '[validKeyword][ngModel]',
+  selector: '[appValidKeyword][ngModel]',
   providers: [
     {
       provide: NG_VALIDATORS,
@@ -31,7 +31,7 @@ export function validKeywordValidator(keywords: Keyword): ValidatorFn {
     }
 
     // check if the given control value matches any keyword name
-    for (var key in keywords) {
+    for (const key in keywords) {
       if (keywords[key].displayName === control.value) {
         return null;
       }

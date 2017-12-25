@@ -19,8 +19,8 @@ export class WorkComponent implements OnInit, OnDestroy {
   static readonly BATCH_COUNT = 3;
 
   readonly DATE_FORMAT: string = 'MMM. yyyy';
-  isLoading: boolean = false;
-  hasMoreData: boolean = true;
+  isLoading = false;
+  hasMoreData = true;
   experiences: WorkExperience[] = [];
 
   private nextPage$: Subject<void> = new Subject();
@@ -39,7 +39,7 @@ export class WorkComponent implements OnInit, OnDestroy {
         }
 
         // retrieve the last item as cursor
-        let last = this.experiences[this.experiences.length - 1];
+        const last = this.experiences[this.experiences.length - 1];
         return this.infoService.getWork(WorkComponent.BATCH_COUNT, last.endDate, last.startDate);
       })
       // component descruction

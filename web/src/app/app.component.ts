@@ -21,7 +21,7 @@ import { Subject } from 'rxjs/Subject';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  showSpinner: boolean = false;
+  showSpinner = false;
 
   private unSub$: Subject<boolean> = new Subject();
 

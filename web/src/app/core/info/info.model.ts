@@ -1,3 +1,11 @@
+export interface BasicInfo {
+  name: string;
+  summary: string;
+  image: string;
+  profile: Profile;
+  [key: string]: any;
+}
+
 export interface Info extends BasicInfo {
   email: string;
   location: Location;
@@ -6,14 +14,6 @@ export interface Info extends BasicInfo {
   url: string;
   education: Education[];
   work?: WorkExperience[];
-}
-
-export interface BasicInfo {
-  name: string;
-  summary: string;
-  image: string;
-  profile: Profile
-  [key: string]: any;
 }
 
 export interface Profile {

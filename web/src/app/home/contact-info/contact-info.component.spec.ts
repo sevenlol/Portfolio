@@ -19,7 +19,7 @@ describe('ContactInfoComponent', () => {
     image : 'https://avatars3.githubusercontent.com/u/6497884?s=400&u=14a9be7c3afc0a1e0d797db1d9a7c86c5aac7a83&v=4',
     profile : {}
   };
-  const CONTACT_TITLE_TEXT: string = 'Contact';
+  const CONTACT_TITLE_TEXT = 'Contact';
   const GITHUB_PROFILE: Contact = {
     url : 'https://github.com/sevenlol',
     username : 'sevenlol'
@@ -59,7 +59,7 @@ describe('ContactInfoComponent', () => {
 
   // title
   it('should contain correct title', () => {
-    let titleEle: DebugElement = de.query(By.css('.contact-title'));
+    const titleEle: DebugElement = de.query(By.css('.contact-title'));
     expect(titleEle).toBeTruthy();
     expect(titleEle.nativeElement.textContent).toContain(CONTACT_TITLE_TEXT);
   });
@@ -70,7 +70,7 @@ describe('ContactInfoComponent', () => {
 
   // no contact links displayed when profile object is empty
   it('should contain no profile link', () => {
-    let contactLinkEles: DebugElement[] = de.queryAll(By.css('mat-icon'));
+    const contactLinkEles: DebugElement[] = de.queryAll(By.css('mat-icon'));
     expect(contactLinkEles.length).toBe(0);
   });
 
@@ -78,16 +78,16 @@ describe('ContactInfoComponent', () => {
   it('should only contain github link', () => {
     component.profiles.github = GITHUB_PROFILE;
     fixture.detectChanges();
-    let githubEle: DebugElement = getContactIconElement('github');
-    let linkedInEle: DebugElement = getContactIconElement('linkedin');
-    let facebookEle: DebugElement = getContactIconElement('facebook');
-    let twitterEle: DebugElement = getContactIconElement('twitter');
+    const githubEle: DebugElement = getContactIconElement('github');
+    const linkedInEle: DebugElement = getContactIconElement('linkedin');
+    const facebookEle: DebugElement = getContactIconElement('facebook');
+    const twitterEle: DebugElement = getContactIconElement('twitter');
     // only github icon exists
     expect(githubEle).toBeTruthy();
     expect(linkedInEle).toBeFalsy();
     expect(facebookEle).toBeFalsy();
     expect(twitterEle).toBeFalsy();
-    let githubLinkEle: DebugElement = getContactLinkElement('Github');
+    const githubLinkEle: DebugElement = getContactLinkElement('Github');
     expect(githubLinkEle).toBeTruthy();
     // github url match
     expect(getHref(githubLinkEle)).toBe(GITHUB_PROFILE.url);
@@ -102,20 +102,20 @@ describe('ContactInfoComponent', () => {
       twitter : TWITTER_PROFILE
     };
     fixture.detectChanges();
-    let githubEle: DebugElement = getContactIconElement('github');
-    let linkedInEle: DebugElement = getContactIconElement('linkedin');
-    let facebookEle: DebugElement = getContactIconElement('facebook');
-    let twitterEle: DebugElement = getContactIconElement('twitter');
+    const githubEle: DebugElement = getContactIconElement('github');
+    const linkedInEle: DebugElement = getContactIconElement('linkedin');
+    const facebookEle: DebugElement = getContactIconElement('facebook');
+    const twitterEle: DebugElement = getContactIconElement('twitter');
     // all contact icons exist
     expect(githubEle).toBeTruthy();
     expect(linkedInEle).toBeTruthy();
     expect(facebookEle).toBeTruthy();
     expect(twitterEle).toBeTruthy();
     // all contact links exist and link matches the profile
-    let githubLinkEle: DebugElement = getContactLinkElement('Github');
-    let linkedInLinkEle: DebugElement = getContactLinkElement('LinkedIn');
-    let facebookLinkEle: DebugElement = getContactLinkElement('Facebook');
-    let twitterLinkEle: DebugElement = getContactLinkElement('Twitter');
+    const githubLinkEle: DebugElement = getContactLinkElement('Github');
+    const linkedInLinkEle: DebugElement = getContactLinkElement('LinkedIn');
+    const facebookLinkEle: DebugElement = getContactLinkElement('Facebook');
+    const twitterLinkEle: DebugElement = getContactLinkElement('Twitter');
     expect(githubLinkEle).toBeTruthy();
     expect(linkedInLinkEle).toBeTruthy();
     expect(facebookLinkEle).toBeTruthy();

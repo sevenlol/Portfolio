@@ -13,6 +13,14 @@ const BASIC_INFO: BasicInfo = {
   profile : {}
 };
 
+class InfoServiceStub {
+  constructor(private info: BasicInfo) {}
+
+  getBasicInfo(): Observable<BasicInfo> {
+    return Observable.of(this.info);
+  }
+}
+
 describe('BasicInfoResolverService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -38,11 +46,3 @@ describe('BasicInfoResolverService', () => {
     });
   })));
 });
-
-class InfoServiceStub {
-  constructor(private info: BasicInfo) {}
-
-  getBasicInfo(): Observable<BasicInfo> {
-    return Observable.of(this.info);
-  }
-}

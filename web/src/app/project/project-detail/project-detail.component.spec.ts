@@ -86,11 +86,60 @@ const PROJECT: Project = {
   }
 };
 
+class ProjectServiceStub {
+  constructor(private project: Project) {}
+
+  get(id: string): Observable<Project> {
+    return Observable.of(this.project);
+  }
+
+  queryProjects(limit: number, query: Query, lastProject?: Project): Observable<Project[]> {
+    // not used
+    throw new Error('Not implemented');
+  }
+}
+
+class ParamMapStub {
+  readonly keys;
+  constructor(private map: Params) {
+    this.keys = Object.keys(map);
+  }
+
+  has(name: string): boolean {
+    return name in this.map;
+  }
+
+  get(name: string): string | null {
+    return this.map[name];
+  }
+
+  getAll(name: string): string[] {
+    // not used
+    throw new Error('Not implemented');
+  }
+}
+
+class RouteStub extends ActivatedRoute {
+  constructor(
+    private main: MainMetadata,
+    private keyword: KeywordMetadata,
+    private id: string) {
+    super();
+  }
+
+  params = Observable.of(new ParamMapStub({ id : this.id }));
+
+  data = Observable.of({
+    mainMetadata : this.main,
+    keywordMetadata : this.keyword
+  });
+}
+
 describe('ProjectDetailComponent', () => {
   let component: ProjectDetailComponent;
   let fixture: ComponentFixture<ProjectDetailComponent>;
 
-  let FAKE_ID = 'fake-id';
+  const FAKE_ID = 'fake-id';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -127,52 +176,3 @@ describe('ProjectDetailComponent', () => {
     expect(component.project).toBe(PROJECT);
   });
 });
-
-class ProjectServiceStub {
-  constructor(private project: Project) {}
-
-  get(id: string): Observable<Project> {
-    return Observable.of(this.project);
-  }
-
-  queryProjects(limit: number, query: Query, lastProject?: Project): Observable<Project[]> {
-    // not used
-    throw new Error('Not implemented');
-  }
-}
-
-class RouteStub extends ActivatedRoute {
-  constructor(
-    private main: MainMetadata,
-    private keyword: KeywordMetadata,
-    private id: string) {
-    super();
-  }
-
-  params = Observable.of(new ParamMapStub({ id : this.id }));
-
-  data = Observable.of({
-    mainMetadata : this.main,
-    keywordMetadata : this.keyword
-  });
-}
-
-class ParamMapStub {
-  readonly keys;
-  constructor(private map: Params) {
-    this.keys = Object.keys(map);
-  }
-
-  has(name: string): boolean {
-    return name in this.map;
-  }
-
-  get(name: string): string | null {
-    return this.map[name];
-  }
-
-  getAll(name: string): string[] {
-    // not used
-    throw new Error('Not implemented');
-  }
-}

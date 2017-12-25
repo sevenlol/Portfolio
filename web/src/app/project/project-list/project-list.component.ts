@@ -32,9 +32,9 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   rowHeight: number = ProjectComponent.HEIGHT + ProjectListComponent.HEIGHT_GAP;
 
-  filterPanelExpanded: boolean = false;
-  isLoading: boolean = false;
-  hasMoreData: boolean = true;
+  filterPanelExpanded = false;
+  isLoading = false;
+  hasMoreData = true;
   cols$: Observable<number>;
   private nextPage$: Subject<void> = new Subject();
   private queryChange$: Subject<Query> = new Subject();
@@ -59,7 +59,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     this.registerIcon('filter-list', 'assets/icons/filter_list.svg');
     this.registerIcon('clear', 'assets/icons/clear.svg');
 
-    let cols = Object.keys(ProjectComponent.COLS)
+    const cols = Object.keys(ProjectComponent.COLS)
       .reduce((col, mqAlias) =>
         // check current width
         (this.media.isActive(mqAlias) ? ProjectComponent.COLS[mqAlias] : col),
@@ -71,9 +71,9 @@ export class ProjectListComponent implements OnInit, OnDestroy {
       .takeUntil(this.unSub$);
 
     // retrieve metadata (already resolved)
-    this.route.data.subscribe(( data : {
-      mainMetadata : MainMetadata,
-      keywordMetadata : KeywordMetadata }) => {
+    this.route.data.subscribe(( data: {
+      mainMetadata: MainMetadata,
+      keywordMetadata: KeywordMetadata }) => {
       this.languages = data.mainMetadata.languages;
       this.types = data.mainMetadata.types;
       this.keywords = data.keywordMetadata.keywords;
@@ -105,7 +105,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
         }
 
         // retrieve the last item as cursor
-        let last = this.projects[this.projects.length - 1];
+        const last = this.projects[this.projects.length - 1];
         return this.service.queryProjects(ProjectListComponent.BATCH_COUNT, query, last);
       })
       // component descruction

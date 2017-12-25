@@ -48,23 +48,23 @@ describe('EducationComponent', () => {
   });
 
   it('should display education title correctly', () => {
-    let titleEle = de.query(By.css('.edu-title'));
+    const titleEle = de.query(By.css('.edu-title'));
     expect(titleEle).toBeTruthy();
     expect(titleEle.nativeElement.textContent).toContain('Education');
   });
 
   it('should display the correct number of education items', () => {
-    let eduItemListEle = de.queryAll(By.css('mat-list'));
+    const eduItemListEle = de.queryAll(By.css('mat-list'));
     expect(eduItemListEle).toBeTruthy();
     // one for desktop layout, another for mobile
     expect(eduItemListEle.length).toBe(2);
     eduItemListEle.forEach(listEle => {
-      let eduItemEles = listEle.queryAll(By.css('mat-list-item'));
+      const eduItemEles = listEle.queryAll(By.css('mat-list-item'));
       expect(eduItemEles).toBeTruthy();
       expect(eduItemEles.length).toBe(EDUCATIONS.length);
       eduItemEles.forEach((ele, i) => {
         expect(ele).toBeTruthy();
-        let institutionEle = ele.query(By.css('h4[mat-line]'));
+        const institutionEle = ele.query(By.css('h4[mat-line]'));
         expect(institutionEle).toBeTruthy();
         // institution of this education item
         expect(institutionEle.nativeElement.textContent).toContain(EDUCATIONS[i].institution);

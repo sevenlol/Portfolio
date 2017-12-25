@@ -65,16 +65,16 @@ describe('ProjectHighlightComponent', () => {
   });
 
   it('should display highlight list correctly', () => {
-    let listEle = de.query(By.css('ul'));
+    const listEle = de.query(By.css('ul'));
     // list
     expect(listEle).toBeTruthy();
-    let highlightItemEles = listEle.queryAll(By.css('li'));
+    const highlightItemEles = listEle.queryAll(By.css('li'));
     // item
     expect(highlightItemEles).toBeTruthy();
     expect(highlightItemEles.length).toBe(component.project.highlights.length);
 
     highlightItemEles.forEach((ele, index) => {
-      let item = component.project.highlights[index];
+      const item = component.project.highlights[index];
       // each item's content
       expect(ele).toBeTruthy();
       expect(ele.nativeElement.textContent).toContain(item);

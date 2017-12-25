@@ -29,9 +29,9 @@ export class HomeComponent implements OnInit {
     this.registerIcon('github', 'assets/icons/github.svg');
     this.registerIcon('linkedin', 'assets/icons/linkedin.svg');
     this.registerIcon('twitter', 'assets/icons/twitter.svg');
-    this.route.data.subscribe(( data : {
-      mainMetadata : MainMetadata,
-      keywordMetadata : KeywordMetadata,
+    this.route.data.subscribe(( data: {
+      mainMetadata: MainMetadata,
+      keywordMetadata: KeywordMetadata,
       basicInfo: BasicInfo }) => {
       this.mainMetadata = data.mainMetadata;
       this.keywordMetadata = data.keywordMetadata;

@@ -5,6 +5,16 @@ import * as firebase from 'firebase/app';
 
 import { Project } from '../shared/project/project.model';
 
+export enum QueryType {
+  LANGUAGE, TYPE, KEYWORD
+}
+
+export interface Query {
+  type: QueryType;
+  active?: boolean;
+  value: string;
+}
+
 const PROJECT_COLL = 'projects';
 
 @Injectable()
@@ -19,9 +29,9 @@ export class ProjectService {
 
     return this.afs.doc<Project>(`${ProjectService.PROJECTS_PATH}/${id}`)
       .snapshotChanges().map(ref => {
-        let project = ref.payload.data() as Project;
-        let id = ref.payload.id;
-        project.id = id;
+        const project = ref.payload.data() as Project;
+        const projId = ref.payload.id;
+        project.id = projId;
         return project;
       });
   }
@@ -32,9 +42,9 @@ export class ProjectService {
       (ref) => this.getQuery(limit, query, ref, lastProject))
       .snapshotChanges()
       .map(snapshots => snapshots.map(ref => {
-        let project = ref.payload.doc.data() as Project;
-        let id = ref.payload.doc.id;
-        project.id = id;
+        const project = ref.payload.doc.data() as Project;
+        const projId = ref.payload.doc.id;
+        project.id = projId;
         return project;
       }));
   }
@@ -49,7 +59,7 @@ export class ProjectService {
     if (!limit || limit < 0) {
       throw new Error('Limit should be greater than 0');
     }
-    if (parseInt(limit.toString()) !== limit) {
+    if (parseInt(limit.toString(), 10) !== limit) {
       throw new Error('Limit should be an integer');
     }
     if (query) {
@@ -65,15 +75,19 @@ export class ProjectService {
   }
 
   private getQuery(limit: number, query: Query, queryObj: firebase.firestore.Query, lastProject?: Project): firebase.firestore.Query {
+    let res = null;
+
     if (!query) {
-      let res = queryObj.orderBy('endDate', 'desc');
+      // no input query
+      res = queryObj.orderBy('endDate', 'desc');
       if (lastProject) {
         res = res.startAfter(lastProject.endDate);
       }
       return res.limit(limit);
     }
-    let key = `${this.getPropertyName(query)}.${query.value}`;
-    let res =  queryObj.where(key, '>', 0);
+
+    const key = `${this.getPropertyName(query)}.${query.value}`;
+    res = queryObj.where(key, '>', 0);
     if (query.type !== QueryType.KEYWORD && typeof query.active === 'boolean') {
       // query by type/language, support active
       res = res.where('active', '==', query.active);
@@ -99,14 +113,4 @@ export class ProjectService {
         throw new Error('Invalid query type');
     }
   }
-}
-
-export interface Query {
-  type: QueryType;
-  active?: boolean;
-  value: string;
-}
-
-export enum QueryType {
-  LANGUAGE, TYPE, KEYWORD
 }

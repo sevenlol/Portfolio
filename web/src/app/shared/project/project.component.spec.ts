@@ -44,7 +44,7 @@ const KEYWORD_METADATA: KeywordMetadata = {
   }
 };
 
-let PROJECT: Project = {
+const PROJECT: Project = {
   id : '123',
   name : 'Test Project',
   description : 'Project description',
@@ -108,28 +108,28 @@ describe('ProjectComponent', () => {
 
   // project name
   it('should display project name correctly', () => {
-    let titleEle = de.query(By.css('mat-card-title'));
+    const titleEle = de.query(By.css('mat-card-title'));
     expect(titleEle).toBeTruthy();
     expect(titleEle.nativeElement.textContent).toContain(PROJECT.name);
   });
 
   // project description
   it('should display project description correctly', () => {
-    let desEle = de.query(By.css('mat-card-content'));
+    const desEle = de.query(By.css('mat-card-content'));
     expect(desEle).toBeTruthy();
     expect(desEle.nativeElement.textContent).toContain(PROJECT.description);
   });
 
   // language and project type
   it('should display primary language and type correctly', () => {
-    let langTypeEle = de.query(By.css('.lang-type'));
+    const langTypeEle = de.query(By.css('.lang-type'));
     expect(langTypeEle).toBeTruthy();
-    let chips = langTypeEle.queryAll(By.css('mat-chip'));
+    const chips = langTypeEle.queryAll(By.css('mat-chip'));
     expect(chips).toBeTruthy();
     // one for language, another for project type
     expect(chips.length).toBe(2);
-    let langEle = chips[0];
-    let typeEle = chips[1];
+    const langEle = chips[0];
+    const typeEle = chips[1];
     expect(langEle).toBeTruthy();
     expect(langEle.nativeElement.textContent).toContain(
       MAIN_METADATA.languages[PROJECT.primaryLanguage].displayName);
@@ -140,22 +140,22 @@ describe('ProjectComponent', () => {
 
   // keywords
   it('should display keywords correctly', async(() => {
-    let keywordListEle = de.query(By.css('.project-footer'));
+    const keywordListEle = de.query(By.css('.project-footer'));
     expect(keywordListEle).toBeTruthy();
-    let keywordEles = keywordListEle.queryAll(By.css('mat-chip'));
+    const keywordEles = keywordListEle.queryAll(By.css('mat-chip'));
     expect(keywordEles).toBeTruthy();
-    let keywordCount = Object.keys(PROJECT.keywords).length;
+    const keywordCount = Object.keys(PROJECT.keywords).length;
     // keywords displayed (min(MAX_DISPLAY, COUNT))
     expect(keywordEles.length).toBe(Math.min(component.displayKeywordCount, keywordCount));
     keywordEles.forEach((ele) => {
-      let keyword = getKeywordKey(ele.nativeElement.textContent.trim());
+      const keyword = getKeywordKey(ele.nativeElement.textContent.trim());
       expect(keyword).toBeTruthy();
       expect(PROJECT.keywords[keyword]).toBeTruthy();
     });
   }));
 
   it('should display keywords with correct count', () => {
-    let keywordCount = Object.keys(PROJECT.keywords).length;
+    const keywordCount = Object.keys(PROJECT.keywords).length;
 
     // change max display count
     component.displayKeywordCount = 2;
@@ -183,7 +183,7 @@ describe('ProjectComponent', () => {
   });
 
   function getKeywordKey(displayName: string): string {
-    for (let word in KEYWORD_METADATA.keywords) {
+    for (const word in KEYWORD_METADATA.keywords) {
       if (KEYWORD_METADATA.keywords[word].displayName === displayName) {
         return word;
       }

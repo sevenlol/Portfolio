@@ -20,7 +20,7 @@ export class FeaturedProjectsComponent implements OnInit, OnDestroy {
   keywords: Keyword;
   languages: Language;
   types: Type;
-  showSpinner: boolean = true;
+  showSpinner = true;
 
   private unSub$: Subject<boolean> = new Subject();
 

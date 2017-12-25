@@ -21,7 +21,7 @@ export class EducationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.registerIcon('school', 'assets/icons/school.svg')
+    this.registerIcon('school', 'assets/icons/school.svg');
   }
 
   private registerIcon(name: string, path: string) {

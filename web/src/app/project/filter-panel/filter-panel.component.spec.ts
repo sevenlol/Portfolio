@@ -86,11 +86,11 @@ describe('FilterPanelComponent', () => {
   });
 
   it('should display the initial tab correctly', () => {
-    let tabGroupEle = de.query(By.css('mat-tab-group'));
+    const tabGroupEle = de.query(By.css('mat-tab-group'));
     expect(tabGroupEle).toBeTruthy();
-    let tabEles = tabGroupEle.queryAll(By.css('.tab-content'));
+    const tabEles = tabGroupEle.queryAll(By.css('.tab-content'));
     expect(tabEles.length).toBe(1);
-    let keywordInputEle = tabEles[0].query(By.css('.keyword-input'));
+    const keywordInputEle = tabEles[0].query(By.css('.keyword-input'));
     expect(keywordInputEle).toBeTruthy();
   });
 

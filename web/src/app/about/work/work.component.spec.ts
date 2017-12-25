@@ -23,6 +23,21 @@ const EXPERIENCE: WorkExperience = {
   ]
 };
 
+class InfoServiceStub {
+
+  getInfo(): Observable<Info> {
+    throw new Error('Not implemented');
+  }
+  getBasicInfo(): Observable<BasicInfo> {
+    throw new Error('Not implemented');
+  }
+
+  getWork(): Observable<WorkExperience[]> {
+    // TODO set the data from constructor
+    return Observable.of([ EXPERIENCE ]);
+  }
+}
+
 describe('WorkComponent', () => {
   let component: WorkComponent;
   let fixture: ComponentFixture<WorkComponent>;
@@ -60,18 +75,3 @@ describe('WorkComponent', () => {
 
   // TODO test the component
 });
-
-class InfoServiceStub {
-
-  getInfo(): Observable<Info> {
-    throw new Error('Not implemented');
-  }
-  getBasicInfo(): Observable<BasicInfo> {
-    throw new Error('Not implemented');
-  }
-
-  getWork(): Observable<WorkExperience[]> {
-    // TODO set the data from constructor
-    return Observable.of([ EXPERIENCE ]);
-  }
-}

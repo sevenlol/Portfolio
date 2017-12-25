@@ -39,6 +39,66 @@ const KEYWORD_METADATA: KeywordMetadata = {
   }
 };
 
+class FirestoreDocumentStub<T> {
+  ref: firebase.firestore.DocumentReference;
+
+  constructor(private value: T) {}
+
+  valueChanges(): Observable<T> {
+    return Observable.of(this.value);
+  }
+
+  set(data: T, options?: firebase.firestore.SetOptions): Promise<void> {
+    // not used
+    return notImplemented();
+  }
+  update(data: Partial<T>): Promise<void> {
+    // not used
+    return notImplemented();
+  }
+  delete(): Promise<void> {
+    // not used
+    return notImplemented();
+  }
+  collection<V>(path: string, queryFn?: QueryFn): AngularFirestoreCollection<V> {
+    // not used
+    return notImplemented();
+  }
+  snapshotChanges(): Observable<Action<firebase.firestore.DocumentSnapshot>> {
+    // not used
+    return notImplemented();
+  }
+}
+
+class FirestoreStub {
+  app: FirebaseApp;
+  readonly firestore: firebase.firestore.Firestore;
+  readonly persistenceEnabled$: Observable<boolean>;
+
+  constructor(
+    private main: AngularFirestoreDocument<any>,
+    private keyword: AngularFirestoreDocument<any>
+  ) {}
+
+  collection<T>(path: string, queryFn?: QueryFn): AngularFirestoreCollection<T> {
+    // not used
+    return notImplemented();
+  }
+  doc<T>(path: string): AngularFirestoreDocument<T> {
+    if (path === MetadataService.MAIN_METADATA_PATH) {
+      return this.main;
+    } else if (path === MetadataService.KEYWORD_METADATA_PATH) {
+      return this.keyword;
+    } else {
+      return null;
+    }
+  }
+  createId(): string {
+    // not used
+    return notImplemented();
+  }
+}
+
 describe('MetadataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -75,66 +135,6 @@ describe('MetadataService', () => {
     });
   })));
 });
-
-class FirestoreStub {
-  app: FirebaseApp;
-  readonly firestore: firebase.firestore.Firestore;
-  readonly persistenceEnabled$: Observable<boolean>;
-
-  constructor(
-    private main: AngularFirestoreDocument<any>,
-    private keyword: AngularFirestoreDocument<any>
-  ) {}
-
-  collection<T>(path: string, queryFn?: QueryFn): AngularFirestoreCollection<T> {
-    // not used
-    return notImplemented();
-  }
-  doc<T>(path: string): AngularFirestoreDocument<T> {
-    if (path === MetadataService.MAIN_METADATA_PATH) {
-      return this.main;
-    } else if (path === MetadataService.KEYWORD_METADATA_PATH) {
-      return this.keyword;
-    } else {
-      return null;
-    }
-  }
-  createId(): string {
-    // not used
-    return notImplemented();
-  }
-}
-
-class FirestoreDocumentStub<T> {
-  ref: firebase.firestore.DocumentReference;
-
-  constructor(private value: T) {}
-
-  valueChanges(): Observable<T> {
-    return Observable.of(this.value);
-  }
-
-  set(data: T, options?: firebase.firestore.SetOptions): Promise<void> {
-    // not used
-    return notImplemented();
-  }
-  update(data: Partial<T>): Promise<void> {
-    // not used
-    return notImplemented();
-  }
-  delete(): Promise<void> {
-    // not used
-    return notImplemented();
-  }
-  collection<T>(path: string, queryFn?: QueryFn): AngularFirestoreCollection<T> {
-    // not used
-    return notImplemented();
-  }
-  snapshotChanges(): Observable<Action<firebase.firestore.DocumentSnapshot>> {
-    // not used
-    return notImplemented();
-  }
-}
 
 function notImplemented(): any {
   throw new Error('Not implemented');

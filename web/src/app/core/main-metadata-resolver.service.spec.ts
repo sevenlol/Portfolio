@@ -21,6 +21,21 @@ const MAIN_METADATA: MainMetadata = {
   }
 };
 
+class MetadataServiceStub {
+  constructor(
+    private main: MainMetadata,
+    private delay: number) {
+  }
+
+  getMainMetadata(): Observable<MainMetadata> {
+    return Observable.of(this.main);
+  }
+
+  getKeywordMetadata(): Observable<KeywordMetadata> {
+    return null;
+  }
+}
+
 describe('MetadataResolverService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -46,18 +61,3 @@ describe('MetadataResolverService', () => {
     });
   })));
 });
-
-class MetadataServiceStub {
-  constructor(
-    private main: MainMetadata,
-    private delay: number) {
-  }
-
-  getMainMetadata(): Observable<MainMetadata> {
-    return Observable.of(this.main);
-  }
-
-  getKeywordMetadata(): Observable<KeywordMetadata> {
-    return null;
-  }
-}
