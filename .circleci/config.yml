@@ -41,7 +41,7 @@ jobs:
       - run:
           # configure angular environment
           name: Configure environment
-          command: npm run configure
+          command: npm run configure-env
           environment:
             FIREBASE_WEB_CONFIG: $FIREBASE_WEB_CONFIG_STAGING
       - run:
