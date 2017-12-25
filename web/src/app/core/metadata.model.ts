@@ -24,4 +24,5 @@ export class Resource {
   description?: string;
   color?: string;
   fontColor?: string;
+  key?: string;
 }

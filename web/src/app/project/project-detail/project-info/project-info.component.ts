@@ -38,6 +38,7 @@ export class ProjectInfoComponent implements OnInit {
     // add primary resource
     if (primaryKey) {
       let primary = this.copy(resourceMap[primaryKey]);
+      primary.key = primaryKey;
       primary.color = ProjectInfoComponent.PRIMARY_COLOR;
       primary.fontColor = ProjectInfoComponent.PRIMARY_FONT_COLOR;
       res.push(primary);
@@ -48,7 +49,9 @@ export class ProjectInfoComponent implements OnInit {
         continue;
       }
 
-      res.push(resourceMap[key]);
+      let resource = this.copy(resourceMap[key]);
+      resource.key = key;
+      res.push(resource);
     }
 
     return res;
