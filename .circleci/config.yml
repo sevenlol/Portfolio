@@ -64,11 +64,13 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
                 export PORTFOLIO_ENV=staging
-            elif [ "${CIRCLE_BRANCH}" == "master" ]; then
+            elif [ "${CIRCLE_BRANCH}" == "release" ]; then
                 export PORTFOLIO_ENV=prod
             else
                 echo "Invalid branch name ${CIRCLE_BRANCE}"
             fi
+            echo ${CIRCLE_BRANCH}
+            echo ${PORTFOLIO_ENV}
             npm run configure-env
       - run:
           name: Build Website
@@ -87,3 +89,4 @@ workflows:
             branches:
               only:
                 - master
+                - release
