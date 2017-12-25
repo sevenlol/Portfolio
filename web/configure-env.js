@@ -2,21 +2,37 @@
 
 const fs = require('fs');
 
-const FIREBASE_WEB_CONFIG_ENV = 'FIREBASE_WEB_CONFIG';
-const DEFAULT_ENV = 'prod';
+// current environment, e.g., 'prod', 'staging'
+const PORTFOLIO_ENV = 'PORTFOLIO_ENV';
+const ANGULAR_ENV = 'prod';
 const IS_PRODUCTION = true;
+const ENV_MAP = {
+  prod : 'FIREBASE_WEB_CONFIG_PROD',
+  staging : 'FIREBASE_WEB_CONFIG_STAGING'
+};
 
-if (!process.env[FIREBASE_WEB_CONFIG_ENV]) {
-  throw new Error(`Firebase web config environment [${FIREBASE_WEB_CONFIG_ENV}] not found.`);
+if (!process.env[PORTFOLIO_ENV]) {
+  throw new Error(`Portfolio environment [${PORTFOLIO_ENV}] not found.`);
 }
 
-const envFilePath = `src/environments/environment.${DEFAULT_ENV}.ts`;
+const currEnv = process.env[PORTFOLIO_ENV];
+const firebaseEnv = ENV_MAP[currEnv];
+if (!firebaseEnv) {
+  const errMsg = `Invalid portfolio environment ${currEnv}.`;
+  throw new Error(errMsg);
+}
+if (!process.env[firebaseEnv]) {
+  const errMsg = `Firebase web config environment [${firebaseEnv}] not found.`;
+  throw new Error(errMsg);
+}
+
+const envFilePath = `src/environments/environment.${ANGULAR_ENV}.ts`;
 if (!fs.existsSync(envFilePath)) {
   const errMsg = `Environment file does not exist [${envFilePath}]`;
   throw new Error(errMsg);
 }
 
-const firebaseObj = JSON.parse(process.env[FIREBASE_WEB_CONFIG_ENV]);
+const firebaseObj = JSON.parse(process.env[firebaseEnv]);
 
 // generate environment file
 const envFileStr = `

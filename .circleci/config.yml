@@ -43,7 +43,7 @@ jobs:
           name: Configure environment
           command: npm run configure-env
           environment:
-            FIREBASE_WEB_CONFIG: $FIREBASE_WEB_CONFIG_STAGING
+            PORTFOLIO_ENV: staging
       - run:
           name: Build Website
           command: npm run build
