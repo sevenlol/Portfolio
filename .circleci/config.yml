@@ -93,6 +93,9 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
+      - restore_cache:
+          keys:
+            - v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           # install dependencies
           name: Install local dependencies
@@ -103,7 +106,7 @@ jobs:
             - node_modules
       - run:
           # configure angular environment
-          name: Configure environment
+          name: Deploy Website
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               export FIREBASE_PROJECT=${FIREBASE_PROJECT_STAGING}
