@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
-    "configure-env" : "node configure-env.js",
+    "configure-env": "node configure-env.js",
     "test": "ng test --single-run",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -39,6 +39,7 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
     "codelyzer": "^4.0.1",
+    "firebase-tools": "^3.16.0",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",
