@@ -102,22 +102,22 @@ jobs:
           paths:
             - node_modules
       - run:
-        # configure angular environment
-        name: Configure environment
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            export FIREBASE_PROJECT=${FIREBASE_PROJECT_STAGING}
-            export FIREBASE_TOKEN=${FIREBASE_TOKEN_STAGING}
-          elif [ "${CIRCLE_BRANCH}" == "release" ]; then
-            export FIREBASE_PROJECT=${FIREBASE_PROJECT_PROD}
-            export FIREBASE_TOKEN=${FIREBASE_TOKEN_PROD}
-          else
-            echo "Invalid branch name ${CIRCLE_BRANCE}"
-          fi
-          echo ${CIRCLE_BRANCH}
-          echo ${FIREBASE_PROJECT}
-          ./node_modules/.bin/firebase use ${FIREBASE_PROJECT}
-          ./node_modules/.bin/firebase deploy --token ${FIREBASE_TOKEN} --only hosting
+          # configure angular environment
+          name: Configure environment
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              export FIREBASE_PROJECT=${FIREBASE_PROJECT_STAGING}
+              export FIREBASE_TOKEN=${FIREBASE_TOKEN_STAGING}
+            elif [ "${CIRCLE_BRANCH}" == "release" ]; then
+              export FIREBASE_PROJECT=${FIREBASE_PROJECT_PROD}
+              export FIREBASE_TOKEN=${FIREBASE_TOKEN_PROD}
+            else
+              echo "Invalid branch name ${CIRCLE_BRANCE}"
+            fi
+            echo ${CIRCLE_BRANCH}
+            echo ${FIREBASE_PROJECT}
+            ./node_modules/.bin/firebase use ${FIREBASE_PROJECT}
+            ./node_modules/.bin/firebase deploy --token ${FIREBASE_TOKEN} --only hosting
 workflows:
   version: 2
   build_and_deploy:
