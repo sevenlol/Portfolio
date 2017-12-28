@@ -5,8 +5,7 @@
 
 .cover-image {
   object-fit: cover;
-  height: 200px;
-  width: 300px;
+  max-height: 200px;
 }
 
 .lang-type {
