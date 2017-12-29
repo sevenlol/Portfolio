@@ -1,0 +1,9 @@
+.skill-title {
+  margin: 20px 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .skill-title {
+    margin: 10px 0;
+  }
+}

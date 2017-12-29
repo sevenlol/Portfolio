@@ -1,0 +1,27 @@
+<div>
+  <div class="skill-title">
+    <span fxShow.gt-xs fxHide.xs class="mat-display-2">Skills</span>
+    <span fxHide.gt-xs fxShow.xs class="mat-display-1">Skills</span>
+  </div>
+
+  <app-spinner *ngIf="isLoading" [diameter]="40" [topMargin]="'20px'"></app-spinner>
+
+  <mat-card *ngIf="!isLoading">
+    <mat-card-content>
+      <mat-list>
+        <div *ngFor="let skill of skills">
+          <h3 mat-subheader>{{ skill.name }}</h3>
+          <mat-list-item mat-line>
+            <mat-chip-list>
+              <mat-chip
+                *ngFor="let item of skill.items"
+                (click)="openLink(item.url)"
+                [matTooltip]="item.description">
+                {{ item.name }}</mat-chip>
+            </mat-chip-list>
+          </mat-list-item>
+        </div>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -32,6 +32,7 @@ export class WorkComponent implements OnInit, OnDestroy {
     this.nextPage$
       // show spinner
       .do(() => this.isLoading = true)
+      // use mergeMap so that every change will be updated immediately
       .mergeMap(() => {
         if (this.experiences.length === 0) {
           // initial query, no endDate/startDate cursor
