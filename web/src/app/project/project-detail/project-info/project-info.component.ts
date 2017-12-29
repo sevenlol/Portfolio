@@ -48,6 +48,11 @@ export class ProjectInfoComponent implements OnInit {
       if (!key || key === primaryKey) {
         continue;
       }
+      if (!resourceMap[key]) {
+        // guard against invalid keyword
+        // TODO log error
+        continue;
+      }
 
       const resource = this.copy(resourceMap[key]);
       resource.key = key;
