@@ -49,3 +49,17 @@ export interface WorkExperience {
   endDate?: Date;
   highlights: string[];
 }
+
+export interface Skill {
+  id?: string;
+  name: string;
+  priority: number;
+  updatedAt: Date;
+  items: SkillItem[];
+}
+
+export interface SkillItem {
+  name: string;
+  url: string;
+  description?: string;
+}

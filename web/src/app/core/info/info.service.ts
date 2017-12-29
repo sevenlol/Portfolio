@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QueryFn } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
-import { BasicInfo, Info, WorkExperience } from './info.model';
+import { BasicInfo, Info, WorkExperience, Skill } from './info.model';
 
 const INFO_COLL = 'info';
 const WORK_COLL = 'work';
+const SKILL_COLL = 'skills';
 const BASIC_INFO_DOC = 'basic';
 
 @Injectable()
@@ -13,6 +14,7 @@ export class InfoService {
 
   public static readonly BASIC_INFO_PATH = `${INFO_COLL}/${BASIC_INFO_DOC}`;
   public static readonly WORK_PATH = `${INFO_COLL}/${BASIC_INFO_DOC}/${WORK_COLL}`;
+  public static readonly SKILL_PATH = `${INFO_COLL}/${BASIC_INFO_DOC}/${SKILL_COLL}`;
 
   private basicInfoDoc: AngularFirestoreDocument<BasicInfo>;
   private infoDoc: AngularFirestoreDocument<Info>;
@@ -61,5 +63,37 @@ export class InfoService {
           return work;
         });
       });
+  }
+
+  // TODO add unit tests
+  querySkills(limit?: number, lastSkill?: Skill): Observable<Skill[]> {
+    this.checkLimit(limit);
+    return this.afs.collection<Skill>(
+      InfoService.SKILL_PATH,
+      ref => {
+        let baseQuery = ref.orderBy('priority', 'desc').orderBy('updatedAt', 'desc');
+        if (lastSkill) {
+          baseQuery = baseQuery.startAfter(lastSkill.priority, lastSkill.updatedAt);
+        }
+        // decide whether to add limit condition
+        return limit ? baseQuery.limit(limit) : baseQuery;
+      }
+    ).snapshotChanges().map(refs => refs.map(ref => {
+      const skill = ref.payload.doc.data() as Skill;
+      skill.id = ref.payload.doc.id;
+      return skill;
+    }));
+  }
+
+  private checkLimit(limit: number) {
+    if (limit === undefined) {
+      return;
+    }
+    if (limit <= 0) {
+      throw new Error('Limit should be greater than 0');
+    }
+    if (parseInt(limit.toString(), 10) !== limit) {
+      throw new Error('Limit should be an integer');
+    }
   }
 }
