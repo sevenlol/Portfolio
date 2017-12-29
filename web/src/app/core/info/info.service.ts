@@ -54,6 +54,12 @@ export class InfoService {
         }
         // limit the number of results
         return query.limit(limit);
-      }).valueChanges();
+      }).snapshotChanges().map(refs => {
+        return refs.map(ref => {
+          const work = ref.payload.doc.data() as WorkExperience;
+          work.id = ref.payload.doc.id;
+          return work;
+        });
+      });
   }
 }

@@ -39,6 +39,7 @@ export interface Education {
 }
 
 export interface WorkExperience {
+  id?: string;
   name: string;
   location: string;
   position: string;

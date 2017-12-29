@@ -68,7 +68,23 @@ export class WorkComponent implements OnInit, OnDestroy {
         return;
       }
 
-      this.experiences.push(work);
+      const foundItem = this.experiences.reduce((exists, exp, index) => {
+        if (exists) {
+          // already updated
+          return true;
+        }
+        if (exp.id === work.id) {
+          // update this item
+          this.experiences[index] = work;
+          return true;
+        }
+
+        return false;
+      }, false);
+      if (!foundItem) {
+        // item not in the list
+        this.experiences.push(work);
+      }
     });
   }
 }
