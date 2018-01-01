@@ -6,6 +6,13 @@ import { Subject } from 'rxjs/Subject';
 import { Info } from '../core/info/info.model';
 import { InfoService } from '../core/info/info.service';
 
+/**
+ * Angular Module: [[AboutModule]]
+ *
+ * Container component for [[BasicInfoComponent]],
+ * [[EducationComponent]], [[SkillComponent]], [[SummaryComponent]]
+ * and [[WorkComponent]]
+ */
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
@@ -13,13 +20,25 @@ import { InfoService } from '../core/info/info.service';
 })
 export class AboutComponent implements OnInit, OnDestroy {
 
+  /**
+   * information about me
+   */
   info: Info;
+  /**
+   * indicate if the spinner should be displayed
+   */
   showSpinner = true;
 
+  /**
+   * Trigger to stop receiving info data
+   */
   private unSub$: Subject<boolean> = new Subject();
 
   constructor(private infoService: InfoService) { }
 
+  /**
+   * @hidden
+   */
   ngOnInit() {
     this.infoService
       .getInfo()
@@ -30,6 +49,9 @@ export class AboutComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * @hidden
+   */
   ngOnDestroy() {
     this.unSub$.next(true);
     this.unSub$.complete();

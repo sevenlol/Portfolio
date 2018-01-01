@@ -9,6 +9,11 @@ import { Subject } from 'rxjs/Subject';
 import { Skill } from '../../core/info/info.model';
 import { InfoService } from '../../core/info/info.service';
 
+/**
+ * Angular Module: [[AboutModule]]
+ *
+ * Component to display my software development skills.
+ */
 @Component({
   selector: 'app-skill',
   templateUrl: './skill.component.html',
@@ -16,13 +21,24 @@ import { InfoService } from '../../core/info/info.service';
 })
 export class SkillComponent implements OnInit, OnDestroy {
 
+  /**
+   * Whether skill data is being loaded
+   */
   isLoading = true;
+  /**
+   * skill information
+   */
   skills: Skill[] = [];
-
+  /**
+   * Trigger to stop receiving skill data
+   */
   unSub$: Subject<void> = new Subject();
 
   constructor(private infoService: InfoService) { }
 
+  /**
+   * @hidden
+   */
   ngOnInit() {
     // TODO decide whether to use pagination here
     // skill category is unlikely to grow too much (if any)
@@ -39,6 +55,9 @@ export class SkillComponent implements OnInit, OnDestroy {
         }));
   }
 
+  /**
+   * @hidden
+   */
   ngOnDestroy() {
     this.unSub$.next();
     this.unSub$.complete();
@@ -46,6 +65,11 @@ export class SkillComponent implements OnInit, OnDestroy {
 
   // FIXME remove when the issue below is merged
   // https://github.com/angular/material2/pull/9043
+  /**
+   * Open the specified url in a new browser tab.
+   * As a workaround for {@link https://github.com/angular/material2/pull/9043}
+   * @param link url to be open
+   */
   openLink(link: string) {
     window.open(link, '_blank');
   }

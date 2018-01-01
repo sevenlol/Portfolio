@@ -17,6 +17,17 @@ import { SummaryComponent } from './summary/summary.component';
 import { WorkComponent } from './work/work.component';
 import { SkillComponent } from './skill/skill.component';
 
+/**
+ * Angular Module in charge of all the information about me.
+ *
+ * Components:
+ * [[AboutComponent]]
+ * [[BasicInfoComponent]]
+ * [[EducationComponent]]
+ * [[SummaryComponent]]
+ * [[WorkComponent]]
+ * [[SkillComponent]]
+ */
 @NgModule({
   imports: [
     CommonModule,

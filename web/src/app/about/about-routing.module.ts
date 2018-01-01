@@ -10,6 +10,9 @@ const routes: Routes = [
   }
 ];
 
+/**
+ * Contains routing information for [[AboutModule]]
+ */
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

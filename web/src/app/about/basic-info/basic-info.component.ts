@@ -4,6 +4,12 @@ import { MatIconRegistry } from '@angular/material';
 
 import { Info } from '../../core/info/info.model';
 
+/**
+ * Angular Module: [[AboutModule]]
+ *
+ * Component to display my basic information.
+ * E.g., name, location, email, etc.
+ */
 @Component({
   selector: 'app-basic-info',
   templateUrl: './basic-info.component.html',
@@ -11,6 +17,9 @@ import { Info } from '../../core/info/info.model';
 })
 export class BasicInfoComponent implements OnInit {
 
+  /**
+   * @input information about me
+   */
   @Input() info: Info;
 
   constructor(
@@ -18,6 +27,9 @@ export class BasicInfoComponent implements OnInit {
     private sanitizer: DomSanitizer) {
   }
 
+  /**
+   * @hidden
+   */
   ngOnInit() {
     this.registerIcon('facebook', 'assets/icons/facebook.svg');
     this.registerIcon('github', 'assets/icons/github.svg');
@@ -29,6 +41,11 @@ export class BasicInfoComponent implements OnInit {
     this.registerIcon('phone', 'assets/icons/phone.svg');
   }
 
+  /**
+   * Register svg icon to Angular Material
+   * @param name name of the svg icon
+   * @param path svg file path
+   */
   private registerIcon(name: string, path: string) {
     this.iconRegistry.addSvgIcon(
       name,
