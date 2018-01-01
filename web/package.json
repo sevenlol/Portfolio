@@ -9,7 +9,9 @@
     "configure-env": "node configure-env.js",
     "test": "ng test --single-run",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "docs": "npm run typedoc -- --options typedoc.js ./src/",
+    "typedoc": "./node_modules/typedoc/bin/typedoc"
   },
   "private": true,
   "dependencies": {
@@ -52,6 +54,7 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
+    "typedoc": "^0.9.0",
     "typescript": "~2.4.2"
   }
 }
