@@ -9,12 +9,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { AboutRoutingModule } from './about-routing.module';
 import { AboutComponent } from './about.component';
 import { BasicInfoComponent } from './basic-info/basic-info.component';
-import { MatButtonModule, MatTooltipModule, MatExpansionModule } from '@angular/material';
+import { MatButtonModule, MatTooltipModule, MatExpansionModule, MatChipsModule } from '@angular/material';
 
 import { SharedModule } from '../shared/shared.module';
 import { EducationComponent } from './education/education.component';
 import { SummaryComponent } from './summary/summary.component';
 import { WorkComponent } from './work/work.component';
+import { SkillComponent } from './skill/skill.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { WorkComponent } from './work/work.component';
     FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
+    MatChipsModule,
     MatExpansionModule,
     MatListModule,
     MatIconModule,
@@ -29,6 +31,6 @@ import { WorkComponent } from './work/work.component';
     SharedModule,
     AboutRoutingModule
   ],
-  declarations: [AboutComponent, BasicInfoComponent, EducationComponent, SummaryComponent, WorkComponent]
+  declarations: [AboutComponent, BasicInfoComponent, EducationComponent, SummaryComponent, WorkComponent, SkillComponent]
 })
 export class AboutModule { }
