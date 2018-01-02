@@ -16,6 +16,14 @@ import { KeywordMetadataResolverService } from './keyword-metadata-resolver.serv
 import { BasicInfoResolverService } from './info/basic-info-resolver.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+/**
+ * Core angular module, containing components that are only used
+ * once and services required by the whole application.
+ *
+ * Including [[MetadataService]], [[InfoService]], [[MainMetadataResolverService]],
+ *  [[KeywordMetadataResolverService]], [[BasicInfoResolverService]], [[NavBarComponent]],
+ *  [[PageNotFoundComponent]]
+ */
 @NgModule({
   imports: [
     CommonModule,

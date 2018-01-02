@@ -12,6 +12,11 @@ const METADATA_DOCS = {
   KEYWORD : 'keyword'
 };
 
+/**
+ * Angular Module: [[CoreModule]]
+ *
+ * Data service for [[MainMetadata]] and [[KeywordMetadata]]
+ */
 @Injectable()
 export class MetadataService {
 
@@ -19,6 +24,7 @@ export class MetadataService {
   public static readonly MAIN_METADATA_PATH = `${METADATA_COLL}/${METADATA_DOCS.MAIN}`;
   public static readonly KEYWORD_METADATA_PATH = `${METADATA_COLL}/${METADATA_DOCS.KEYWORD}`;
 
+  // cache previous results, metadata should not change frequently
   private main$: BehaviorSubject<MainMetadata>;
   private keyword$: BehaviorSubject<KeywordMetadata>;
 
@@ -29,10 +35,16 @@ export class MetadataService {
     afs.doc<KeywordMetadata>(MetadataService.KEYWORD_METADATA_PATH).valueChanges().subscribe((res) => this.keyword$.next(res));
   }
 
+  /**
+   * Retrieve main metadata
+   */
   getMainMetadata(): Observable<MainMetadata> {
     return this.main$;
   }
 
+  /**
+   * Retrieve keyword metadata
+   */
   getKeywordMetadata(): Observable<KeywordMetadata> {
     return this.keyword$;
   }

@@ -3,6 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 
+/**
+ * Angular Module: [[CoreModule]]
+ *
+ * Navagation bar component.
+ */
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -21,6 +26,11 @@ export class NavBarComponent implements OnInit {
   }
 
   // TODO move these to utility class
+  /**
+   * Register svg icon to Angular Material
+   * @param name name of the svg icon
+   * @param path svg file path
+   */
   private registerIcon(name: string, path: string) {
     this.iconRegistry.addSvgIcon(
       name,
