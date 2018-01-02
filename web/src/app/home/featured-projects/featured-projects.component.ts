@@ -8,6 +8,11 @@ import { Subject } from 'rxjs/Subject';
 
 const NUM_PROJECTS_PER_ROW = 3;
 
+/**
+ * Angular Module: [[HomeModule]]
+ *
+ * Component to display featured projects
+ */
 @Component({
   selector: 'app-featured-projects',
   templateUrl: './featured-projects.component.html',
@@ -15,20 +20,49 @@ const NUM_PROJECTS_PER_ROW = 3;
 })
 export class FeaturedProjectsComponent implements OnInit, OnDestroy {
 
+  /**
+   * Already retrieved featured projects
+   * (in two dimension array [row][column])
+   */
   featuredProjects: Project[][];
 
+  /**
+   * keyword resource map
+   */
   keywords: Keyword;
+  /**
+   * language resource map
+   */
   languages: Language;
+  /**
+   * project category resource map
+   */
   types: Type;
+  /**
+   * whether to display spinner or not
+   */
   showSpinner = true;
 
+  /**
+   * trigger to stop retrieving featured projects
+   */
   private unSub$: Subject<boolean> = new Subject();
 
+  /**
+   * @input Main metadata resource, containing language &
+   * project category
+   */
   @Input() mainMetadata: MainMetadata;
+  /**
+   * @input Keyword metadata resource
+   */
   @Input() keywordMetadata: KeywordMetadata;
 
   constructor(private projectService: FeaturedProjectService) { }
 
+  /**
+   * @hidden
+   */
   ngOnInit() {
     this.languages = this.mainMetadata.languages;
     this.types = this.mainMetadata.types;
@@ -43,6 +77,9 @@ export class FeaturedProjectsComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * @hidden
+   */
   ngOnDestroy() {
     this.unSub$.next(true);
     this.unSub$.complete();

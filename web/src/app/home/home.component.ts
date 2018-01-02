@@ -7,6 +7,12 @@ import { Observable } from 'rxjs/Observable';
 import { MainMetadata, KeywordMetadata } from '../core/metadata.model';
 import { BasicInfo } from '../core/info/info.model';
 
+/**
+ * Angular Module: [[HomeModule]]
+ *
+ * Container component for [[IntroComponent]],
+ * [[FeaturedProjectsComponent]] and [[ContactInfoComponent]]
+ */
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,8 +20,17 @@ import { BasicInfo } from '../core/info/info.model';
 })
 export class HomeComponent implements OnInit {
 
+  /**
+   * Language and project category metadata resource map
+   */
   mainMetadata: MainMetadata;
+  /**
+   * Keyword metadata resource map
+   */
   keywordMetadata: KeywordMetadata;
+  /**
+   * Basic information about me
+   */
   basicInfo: BasicInfo;
 
   constructor(
@@ -24,6 +39,11 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute) {
   }
 
+  /**
+   * @hidden
+   * register icon and load main metadata, keyword metadata and
+   * basic info from router
+   */
   ngOnInit() {
     this.registerIcon('facebook', 'assets/icons/facebook.svg');
     this.registerIcon('github', 'assets/icons/github.svg');
@@ -39,6 +59,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /**
+   * Register svg icon to Angular Material
+   * @param name name of the svg icon
+   * @param path svg file path
+   */
   private registerIcon(name: string, path: string) {
     this.iconRegistry.addSvgIcon(
       name,

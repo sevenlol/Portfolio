@@ -15,6 +15,18 @@ import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { FeaturedProjectsComponent } from './featured-projects/featured-projects.component';
 import { FeaturedProjectService } from './featured-projects/featured-project.service';
 
+/**
+ * Angular Module in charge of all the information about me.
+ *
+ * Components:
+ * [[HomeComponent]]
+ * [[IntroComponent]]
+ * [[ContactInfoComponent]]
+ * [[FeaturedProjectsComponent]]
+ *
+ * Services:
+ * [[FeaturedProjectService]]
+ */
 @NgModule({
   imports: [
     CommonModule,

@@ -18,6 +18,11 @@ const routes: Routes = [
   }
 ];
 
+/**
+ * Angular Module: [[HomeModule]]
+ *
+ * Contains routing information for [[HomeModule]]
+ */
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
