@@ -190,7 +190,6 @@ workflows:
             branches:
               only:
                 - master
-                - typedoc
       - deploy_web:
           requires:
             - build_web
