@@ -140,6 +140,35 @@ jobs:
           key: v1-ts-doc-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - doc
+  # deploy typescript document
+  deploy_web_ts_doc:
+    working_directory: ~/release
+    docker:
+      - image: circleci/node:8.9.1-browsers
+    steps:
+      - checkout:
+          path: ~/project
+      - restore_cache:
+          keys:
+            - v1-ts-doc-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Deploy Website Typescript Document to Github Page
+          command: |
+            git init
+            git remote add --fetch origin ${WEB_TS_DOC_REPO}
+            git config --global user.email ${GITHUB_EMAIL}
+            git config --global user.name ${GITHUB_NAME}
+            if git rev-parse --verify origin/gh-pages > /dev/null 2>&1
+            then
+              git checkout gh-pages
+              git rm -rf .
+            else
+              git checkout --orphan gh-pages
+            fi
+            cp -a ~/project/web/doc/. .
+            git add .
+            git commit -m "document"
+            git push --force --quiet origin gh-pages > /dev/null 2>&1
 workflows:
   version: 2
   build_and_deploy:
@@ -154,6 +183,14 @@ workflows:
                 - master
                 - release
       - build_web_ts_doc
+      - deploy_web_ts_doc:
+          requires:
+            - build_web_ts_doc
+          filters:
+            branches:
+              only:
+                - master
+                - typedoc
       - deploy_web:
           requires:
             - build_web
