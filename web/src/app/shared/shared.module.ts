@@ -12,6 +12,14 @@ import { ProjectComponent } from './project/project.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { ValidKeywordDirective } from './valid-keyword.directive';
 
+/**
+ * Angular Module for shared components
+ *
+ * Components:
+ * [[ProjectComponent]]
+ * [[SpinnerComponent]]
+ * [[ValidKeywordDirective]]
+ */
 @NgModule({
   imports: [
     CommonModule,
