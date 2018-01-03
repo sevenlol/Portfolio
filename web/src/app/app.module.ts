@@ -7,6 +7,12 @@ import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { AppRoutingModule } from './app-routing.module';
 
+/**
+ * Angular Root Module.
+ *
+ * Components:
+ * [[AppComponent]]
+ */
 @NgModule({
   declarations: [
     AppComponent

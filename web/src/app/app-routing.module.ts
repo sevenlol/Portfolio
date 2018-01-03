@@ -24,6 +24,11 @@ const routes: Routes = [
   }
 ];
 
+/**
+ * Angular Module: [[AppModule]]
+ *
+ * Contains root level routing information
+ */
 @NgModule({
   imports: [
     CommonModule,
