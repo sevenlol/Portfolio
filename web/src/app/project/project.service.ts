@@ -17,13 +17,31 @@ export interface Query {
 
 const PROJECT_COLL = 'projects';
 
+/**
+ * Angular Module: [[ProjectModule]]
+ *
+ * Data service for [[Project]]
+ */
 @Injectable()
 export class ProjectService {
 
+  /**
+   * path to project resources
+   */
   public static readonly PROJECTS_PATH = `${PROJECT_COLL}`;
 
+  /**
+   * Create a project data service
+   * @param afs firestore client object
+   */
   constructor(private afs: AngularFirestore) { }
 
+  /**
+   * Retrieve project by ID
+   * @param id project id, should be a non-empty string
+   * @throws Error if id is invalid
+   * @returns generated observable of the specified project
+   */
   get(id: string): Observable<Project> {
     this.checkId(id);
 
@@ -36,6 +54,14 @@ export class ProjectService {
       });
   }
 
+  /**
+   * Query projects based on given query
+   * @param limit number of projects to return, should be a positive integer
+   * @param query query object for this request
+   * @param lastProject last project in the last batch
+   * @throws Error if query object or limit is invalid
+   * @returns configured observable based on query/limit/cursor
+   */
   queryProjects(limit: number, query: Query, lastProject?: Project): Observable<Project[]> {
     this.checkQueryParams(limit, query);
     return this.afs.collection<Project>(ProjectService.PROJECTS_PATH,
@@ -49,12 +75,23 @@ export class ProjectService {
       }));
   }
 
+  /**
+   * Check if the given ID is valid
+   * @param id ID to be check
+   * @throws Error if given ID is invalid
+   */
   private checkId(id: string) {
     if (!id) {
       throw new Error('Invalid project ID');
     }
   }
 
+  /**
+   * Check limit and query object
+   * @param limit limit of returned projects, should be a positive integer
+   * @param query query object, should contains valid type/value
+   * @throws Error if either limit or query is invalid
+   */
   private checkQueryParams(limit: number, query: Query) {
     if (!limit || limit < 0) {
       throw new Error('Limit should be greater than 0');
@@ -74,6 +111,15 @@ export class ProjectService {
     }
   }
 
+  /**
+   * Adapter function from [[Query]] to firebase query.
+   * Assumes all inputs are valid.
+   * @param limit query limit
+   * @param query query object
+   * @param queryObj firestore query object
+   * @param lastProject last project from the last query
+   * @returns configured firestore query object
+   */
   private getQuery(limit: number, query: Query, queryObj: firebase.firestore.Query, lastProject?: Project): firebase.firestore.Query {
     let res = null;
 
@@ -101,6 +147,12 @@ export class ProjectService {
     return res.limit(limit);
   }
 
+  /**
+   * Retrieve property name of firestore document based
+   * on the given query
+   * @param query query object
+   * @returns firestore property name
+   */
   private getPropertyName(query: Query): string {
     switch (query.type) {
       case QueryType.LANGUAGE:

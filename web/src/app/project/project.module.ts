@@ -29,6 +29,20 @@ import { ProjectInfoComponent } from './project-detail/project-info/project-info
 import { ProjectHighlightComponent } from './project-detail/project-highlight/project-highlight.component';
 import { ProjectDemoComponent } from './project-detail/project-demo/project-demo.component';
 
+/**
+ * Angular Module for personal projects.
+ *
+ * Components:
+ * [[ProjectListComponent]]
+ * [[ProjectDetailComponent]]
+ * [[FilterPanelComponent]]
+ * [[ProjectInfoComponent]]
+ * [[ProjectHighlightComponent]]
+ * [[ProjectDemoComponent]]
+ *
+ * Services:
+ * [[ProjectService]]
+ */
 @NgModule({
   imports: [
     CommonModule,

@@ -13,6 +13,11 @@ import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ProjectService } from '../project.service';
 
+/**
+ * Angular Module: [[ProjectModule]]
+ *
+ * Component for displaying detailed information of a target [[Project]]
+ */
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',
@@ -20,13 +25,31 @@ import { ProjectService } from '../project.service';
 })
 export class ProjectDetailComponent implements OnInit, OnDestroy {
 
+  /**
+   * target project
+   */
   project: Project;
+  /**
+   * flag to display/hide spinner
+   */
   showSpinner: boolean;
 
+  /**
+   * trigger to stop loading project data
+   */
   unSub$: Subject<void> = new Subject();
 
+  /**
+   * keyword resource map
+   */
   keywords: Keyword;
+  /**
+   * language resource map
+   */
   languages: Language;
+  /**
+   * category resource map
+   */
   types: Type;
 
   constructor(
@@ -35,6 +58,14 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     private sanitizer: DomSanitizer,
     private projectService: ProjectService) { }
 
+  /**
+   * @hidden
+   * 1. Register icons
+   * 2. Retrieve language, keyword and category resource map
+   *    from router (already resolved)
+   * 3. Retrieve project ID from router
+   * 4. Load project
+   */
   ngOnInit() {
     // icons
     this.registerIcon('github', 'assets/icons/github.svg');
@@ -62,12 +93,20 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * @hidden
+   */
   ngOnDestroy() {
     // to unsubscribe other observers
     this.unSub$.next();
     this.unSub$.complete();
   }
 
+  /**
+   * Register svg icon to Angular Material
+   * @param name name of the svg icon
+   * @param path svg file path
+   */
   private registerIcon(name: string, path: string) {
     this.iconRegistry.addSvgIcon(
       name,

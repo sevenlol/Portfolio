@@ -26,6 +26,9 @@ const routes: Routes = [
   }
 ];
 
+/**
+ * Contains routing information for [[ProjectModule]]
+ */
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

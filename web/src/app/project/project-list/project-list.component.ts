@@ -19,6 +19,12 @@ import { ProjectService, QueryType, Query } from '../project.service';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
+/**
+ * Angular Module: [[ProjectModule]]
+ *
+ * Component to display a list of [[Project]] based on current filter
+ * options.
+ */
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
@@ -30,21 +36,60 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   static readonly DEFAULT_COLS: number = 1;
   static readonly BATCH_COUNT = 3;
 
+  /**
+   * row height for project grid
+   */
   rowHeight: number = ProjectComponent.HEIGHT + ProjectListComponent.HEIGHT_GAP;
 
+  /**
+   * flag to expand/collapse the filter panel
+   */
   filterPanelExpanded = false;
+  /**
+   * flag to indicate whether there is data being loaded
+   */
   isLoading = false;
+  /**
+   * flag to indicate whether there are projects to be loaded
+   */
   hasMoreData = true;
+  /**
+   * latest query object
+   */
   currQuery: Query;
+  /**
+   * number of columns in the project grid, based on current device width
+   */
   cols$: Observable<number>;
+  /**
+   * observable to trigger loading the next batch of projects
+   */
   private nextPage$: Subject<void> = new Subject();
+  /**
+   * observable to indicate query object is changed
+   */
   private queryChange$: Subject<Query> = new Subject();
+  /**
+   * trigger to stop loading data
+   */
   private unSub$: Subject<void> = new Subject();
 
+  /**
+   * keyword resource map
+   */
   keywords: Keyword;
+  /**
+   * language resource map
+   */
   languages: Language;
+  /**
+   * project category resource map
+   */
   types: Type;
 
+  /**
+   * current loaded (cached) projects
+   */
   projects: Project[] = [];
 
   constructor(
@@ -55,6 +100,14 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     private sanitizer: DomSanitizer
   ) { }
 
+  /**
+   * @hidden
+   * 1. Register icons
+   * 2. Retrieve language, keyword and category resource map
+   *    from router (already resolved)
+   * 3. Configure project list observable based on current query,
+   *    current loaded projects and number of projects per batch
+   */
   ngOnInit() {
     this.registerIcon('filter-list', 'assets/icons/filter_list.svg');
     this.registerIcon('clear', 'assets/icons/clear.svg');
@@ -117,40 +170,69 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     this.queryChange$.next();
   }
 
+  /**
+   * Load next batch of projects
+   */
   public loadNext() {
     // TODO implement infinite scrolling
     // user triggers load next page event
     this.nextPage$.next();
   }
 
+  /**
+   * Toggle filter panel
+   */
   public toggleFilterPanel() {
     this.filterPanelExpanded = !this.filterPanelExpanded;
   }
 
+  /**
+   * Handler for queryChange event.
+   * Collapse filter panel and propagate the event
+   * @param query query object of in the change event
+   */
   public queryChanged(query: Query) {
     // collapse filter panel
     this.filterPanelExpanded = false;
     this.queryChange$.next(query);
   }
 
+  /**
+   * Clear current filter option by emiting an empty
+   * queryChange event
+   */
   public clearQuery() {
     this.queryChange$.next();
   }
 
+  /**
+   * @hidden
+   */
   ngOnDestroy() {
     this.unSub$.next();
     this.unSub$.complete();
   }
 
+  /**
+   * Set isLoading flag and hasMoreData flag based on the received
+   * project list
+   * @param projects received project list
+   */
   private handleData(projects: Project[]) {
     // hide spinner
     this.isLoading = false;
     // if # of results is less than batch count, no more data
     this.hasMoreData = projects.length === ProjectListComponent.BATCH_COUNT;
+    // FIXME handle duplication
     projects.forEach(project => this.projects.push(project));
   }
 
   // TODO move to utility class
+  /**
+   * Register svg icon to Angular Material
+   * @param name name of the svg icon
+   * @param path svg file path
+   */
   private registerIcon(name: string, path: string) {
     this.iconRegistry.addSvgIcon(
       name,
