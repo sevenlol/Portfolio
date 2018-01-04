@@ -4,8 +4,10 @@ const fs = require('fs');
 
 // current environment, e.g., 'prod', 'staging'
 const PORTFOLIO_ENV = 'PORTFOLIO_ENV';
-const ANGULAR_ENV = 'prod';
-const IS_PRODUCTION = true;
+const ENV_FILE_PATH = {
+  PRODUCTION : 'src/environments/environment.prod.ts',
+  DEV : 'src/environments/environment.ts'
+};
 const ENV_MAP = {
   prod : 'FIREBASE_WEB_CONFIG_PROD',
   staging : 'FIREBASE_WEB_CONFIG_STAGING'
@@ -26,18 +28,31 @@ if (!process.env[firebaseEnv]) {
   throw new Error(errMsg);
 }
 
-const envFilePath = `src/environments/environment.${ANGULAR_ENV}.ts`;
-if (!fs.existsSync(envFilePath)) {
-  const errMsg = `Environment file does not exist [${envFilePath}]`;
-  throw new Error(errMsg);
-}
+// check environment file
+checkEnvFile(ENV_FILE_PATH.DEV);
+checkEnvFile(ENV_FILE_PATH.PRODUCTION);
 
 const firebaseObj = JSON.parse(process.env[firebaseEnv]);
 
-// generate environment file
-const envFileStr = `
-export const environment = {
-  production: ${IS_PRODUCTION},
+// generate environment file string
+const devEnvFile = getEnvFileStr(false, firebaseObj);
+const prodEnvFile = getEnvFileStr(true, firebaseObj);
+
+fs.writeFileSync(ENV_FILE_PATH.DEV, devEnvFile);
+fs.writeFileSync(ENV_FILE_PATH.PRODUCTION, prodEnvFile);
+
+/* private functions */
+
+function checkEnvFile(path) {
+  if (!fs.existsSync(path)) {
+    const errMsg = `Environment file does not exist [${path}]`;
+    throw new Error(errMsg);
+  }
+}
+
+function getEnvFileStr(isProduction, firebaseObj) {
+  return `export const environment = {
+  production: ${isProduction},
   firebase: {
     apiKey: '${firebaseObj.api_key}',
     authDomain: '${firebaseObj.auth_domain}',
@@ -46,12 +61,8 @@ export const environment = {
     storageBucket: '${firebaseObj.storage_bucket}',
     messagingSenderId: '${firebaseObj.messaging_sender_id}'
   }
-};
-`;
-
-fs.writeFileSync(envFilePath, envFileStr);
-
-/* private functions */
+};`;
+}
 
 function checkProperty(obj, propertyKey) {
   if (!obj || typeof obj !== 'object') {
