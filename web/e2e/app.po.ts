@@ -5,7 +5,19 @@ export class AppPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getTitle() {
+    return browser.getTitle();
+  }
+
+  getHomeButtonText() {
+    return element(by.css('button[mat-button]')).getText();
+  }
+
+  getProjectLinkButtonText() {
+    return element(by.css('a[routerLink="/projects"]')).getText();
+  }
+
+  getAboutLinkButtonText() {
+    return element(by.css('a[routerLink="/about"]')).getText();
   }
 }
