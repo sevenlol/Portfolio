@@ -134,6 +134,14 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
       - run:
+          # install dependencies
+          name: Install local dependencies
+          command: npm install
+      - save_cache:
+          key: v1-dependencies-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
           name: Build Website Typescript Document
           command: npm run docs
       - save_cache:
@@ -182,17 +190,19 @@ workflows:
               only:
                 - master
                 - release
-      - build_web_ts_doc
-      - deploy_web_ts_doc:
+      - deploy_web:
           requires:
-            - build_web_ts_doc
+            - build_web
           filters:
             branches:
               only:
                 - master
-      - deploy_web:
+  build_n_deploy_ts_doc:
+    jobs:
+      - build_web_ts_doc
+      - deploy_web_ts_doc:
           requires:
-            - build_web
+            - build_web_ts_doc
           filters:
             branches:
               only:
