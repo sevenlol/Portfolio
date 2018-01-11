@@ -18,7 +18,7 @@
       </mat-chip>
     </mat-chip-list>
   </mat-card-title-group>
-  <img class="cover-image" mat-card-image [src]="project.coverImageUrl" *ngIf="project.coverImageUrl !== undefined" />
+  <img class="cover-image" mat-card-image [src]="project.coverImageUrl" alt="Project cover image" *ngIf="project.coverImageUrl !== undefined" />
   <mat-card-content>
     {{ project.description }}
   </mat-card-content>
