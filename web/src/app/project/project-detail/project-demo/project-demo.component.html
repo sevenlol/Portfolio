@@ -4,7 +4,11 @@
     fxLayout="column">
     <h4 class="mat-title">Demo</h4>
     <mat-nav-list>
-      <a mat-list-item *ngFor="let link of project.links.demoVideo" [href]="link.url" target="_blank">
+      <a mat-list-item
+        *ngFor="let link of project.links.demoVideo"
+        [href]="link.url"
+        target="_blank"
+        rel="noopener">
         <mat-icon mat-list-icon svgIcon="video"></mat-icon>
         <h4 mat-line>{{ link.name }}</h4>
         <span fxHide.xs *ngIf="link.description" mat-line>{{ link.description }}</span>

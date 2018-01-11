@@ -23,7 +23,7 @@
     {{ project.description }}
   </mat-card-content>
   <mat-card-actions fxLayout="row" fxLayoutAlign="space-between" class="read-more">
-    <a mat-button [href]="project.url" target="_blank" aria-label="Link to Project Website">Link</a>
+    <a mat-button [href]="project.url" target="_blank" rel="noopener" aria-label="Link to Project Website">Link</a>
     <a mat-button
       [disabled]="!project.id"
       aria-label="View Project Detail"
