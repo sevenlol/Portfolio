@@ -59,8 +59,8 @@ jobs:
           paths:
             - node_modules
       - run:
-          # configure angular environment
-          name: Configure environment
+          # configure angular environment and web manifest
+          name: Configure environment and manifest
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
                 export PORTFOLIO_ENV=staging
@@ -72,6 +72,7 @@ jobs:
             echo ${CIRCLE_BRANCH}
             echo ${PORTFOLIO_ENV}
             npm run configure-env
+            npm run configure-manifest
       - run:
           name: Build Website
           command: npm run build
