@@ -7,8 +7,9 @@
   </div>
   <div fxLayout="row" fxLayoutAlign="center none">
     <div fxLayout="column" fxLayoutAlign="start center" class="basic-intro">
-      <h1>{{ basicInfo.name }}</h1>
-      <p>{{ basicInfo.summary }}</p>
+      <h1 class="mat-display-2">{{ basicInfo.name }}</h1>
+      <p class="mat-title" fxHide.xs fxShow.gt-xs>{{ basicInfo.summary }}</p>
+      <p fxShow.xs fxHide.gt-xs>{{ basicInfo.summary }}</p>
     </div>
   </div>
 </div>
