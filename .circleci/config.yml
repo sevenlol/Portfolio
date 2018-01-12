@@ -13,14 +13,14 @@ jobs:
           command: echo ${CIRCLE_BRANCH}
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+            - v2-dependencies-{{ checksum "package.json" }}
+            - v2-dependencies-
       - run:
           # install dependencies
           name: Install local dependencies
           command: npm install
       - save_cache:
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v2-dependencies-{{ checksum "package.json" }}
           paths:
             - node_modules
       - run:
@@ -48,14 +48,14 @@ jobs:
           path: ~/project
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+            - v2-dependencies-{{ checksum "package.json" }}
+            - v2-dependencies-
       - run:
           # install dependencies
           name: Install local dependencies
           command: npm install
       - save_cache:
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v2-dependencies-{{ checksum "package.json" }}
           paths:
             - node_modules
       - run:
@@ -92,8 +92,8 @@ jobs:
           path: ~/project
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+            - v2-dependencies-{{ checksum "package.json" }}
+            - v2-dependencies-
       - restore_cache:
           keys:
             - v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
@@ -102,7 +102,7 @@ jobs:
           name: Install local dependencies
           command: npm install
       - save_cache:
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v2-dependencies-{{ checksum "package.json" }}
           paths:
             - node_modules
       - run:
@@ -132,14 +132,14 @@ jobs:
           path: ~/project
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+            - v2-dependencies-{{ checksum "package.json" }}
+            - v2-dependencies-
       - run:
           # install dependencies
           name: Install local dependencies
           command: npm install
       - save_cache:
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v2-dependencies-{{ checksum "package.json" }}
           paths:
             - node_modules
       - run:
