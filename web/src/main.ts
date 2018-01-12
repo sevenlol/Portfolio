@@ -9,12 +9,6 @@ if (environment.production) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
-    // FIXME remove workaround when the issue below is fixed
-    // https://github.com/angular/angular-cli/issues/8779
-    if ('serviceWorker' in navigator && environment.production) {
-      navigator.serviceWorker.register('/ngsw-worker.js');
-    }
-  })
+  platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
 });

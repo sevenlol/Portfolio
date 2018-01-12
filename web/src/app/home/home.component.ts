@@ -6,6 +6,7 @@ import { MatIconRegistry } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { MainMetadata, KeywordMetadata } from '../core/metadata.model';
 import { BasicInfo } from '../core/info/info.model';
+import { environment } from '../../environments/environment';
 
 /**
  * Angular Module: [[HomeModule]]
@@ -57,6 +58,13 @@ export class HomeComponent implements OnInit {
       this.keywordMetadata = data.keywordMetadata;
       this.basicInfo = data.basicInfo;
     });
+
+    // register service worker
+    // FIXME remove workaround when the issue below is fixed
+    // https://github.com/angular/angular-cli/issues/8779
+    if ('serviceWorker' in navigator && environment.production) {
+      navigator.serviceWorker.register('/ngsw-worker.js');
+    }
   }
 
   /**

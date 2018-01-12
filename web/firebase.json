@@ -6,6 +6,53 @@
         "source": "**",
         "destination": "/index.html"
       }
+    ],
+    "headers" : [
+      {
+        "source" : "**/*.html",
+        "headers" : [
+          {
+            "key" : "Cache-Control",
+            "value" : "max-age=0, no-cache"
+          }
+        ]
+      },
+      {
+        "source" : "ngsw.json",
+        "headers" : [
+          {
+            "key" : "Cache-Control",
+            "value" : "max-age=0, no-cache"
+          }
+        ]
+      },
+      {
+        "source" : "ngsw-worker.js",
+        "headers" : [
+          {
+            "key" : "Cache-Control",
+            "value" : "max-age=0, no-cache"
+          }
+        ]
+      },
+      {
+        "source" : "**/*.@(js|css)",
+        "headers" : [
+          {
+            "key" : "Cache-Control",
+            "value" : "max-age=86400"
+          }
+        ]
+      },
+      {
+        "source" : "**/*.@(jpg|jpeg|gif|png)",
+        "headers" : [
+          {
+            "key" : "Cache-Control",
+            "value" : "max-age=86400"
+          }
+        ]
+      }
     ]
   }
 }
