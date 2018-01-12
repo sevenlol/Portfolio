@@ -8,6 +8,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
 
 /**
  * Angular Root Module.
@@ -17,15 +18,15 @@ import { AppRoutingModule } from './app-routing.module';
  */
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     CoreModule,
     SharedModule,
     HomeModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]

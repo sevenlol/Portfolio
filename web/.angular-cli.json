@@ -29,7 +29,40 @@
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
+      },
+      "appShell": {
+        "app": "app-shell",
+        "route": "shell/home"
       }
+    },
+    {
+      "root": "src",
+      "outDir": "dist-server/",
+      "assets": [
+        "assets",
+        "manifest.json",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.server.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.server.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "serviceWorker": true,
+      "styles": [
+        "theme.scss",
+        "styles.css"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      },
+      "platform": "server",
+      "name": "app-shell"
     }
   ],
   "e2e": {
@@ -58,7 +91,6 @@
   },
   "defaults": {
     "styleExt": "css",
-    "component": {
-    }
+    "component": {}
   }
 }

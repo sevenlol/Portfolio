@@ -8,7 +8,8 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
+document.addEventListener('DOMContentLoaded', () => {
+  platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
     // FIXME remove workaround when the issue below is fixed
     // https://github.com/angular/angular-cli/issues/8779
     if ('serviceWorker' in navigator && environment.production) {
@@ -16,3 +17,4 @@ platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
     }
   })
   .catch(err => console.log(err));
+});
