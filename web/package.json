@@ -8,6 +8,7 @@
     "build": "ng build --prod",
     "configure-env": "node configure-env.js",
     "configure-manifest": "node configure-web-app-manifest.js",
+    "fix-sw-hash": "node fix-sw-hash.js",
     "test": "ng test --single-run",
     "lint": "ng lint",
     "e2e": "ng e2e",

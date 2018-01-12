@@ -76,6 +76,10 @@ jobs:
       - run:
           name: Build Website
           command: npm run build
+      - run:
+          # https://github.com/angular/angular-cli/issues/8794
+          name: Fix Service Worker Hash
+          command: npm run fix-sw-hash
       - store_artifacts:
           path: dist/
       - save_cache:
