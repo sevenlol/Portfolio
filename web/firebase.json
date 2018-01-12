@@ -36,7 +36,7 @@
         ]
       },
       {
-        "source" : "**/*.@(js|css)",
+        "source" : "**/*.@(bundle.js|bundle.css)",
         "headers" : [
           {
             "key" : "Cache-Control",
