@@ -202,6 +202,7 @@ workflows:
             branches:
               only:
                 - master
+                - release
   build_n_deploy_ts_doc:
     jobs:
       - build_web_ts_doc

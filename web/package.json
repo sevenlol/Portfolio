@@ -1,6 +1,6 @@
 {
-  "name": "web",
-  "version": "0.0.0",
+  "name": "portfolio",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
