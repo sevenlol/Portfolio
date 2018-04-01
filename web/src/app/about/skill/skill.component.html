@@ -9,17 +9,19 @@
   <mat-card *ngIf="!isLoading">
     <mat-card-content>
       <mat-list>
-        <div *ngFor="let skill of skills">
+        <div *ngFor="let skill of skills; let i = index">
           <h3 mat-subheader>{{ skill.name }}</h3>
-          <mat-list-item mat-line>
-            <mat-chip-list>
-              <mat-chip
-                *ngFor="let item of skill.items"
-                (click)="openLink(item.url)"
-                [matTooltip]="item.description">
-                {{ item.name }}</mat-chip>
-            </mat-chip-list>
-          </mat-list-item>
+          <div fxLayout="column">
+            <mat-list-item mat-line *ngFor="let itemRow of items[i]">
+              <mat-chip-list>
+                <mat-chip
+                  *ngFor="let item of itemRow"
+                  (click)="openLink(item.url)"
+                  [matTooltip]="item.description">
+                  {{ item.name }}</mat-chip>
+              </mat-chip-list>
+            </mat-list-item>
+          </div>
         </div>
       </mat-list>
     </mat-card-content>
