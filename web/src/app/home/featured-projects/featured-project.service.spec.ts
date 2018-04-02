@@ -72,7 +72,8 @@ class FirestoreCollectionStub extends AngularFirestoreCollection<Project> {
               id : index.toString(),
               metadata : null,
               data : () => project,
-              get : () => {}
+              get : () => {},
+              isEqual : (other) => false,
             },
             oldIndex : index,
             newIndex : index

@@ -70,7 +70,8 @@ class FirestoreCollectionStub<T> extends AngularFirestoreCollection<T> {
               data : () => {
                 return val;
               },
-              get : () => {}
+              get : () => {},
+              isEqual : (other) => false
             },
             oldIndex : 1,
             newIndex : 2
