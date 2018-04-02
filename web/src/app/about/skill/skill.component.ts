@@ -84,8 +84,8 @@ export class SkillComponent implements OnInit, OnDestroy {
       .combineLatest(this.cols$.distinctUntilChanged())
       .takeUntil(this.unSub$)
       .subscribe(item => {
-        let skills = item[0];
-        let nCols = item[1];
+        const skills = item[0];
+        const nCols = item[1];
         this.skills = skills.filter(skill => {
           if (!skill || !skill.items) {
             return false;
