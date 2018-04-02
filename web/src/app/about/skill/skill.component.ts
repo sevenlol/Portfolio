@@ -86,7 +86,6 @@ export class SkillComponent implements OnInit, OnDestroy {
       .subscribe(item => {
         let skills = item[0];
         let nCols = item[1];
-        console.log(nCols);
         this.skills = skills.filter(skill => {
           if (!skill || !skill.items) {
             return false;
