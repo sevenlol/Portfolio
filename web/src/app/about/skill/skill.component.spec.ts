@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { SkillComponent } from './skill.component';
 import { BasicInfo, Info, Skill, WorkExperience } from '../../core/info/info.model';
@@ -47,6 +48,7 @@ describe('SkillComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SkillComponent ],
+      imports : [ FlexLayoutModule ],
       providers : [
         {
           provide : InfoService,
