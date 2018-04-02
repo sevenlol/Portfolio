@@ -18,12 +18,10 @@ const routes: Routes = [
     path : 'about',
     loadChildren : 'app/about/about.module#AboutModule'
   },
-  // FIXME restore this once app shell bug is fixed
-  // https://github.com/angular/angular-cli/issues/8929
-  /*{
+  {
     path : '**',
     component : PageNotFoundComponent
-  }*/
+  }
 ];
 
 /**
